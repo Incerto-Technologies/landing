@@ -42,3 +42,12 @@ function responsive() {
 }
 
 window.addEventListener("resize", responsive);
+
+async function handleContactSubmit() {
+  const email = document.getElementById("contact-email").value;
+
+  await fetch("https://incerto.in/api/contact", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  });
+}

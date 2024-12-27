@@ -45,66 +45,63 @@
     </header>
 
     <section
-      class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden max-lg:tw-p-4 max-md:tw-mt-[50px]"
+      class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden tw-pt-[80px] max-lg:tw-px-4 max-md:tw-mt-0"
     >
       <div
-        class="tw-flex tw-h-full tw-w-full tw-place-content-center tw-gap-6 tw-p-[5%] max-lg:tw-flex-col max-lg:tw-place-items-center"
+        class="tw-flex tw-h-full tw-w-full tw-place-content-center tw-items-center tw-gap-6 tw-p-[5%] max-lg:tw-flex-col max-lg:tw-place-items-center"
       >
         <div
-          class="tw-flex tw-max-w-[800px] tw-flex-col tw-place-content-center max-lg:tw-min-w-[250px]"
+          class="tw-flex tw-max-w-[600px] tw-flex-col tw-place-content-center max-lg:tw-order-2 max-lg:tw-mt-8 max-lg:tw-text-center"
         >
           <div
-            class="tw-flex tw-flex-wrap tw-text-6xl tw-font-semibold tw-uppercase tw-leading-[80px] max-lg:tw-text-4xl max-md:tw-leading-snug"
+            class="tw-flex tw-flex-wrap tw-text-6xl tw-font-semibold tw-uppercase tw-leading-[1.2] max-lg:tw-text-4xl max-md:tw-text-3xl"
           >
-            Empower your finance
-            <br />
-            with seamless,
-            <br />
-            cloud-based control.
+            Effortless ClickHouse Problem Solving with Just a Click
           </div>
-          <div
-            class="reveal tw-mt-10 tw-p-2 tw-text-justify max-lg:tw-max-w-full"
+          <!-- <div
+            class="reveal tw-mt-8 tw-p-2 tw-text-lg tw-text-gray-600 max-lg:tw-text-center"
           >
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error
             adipisci corrupti accusamus reiciendis similique assumenda nostrum
             fuga dicta vitae ipsum.
-          </div>
+          </div> -->
 
-          <h2 class="reveal tw-mt-6 tw-text-lg">Get started</h2>
+          <h2 class="reveal tw-mt-6 tw-text-xl tw-font-medium">
+            Get alpha release access
+          </h2>
           <div
-            class="reveal tw-mt-4 tw-flex tw-h-[50px] tw-w-[350px] tw-max-w-[350px] tw-place-items-center tw-gap-2 tw-overflow-hidden tw-flex-col md:tw-flex-row"
+            class="reveal tw-mt-4 tw-flex tw-h-[50px] tw-w-full tw-max-w-[350px] tw-place-items-center tw-gap-4 tw-overflow-hidden tw-flex-col md:tw-flex-row max-lg:tw-mx-auto"
           >
             <input
               type="email"
-              class="input tw-h-full tw-w-full tw-rounded-md tw-border-[2px] tw-border-solid tw-border-[#bfbfbf] tw-bg-transparent tw-p-2 tw-px-3 tw-outline-none tw-transition-colors tw-duration-[0.3s]"
+              class="input tw-h-full tw-w-full tw-rounded-md tw-border-[2px] tw-border-solid tw-border-[#bfbfbf] tw-bg-transparent tw-p-2 tw-px-4 tw-outline-none tw-transition-colors tw-duration-[0.3s]"
               placeholder="joe@example.com"
+              id="contact-email"
             />
-            <a
-              class="btn tw-h-full tw-transition-colors tw-duration-[0.3s]"
-              href=""
+            <button
+              class="btn tw-h-full tw-min-w-[120px] tw-rounded-md tw-bg-black tw-px-6 tw-text-white hover:tw-bg-gray-800 tw-transition-colors tw-duration-[0.3s] max-md:tw-w-full"
+              onclick="handleContactSubmit()"
             >
-              Signup
-            </a>
+              Let's Go
+            </button>
           </div>
-
-          <div class="reveal tw-mt-6 tw-flex tw-gap-4 tw-text-2xl"></div>
         </div>
 
         <div
-          class="tw-flex tw-max-h-[120vh] tw-w-full tw-max-w-[850px] tw-place-content-center tw-place-items-center tw-overflow-hidden max-md:tw-max-w-[350px]"
+          class="tw-flex tw-max-h-[550px] tw-max-w-[800px] tw-w-full tw-place-content-center tw-place-items-center tw-overflow-hidden max-lg:tw-order-1 max-md:tw-max-w-[100%]"
         >
           <div
             class="tw-relative tw-flex tw-w-fit tw-place-content-center tw-place-items-center"
           >
             <div
-              class="tw-flex tw-max-h-[550px] tw-max-w-[650px] tw-aspect-[3/2] tw-overflow-hidden tw-rounded-2xl tw-shadow-xl max-lg:tw-h-[320px] max-lg:tw-w-[320px]"
+              class="tw-flex tw-aspect-[3/2] tw-overflow-hidden tw-rounded-2xl tw-shadow-xl max-lg:tw-max-h-[320px] max-lg:tw-max-w-[100%]"
             >
               <video
                 controls
                 contextmenu=""
                 src="./assets/video/intro.MOV"
                 alt="dashboard"
-                class="tw-h-full tw-w-full tw-object-cover max-lg:tw-object-contain tw-aspect-[3/5]"
+                class="tw-h-full tw-w-full tw-object-cover max-lg:tw-object-contain"
               ></video>
             </div>
           </div>
@@ -112,9 +109,110 @@
       </div>
     </section>
 
-    <section>
-      <div></div>
-      <div></div>
+    <section
+      class="tw-flex tw-flex-col tw-w-full tw-bg-gray-50 tw-py-24 tw-px-[10%] max-lg:tw-px-4"
+    >
+      <div class="tw-max-w-7xl tw-mx-auto">
+        <h2 class="tw-text-4xl tw-font-bold tw-text-center tw-mb-16">
+          Why Choose Magic Pill?
+        </h2>
+        <div class="tw-grid tw-grid-cols-2 tw-gap-16 max-lg:tw-grid-cols-1">
+          <!-- Problem Section -->
+          <div class="tw-flex tw-flex-col tw-gap-8">
+            <div class="tw-flex tw-items-center tw-gap-4">
+              <i
+                class="bi bi-exclamation-triangle tw-text-4xl tw-text-red-500"
+              ></i>
+              <h3 class="tw-text-2xl tw-font-bold">The Problem</h3>
+            </div>
+            <p class="tw-text-gray-600 tw-leading-relaxed tw-text-lg">
+              Observability tools often overwhelm users with data but leave them
+              uncertain about the next steps.
+            </p>
+            <div class="tw-bg-white tw-rounded-lg tw-p-8 tw-shadow-sm">
+              <h4 class="tw-text-xl tw-font-semibold tw-mb-6">
+                Typical Troubleshooting Process:
+              </h4>
+              <ul class="tw-space-y-4">
+                <li class="tw-flex tw-items-start tw-gap-3">
+                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
+                  <span>You sift through alerts, dashboards, and logs</span>
+                </li>
+                <li class="tw-flex tw-items-start tw-gap-3">
+                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
+                  <span>Run SQL commands and analyze logs manually</span>
+                </li>
+                <li class="tw-flex tw-items-start tw-gap-3">
+                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
+                  <span
+                    >Search for solutions in GitHub issues, documentation, and
+                    AI suggestions</span
+                  >
+                </li>
+                <li class="tw-flex tw-items-start tw-gap-3">
+                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
+                  <span
+                    >Spend hours or days trying everything if solution isn't
+                    found quickly</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <p class="tw-text-gray-700 tw-font-medium tw-italic tw-text-lg">
+              This isn't easy, scalable, or efficient.
+            </p>
+          </div>
+
+          <!-- Solution Section -->
+          <div class="tw-flex tw-flex-col tw-gap-8">
+            <div class="tw-flex tw-items-center tw-gap-4">
+              <i class="bi bi-lightbulb tw-text-4xl tw-text-green-500"></i>
+              <h3 class="tw-text-2xl tw-font-bold">The Solution</h3>
+            </div>
+            <div class="tw-space-y-8">
+              <p class="tw-text-gray-600 tw-leading-relaxed tw-text-lg">
+                Meet Clickhouse Magic Pill – the ultimate tool for ClickHouse
+                observability and troubleshooting.
+              </p>
+              <div class="tw-bg-white tw-rounded-lg tw-p-8 tw-shadow-sm">
+                <h4 class="tw-text-xl tw-font-semibold tw-mb-6">
+                  How We Redefine Problem-Solving:
+                </h4>
+                <div class="tw-space-y-6">
+                  <div class="tw-flex tw-items-start tw-gap-4">
+                    <i
+                      class="bi bi-search tw-text-2xl tw-text-blue-500 tw-mt-1"
+                    ></i>
+                    <div>
+                      <h5 class="tw-text-lg tw-font-medium">
+                        Automatic Detection
+                      </h5>
+                      <p class="tw-text-gray-600">
+                        Programmatic checks identify issues in your ClickHouse
+                        clusters.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="tw-flex tw-items-start tw-gap-4">
+                    <i
+                      class="bi bi-lightning tw-text-2xl tw-text-blue-500 tw-mt-1"
+                    ></i>
+                    <div>
+                      <h5 class="tw-text-lg tw-font-medium">
+                        Instant Remediation
+                      </h5>
+                      <p class="tw-text-gray-600">
+                        Execute pre-tested SQL commands and scripts on affected
+                        hosts at the click of a button.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer
