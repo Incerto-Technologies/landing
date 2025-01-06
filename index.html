@@ -33,9 +33,9 @@
   </head>
   <body class="tw-flex tw-min-h-[100vh] tw-flex-col tw-bg-[#ffffff]">
     <header
-      class="tw-absolute tw-top-0 tw-z-20 tw-items-start tw-flex tw-h-[60px] tw-w-full tw-bg-white tw-px-[10%] tw-text-black max-lg:tw-px-4 tw-py-3"
+      class="tw-absolute tw-top-0 tw-z-20 tw-items-start tw-flex tw-h-[60px] tw-w-full tw-bg-white tw-px-[5%] tw-text-black max-lg:tw-px-4 tw-py-3"
     >
-      <a class="tw-h-[30px] tw-w-[100px] tw-p-[4px]" href="">
+      <a class="tw-h-[30px] tw-w-[120px] tw-p-[4px]" href="">
         <img
           src="./assets/logo/incerto.png"
           alt="logo"
@@ -45,7 +45,7 @@
     </header>
 
     <section
-      class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden tw-pt-[80px] max-lg:tw-px-4 max-md:tw-mt-0"
+      class="tw-relative tw-flex tw-min-h-[90vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden tw-pt-[80px] max-lg:tw-px-4 max-md:tw-mt-0"
     >
       <div
         class="tw-flex tw-h-full tw-w-full tw-place-content-center tw-items-center tw-gap-6 tw-p-[5%] max-lg:tw-flex-col max-lg:tw-place-items-center"
@@ -53,6 +53,7 @@
         <div
           class="tw-flex tw-max-w-[600px] tw-flex-col tw-place-content-center max-lg:tw-order-2 max-lg:tw-mt-8 max-lg:tw-text-center"
         >
+          <!-- <div class="tw-text-4xl tw-font-bold tw-text-center tw-mb-16"> -->
           <div
             class="tw-flex tw-flex-wrap tw-text-6xl tw-font-semibold tw-uppercase tw-leading-[1.2] max-lg:tw-text-4xl max-md:tw-text-3xl"
           >
@@ -70,7 +71,7 @@
             Get alpha release access
           </h2>
           <div
-            class="reveal tw-mt-4 tw-flex tw-h-[50px] tw-w-full tw-max-w-[350px] tw-place-items-center tw-gap-4 tw-overflow-hidden tw-flex-col md:tw-flex-row max-lg:tw-mx-auto"
+            class="reveal tw-mt-4 tw-flex tw-w-full tw-max-w-[350px] tw-place-items-center tw-gap-4 tw-overflow-hidden tw-flex-col md:tw-flex-row max-lg:tw-mx-auto"
           >
             <input
               type="email"
@@ -109,117 +110,118 @@
       </div>
     </section>
 
-    <section
-      class="tw-flex tw-flex-col tw-w-full tw-bg-gray-50 tw-py-24 tw-px-[10%] max-lg:tw-px-4"
-    >
-      <div class="tw-max-w-7xl tw-mx-auto">
-        <h2 class="tw-text-4xl tw-font-bold tw-text-center tw-mb-16">
-          Why Choose Magic Pill?
+    <section class="tw-mt-2">
+      <div class="tw-pb-10 tw-mx-auto">
+        <h2
+          class="tw-text-4xl tw-font-semibold tw-text-gray-800 tw-text-center"
+        >
+          Problems We Solve
         </h2>
-        <div class="tw-grid tw-grid-cols-2 tw-gap-16 max-lg:tw-grid-cols-1">
-          <!-- Problem Section -->
-          <div class="tw-flex tw-flex-col tw-gap-8">
-            <div class="tw-flex tw-items-center tw-gap-4">
-              <i
-                class="bi bi-exclamation-triangle tw-text-4xl tw-text-red-500"
-              ></i>
-              <h3 class="tw-text-2xl tw-font-bold">The Problem</h3>
+      </div>
+      <div class="tw-px-10 tw-mx-auto">
+        <div
+          class="tw-grid tw-grid-cols-2 tw-gap-10 tw-max-w-[1200px] tw-mx-auto max-md:tw-grid-cols-1"
+        >
+          <!-- Video 1 -->
+          <div class="tw-flex tw-flex-col tw-gap-2">
+            <h3 class="tw-text-xl tw-font-semibold tw-text-gray-800">
+              Cluster Connectivity
+            </h3>
+            <div
+              class="video-thumbnail tw-cursor-pointer tw-overflow-hidden tw-rounded-2xl tw-shadow-xl"
+            >
+              <video
+                src="./assets/video/cluster_connectivity.MP4"
+                alt="dashboard"
+                class="tw-h-full tw-w-full tw-object-cover"
+              ></video>
             </div>
-            <p class="tw-text-gray-600 tw-leading-relaxed tw-text-lg">
-              Observability tools often overwhelm users with data but leave them
-              uncertain about the next steps.
-            </p>
-            <div class="tw-bg-white tw-rounded-lg tw-p-8 tw-shadow-sm">
-              <h4 class="tw-text-xl tw-font-semibold tw-mb-6">
-                Typical Troubleshooting Process:
-              </h4>
-              <ul class="tw-space-y-4">
-                <li class="tw-flex tw-items-start tw-gap-3">
-                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
-                  <span>You sift through alerts, dashboards, and logs</span>
-                </li>
-                <li class="tw-flex tw-items-start tw-gap-3">
-                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
-                  <span>Run SQL commands and analyze logs manually</span>
-                </li>
-                <li class="tw-flex tw-items-start tw-gap-3">
-                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
-                  <span
-                    >Search for solutions in GitHub issues, documentation, and
-                    AI suggestions</span
-                  >
-                </li>
-                <li class="tw-flex tw-items-start tw-gap-3">
-                  <i class="bi bi-dot tw-text-xl tw-mt-1"></i>
-                  <span
-                    >Spend hours or days trying everything if solution isn't
-                    found quickly</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <p class="tw-text-gray-700 tw-font-medium tw-italic tw-text-lg">
-              This isn't easy, scalable, or efficient.
-            </p>
           </div>
 
-          <!-- Solution Section -->
-          <div class="tw-flex tw-flex-col tw-gap-8">
-            <div class="tw-flex tw-items-center tw-gap-4">
-              <i class="bi bi-lightbulb tw-text-4xl tw-text-green-500"></i>
-              <h3 class="tw-text-2xl tw-font-bold">The Solution</h3>
-            </div>
-            <div class="tw-space-y-8">
-              <p class="tw-text-gray-600 tw-leading-relaxed tw-text-lg">
-                Meet Clickhouse Magic Pill – the ultimate tool for ClickHouse
-                observability and troubleshooting.
-              </p>
-              <div class="tw-bg-white tw-rounded-lg tw-p-8 tw-shadow-sm">
-                <h4 class="tw-text-xl tw-font-semibold tw-mb-6">
-                  How We Redefine Problem-Solving:
-                </h4>
-                <div class="tw-space-y-6">
-                  <div class="tw-flex tw-items-start tw-gap-4">
-                    <i
-                      class="bi bi-search tw-text-2xl tw-text-blue-500 tw-mt-1"
-                    ></i>
-                    <div>
-                      <h5 class="tw-text-lg tw-font-medium">
-                        Automatic Detection
-                      </h5>
-                      <p class="tw-text-gray-600">
-                        Programmatic checks identify issues in your ClickHouse
-                        clusters.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tw-flex tw-items-start tw-gap-4">
-                    <i
-                      class="bi bi-lightning tw-text-2xl tw-text-blue-500 tw-mt-1"
-                    ></i>
-                    <div>
-                      <h5 class="tw-text-lg tw-font-medium">
-                        Instant Remediation
-                      </h5>
-                      <p class="tw-text-gray-600">
-                        Execute pre-tested SQL commands and scripts on affected
-                        hosts at the click of a button.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Video 2 -->
+          <div class="tw-flex tw-flex-col tw-gap-2">
+            <h3 class="tw-text-xl tw-font-semibold tw-text-gray-800">
+              Resource Optimization
+            </h3>
+            <div
+              class="video-thumbnail tw-cursor-pointer tw-overflow-hidden tw-rounded-2xl tw-shadow-xl"
+            >
+              <video
+                src="./assets/video/low_resource.MP4"
+                alt="dashboard"
+                class="tw-h-full tw-w-full tw-object-cover"
+              ></video>
             </div>
           </div>
+
+          <!-- Video 3 -->
+          <div class="tw-flex tw-flex-col tw-gap-2">
+            <h3 class="tw-text-xl tw-font-semibold tw-text-gray-800">
+              Table Data
+            </h3>
+            <div
+              class="video-thumbnail tw-cursor-pointer tw-overflow-hidden tw-rounded-2xl tw-shadow-xl"
+            >
+              <video
+                src="./assets/video/table_data.MP4"
+                alt="dashboard"
+                class="tw-h-full tw-w-full tw-object-cover"
+              ></video>
+            </div>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="tw-flex tw-flex-col tw-gap-2">
+            <h3 class="tw-text-xl tw-font-semibold tw-text-gray-800">
+              Query Performance
+            </h3>
+            <div
+              class="video-thumbnail tw-cursor-pointer tw-overflow-hidden tw-rounded-2xl tw-shadow-xl"
+            >
+              <video
+                src="./assets/video/query.MP4"
+                alt="dashboard"
+                class="tw-h-full tw-w-full tw-object-cover"
+              ></video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Modal -->
+      <div
+        id="videoModal"
+        class="tw-fixed tw-inset-0 tw-z-50 tw-hidden tw-bg-black/80 tw-flex tw-items-center tw-justify-center tw-p-4 tw-opacity-0 tw-transition-all tw-duration-300"
+      >
+        <div
+          class="tw-relative tw-w-[90%] tw-max-w-[1000px] tw-scale-95 tw-transition-transform tw-duration-300"
+        >
+          <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
+            <h3
+              id="modalTitle"
+              class="tw-text-2xl tw-font-semibold tw-text-white tw-flex-1"
+            ></h3>
+            <button
+              onclick="closeVideoModal()"
+              class="tw-text-white tw-text-3xl tw-hover:tw-opacity-80 tw-transition-opacity tw-ml-4"
+            >
+              ✕
+            </button>
+          </div>
+          <video
+            id="modalVideo"
+            controls
+            class="tw-w-full tw-rounded-lg"
+          ></video>
         </div>
       </div>
     </section>
 
     <footer
-      class="tw-items-start tw-flex tw-h-[60px] tw-w-full tw-bg-white tw-px-[10%] tw-text-black max-lg:tw-px-4 tw-py-10"
+      class="tw-items-start tw-flex tw-w-full tw-bg-white tw-px-[10%] tw-text-black max-lg:tw-px-4 tw-py-10 tw-mt-10"
     >
       <div
-        class="tw-flex tw-h-full tw-w-[250px] tw-flex-col tw-place-items-start tw-gap-6 max-md:tw-w-full"
+        class="tw-flex tw-h-full tw-w-[250px] tw-flex-col tw-place-items-start tw-gap-3 max-md:tw-w-full"
       >
         <img
           src="./assets/logo/incerto.png"

@@ -51,3 +51,57 @@ async function handleContactSubmit() {
     body: JSON.stringify({ email }),
   });
 }
+
+// Video modal functionality
+const videoThumbnails = document.querySelectorAll(".video-thumbnail");
+const videoModal = document.getElementById("videoModal");
+const modalVideo = document.getElementById("modalVideo");
+const modalTitle = document.getElementById("modalTitle");
+
+videoThumbnails.forEach((thumbnail) => {
+  thumbnail.addEventListener("click", () => {
+    const videoSrc = thumbnail.querySelector("video").src;
+    const title = thumbnail.parentElement
+      .querySelector("h3")
+      .textContent.trim();
+    modalVideo.src = videoSrc;
+    modalTitle.textContent = title;
+    openVideoModal();
+  });
+});
+
+function openVideoModal() {
+  videoModal.classList.remove("tw-hidden");
+  // Trigger animation after unhiding
+  setTimeout(() => {
+    videoModal.classList.add("tw-opacity-100");
+    videoModal.querySelector("div").classList.add("!tw-scale-100");
+  }, 10);
+  modalVideo.play();
+}
+
+function closeVideoModal() {
+  videoModal.classList.remove("tw-opacity-100");
+  videoModal.querySelector("div").classList.remove("!tw-scale-100");
+  // Wait for animation to complete before hiding
+  setTimeout(() => {
+    modalVideo.pause();
+    modalVideo.src = "";
+    modalTitle.textContent = "";
+    videoModal.classList.add("tw-hidden");
+  }, 300);
+}
+
+// Close modal when clicking outside the video
+videoModal.addEventListener("click", (e) => {
+  if (e.target === videoModal) {
+    closeVideoModal();
+  }
+});
+
+// Close modal on escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeVideoModal();
+  }
+});
