@@ -688,6 +688,10 @@ video {
   aspect-ratio: 16 / 9;
 }
 
+.tw-aspect-\[4\/2\] {
+  aspect-ratio: 4/2;
+}
+
 .\!tw-h-\[3px\] {
   height: 3px !important;
 }
@@ -726,6 +730,10 @@ video {
 
 .tw-min-h-\[90vh\] {
   min-height: 90vh;
+}
+
+.tw-min-h-\[70vh\] {
+  min-height: 70vh;
 }
 
 .\!tw-w-\[40px\] {
@@ -957,6 +965,10 @@ video {
 
 .tw-rounded-md {
   border-radius: 0.375rem;
+}
+
+.tw-rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .tw-border-\[2px\] {
