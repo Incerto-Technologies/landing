@@ -1,28 +1,37 @@
 {
-  "name": "landing-pages",
-  "version": "1.0.0",
-  "description": "beautiful landing pages",
-  "main": "index.js",
+  "name": "magic-pill-landing-page",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start:tailwind": "cross-env NODE_ENV=development tailwindcss --postcss -i ./css/tailwind.css -o ./css/tailwind-runtime.css -w",
-    "build:tailwind": "cross-env NODE_ENV=production tailwindcss --postcss -i ./css/tailwind.css -o ./css/tailwind-build.css --minify",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "landing",
-    "pages",
-    "motion",
-    "design",
-    "websites"
-  ],
-  "author": "Paul",
-  "license": "MIT",
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "tailwindcss": "^3.4.1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@shadcn/ui": "^0.0.4",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "lucide-react": "^0.469.0",
     "postcss": "^8.4.33",
-    "postcss-simple-vars": "^7.0.1"
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
   }
 }
