@@ -13,17 +13,9 @@ export const Summary = () => {
   }, []);
 
   return (
-    <div className="h-full min-h-screen bg-background px-4 py-6 md:px-6">
+    <div className="h-full bg-background px-4 py-6 md:px-6">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-semibold">System Summary</h1>
-            <p className="text-sm text-muted-foreground">
-              Monitor your Clickhouse Cluster's health and performance
-            </p>
-          </div>
-        </div>
-
+        <h1 className="text-2xl font-bold">Clickhouse Remediation List</h1>
         {isLoading ? (
           <div className="flex h-[calc(100vh-12rem)] w-full flex-col items-center justify-center gap-3">
             <RefreshCcw className="h-8 w-8 animate-spin text-primary" />

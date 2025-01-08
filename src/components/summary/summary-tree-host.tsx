@@ -7,6 +7,7 @@ import {
 import { RemediationConfig } from "@/types/clickhouse.types";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, ChevronUpIcon, Info } from "lucide-react";
+import { RemediationContainer } from "../remediation/container/container";
 
 export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,20 +51,9 @@ export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
 
       <section
         data-open={isOpen}
-        className="transition-all data-[open=false]:hidden"
+        className="transition-all data-[open=false]:hidden ml-10"
       >
-        {config.steps && config.steps.length > 0 && (
-          <div className="mt-4 space-y-4">
-            {config.steps.map((step, index) => (
-              <div key={index} className="pl-8">
-                <h4 className="text-sm font-medium">Step {step.stepNo}</h4>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {step.instruction}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+        <RemediationContainer alert={config} />
       </section>
     </div>
   );
