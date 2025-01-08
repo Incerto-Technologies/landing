@@ -12,20 +12,21 @@ const TreeNode = ({
   data: ClickhouseSummaryData;
   depth?: number;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [localIsOpen, setLocalIsOpen] = useState(false);
 
   const childrenCount = data.children?.length || 0;
-  const hasContent = childrenCount > 0 || data.remediationConfig !== undefined;
+  const hasContent =
+    childrenCount > 0 || (data.remediations && data.remediations.length > 0);
 
   return (
-    <div className={cn("mx-auto flex w-full flex-col", isOpen && "mb-6")}>
+    <div className={cn("mx-auto flex w-full flex-col", localIsOpen && "mb-6")}>
       <Button
         className="group w-full items-center justify-start hover:bg-accent/30 md:gap-0"
         variant="ghost"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setLocalIsOpen(!localIsOpen)}
       >
         <div className="transition-transform group-hover:scale-110">
-          {isOpen ? (
+          {localIsOpen ? (
             <ChevronUpIcon className="h-4 w-4" />
           ) : (
             <ChevronDownIcon className="h-4 w-4" />
@@ -37,7 +38,11 @@ const TreeNode = ({
               {data.label || "Alerts"}
               {hasContent && (
                 <span className="ml-2 text-sm text-muted-foreground">
-                  ({childrenCount > 0 ? childrenCount + " labels" : "1 config"})
+                  (
+                  {childrenCount > 0
+                    ? childrenCount + " labels"
+                    : data.remediations?.length + " remediations"}
+                  )
                 </span>
               )}
             </h2>
@@ -48,7 +53,7 @@ const TreeNode = ({
       <div
         className={cn(
           "relative ml-6 w-[calc(100%-1.5rem)] transition-all duration-300",
-          isOpen ? "block fade-in-20" : "hidden"
+          localIsOpen ? "block fade-in-20" : "hidden"
         )}
       >
         <div className="absolute left-0 top-2 h-[calc(100%-1rem)] w-px bg-border" />
@@ -68,16 +73,21 @@ const TreeNode = ({
         )}
 
         {/* Then render remediation config if it exists */}
-        {data.remediationConfig && (
-          <div className="mt-2">
-            <div className="relative flex w-full items-start gap-2">
-              <div className="relative flex items-center">
-                <div className="absolute left-0 top-4 h-px w-4 bg-border" />
+        {data.remediations && data.remediations.length > 0 && (
+          <div className="mt-2 space-y-2">
+            {data.remediations.map((config, index) => (
+              <div
+                key={index}
+                className="relative flex w-full items-start gap-2"
+              >
+                <div className="relative flex items-center">
+                  <div className="absolute left-0 top-4 h-px w-4 bg-border" />
+                </div>
+                <div className="w-full pl-6">
+                  <SummaryTreeHost config={config} />
+                </div>
               </div>
-              <div className="w-full pl-6">
-                <SummaryTreeHost config={data.remediationConfig} />
-              </div>
-            </div>
+            ))}
           </div>
         )}
 

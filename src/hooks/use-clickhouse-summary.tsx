@@ -6,6 +6,66 @@ import {
 } from "../types/clickhouse.types";
 import { ApiResponse } from "@/types/server.type";
 
+// Helper function to check if a node matches search
+const nodeMatchesSearch = (
+  node: ClickhouseSummaryData,
+  search: string
+): boolean => {
+  const searchLower = search.toLowerCase();
+  // Check if any remediation in the node matches
+  if (node.remediations?.length) {
+    if (
+      node.remediations.some(
+        (config) =>
+          config.name.toLowerCase().includes(searchLower) ||
+          config.desc.toLowerCase().includes(searchLower) ||
+          config.labels?.some((label) =>
+            label.toLowerCase().includes(searchLower)
+          )
+      )
+    ) {
+      return true;
+    }
+  }
+  // Check children recursively
+  return (
+    node.children?.some((child) => nodeMatchesSearch(child, search)) || false
+  );
+};
+
+// Filter tree based on search
+const filterTree = (
+  node: ClickhouseSummaryData,
+  search: string
+): ClickhouseSummaryData | null => {
+  if (!search) return node;
+
+  // Check if any remediation in the node matches
+  const currentNodeMatches = node.remediations?.some(
+    (config) =>
+      config.name.toLowerCase().includes(search.toLowerCase()) ||
+      config.desc.toLowerCase().includes(search.toLowerCase()) ||
+      config.labels?.some((label) =>
+        label.toLowerCase().includes(search.toLowerCase())
+      )
+  );
+
+  // Process children
+  const filteredChildren = node.children
+    ?.map((child) => filterTree(child, search))
+    .filter((child): child is ClickhouseSummaryData => child !== null);
+
+  // If current node matches or any children match, include this node
+  if (currentNodeMatches || (filteredChildren && filteredChildren.length > 0)) {
+    return {
+      ...node,
+      children: filteredChildren,
+    };
+  }
+
+  return null;
+};
+
 const createLabelTree = (
   configs: RemediationConfig[]
 ): ClickhouseSummaryData[] => {
@@ -39,6 +99,7 @@ const createLabelTree = (
       const noLabelNode = labelMap.get("No Label") || {
         label: "No Label",
         remediationConfig: config,
+        remediations: [config],
         totalNoOfInsights: 0,
         totalNoOfErrors: 0,
         recentFiringAlertAt: null,
@@ -56,34 +117,39 @@ const createLabelTree = (
     let currentParent: ClickhouseSummaryData | null = null;
     const nodesToUpdate = new Set<ClickhouseSummaryData>();
 
-    config.labels
-      .filter((label) => !label.toLocaleLowerCase().startsWith("tag_"))
-      .forEach((label: string, index: number) => {
-        const path = config.labels.slice(0, index + 1).join("/");
-        let node = labelMap.get(path);
+    config.labels.forEach((label: string, index: number) => {
+      const path = config.labels.slice(0, index + 1).join("/");
+      let node = labelMap.get(path);
 
-        if (!node) {
-          node = {
-            label,
-            remediationConfig:
-              index === config.labels.length - 1 ? config : undefined,
-            totalNoOfInsights: 0,
-            totalNoOfErrors: 0,
-            recentFiringAlertAt: null,
-            children: [],
-          };
-          labelMap.set(path, node);
+      if (!node) {
+        node = {
+          label,
+          remediationConfig: config,
+          remediations: [config],
+          totalNoOfInsights: 0,
+          totalNoOfErrors: 0,
+          recentFiringAlertAt: null,
+          children: [],
+        };
+        labelMap.set(path, node);
 
-          if (index === 0) {
-            rootNodes.push(node);
-          } else if (currentParent) {
-            currentParent.children?.push(node);
-          }
+        if (index === 0) {
+          rootNodes.push(node);
+        } else if (currentParent) {
+          currentParent.children?.push(node);
         }
+      } else {
+        // Add the config to existing node's remediations if it's not already there
+        if (!node.remediations) {
+          node.remediations = [config];
+        } else if (!node.remediations.some((r) => r.id === config.id)) {
+          node.remediations.push(config);
+        }
+      }
 
-        nodesToUpdate.add(node);
-        currentParent = node;
-      });
+      nodesToUpdate.add(node);
+      currentParent = node;
+    });
 
     // Update metrics for all nodes in reverse order (leaf to root)
     Array.from(nodesToUpdate)
@@ -111,12 +177,14 @@ const createLabelTree = (
 export const useClickhouseSummary = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [summary, setSummary] = useState<ClickhouseSummaryData[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [originalSummary, setOriginalSummary] = useState<
+    ClickhouseSummaryData[]
+  >([]);
 
   const getSummary = async () => {
     setIsLoading(true);
-    // const apiUrl = import.meta.env.VITE_API_URL;
     const summary = await fetch(`/config.json`);
-    // const summary = await fetch(`${apiUrl}/api/v1/alerts/config-remediations`);
     const data: ApiResponse<RemediationConfig[]> = await summary.json();
     console.log(data, "summary");
     setIsLoading(false);
@@ -126,9 +194,8 @@ export const useClickhouseSummary = () => {
   const setSummaryData = async () => {
     const data = await getSummary();
     if (data && data.length > 0) {
-      // Each RemediationConfig already contains problemSummaries array
       const labelTree = createLabelTree(data);
-      console.log(labelTree, "labelTree");
+      setOriginalSummary(labelTree);
       setSummary(labelTree);
     } else {
       toast({
@@ -139,9 +206,25 @@ export const useClickhouseSummary = () => {
     }
   };
 
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    if (!term.trim()) {
+      setSummary(originalSummary);
+      return;
+    }
+
+    const filteredSummary = originalSummary
+      .map((node) => filterTree(node, term))
+      .filter((node): node is ClickhouseSummaryData => node !== null);
+
+    setSummary(filteredSummary);
+  };
+
   return {
     summary,
     isLoading,
     setSummaryData,
+    searchTerm,
+    handleSearch,
   };
 };

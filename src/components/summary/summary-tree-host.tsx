@@ -10,7 +10,8 @@ import { ChevronDownIcon, ChevronUpIcon, Info } from "lucide-react";
 import { RemediationContainer } from "../remediation/container/container";
 
 export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [localIsOpen, setLocalIsOpen] = useState(false);
+
   const hostRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -18,10 +19,10 @@ export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
       <Button
         className="w-full items-center justify-start hover:bg-transparent hover:text-primary md:gap-0"
         variant="ghost"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => setLocalIsOpen((prev) => !prev)}
       >
         <div className="transition-transform group-hover/host:scale-110">
-          {isOpen ? (
+          {localIsOpen ? (
             <ChevronUpIcon className="h-4 w-4" />
           ) : (
             <ChevronDownIcon className="h-4 w-4" />
@@ -50,8 +51,8 @@ export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
       </Button>
 
       <section
-        data-open={isOpen}
-        className="transition-all data-[open=false]:hidden ml-10"
+        data-open={localIsOpen}
+        className="transition-all data-[open=false]:hidden pl-10 border-l border-border"
       >
         <RemediationContainer alert={config} />
       </section>

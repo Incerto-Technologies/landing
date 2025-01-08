@@ -20,6 +20,7 @@ export type SummaryQueryResponse = ApiResponse<
 export type ClickhouseSummaryData = {
   label: string;
   remediationConfig?: RemediationConfig;
+  remediations?: RemediationConfig[];
   totalNoOfInsights: number;
   totalNoOfErrors: number;
   recentFiringAlertAt: string | null;
