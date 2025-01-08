@@ -7,9 +7,11 @@ import {
 import { RemediationConfig } from "@/types/clickhouse.types";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, ChevronUpIcon, Info } from "lucide-react";
+import { RemediationContainer } from "../remediation/container/container";
 
 export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [localIsOpen, setLocalIsOpen] = useState(false);
+
   const hostRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -17,10 +19,10 @@ export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
       <Button
         className="w-full items-center justify-start hover:bg-transparent hover:text-primary md:gap-0"
         variant="ghost"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => setLocalIsOpen((prev) => !prev)}
       >
         <div className="transition-transform group-hover/host:scale-110">
-          {isOpen ? (
+          {localIsOpen ? (
             <ChevronUpIcon className="h-4 w-4" />
           ) : (
             <ChevronDownIcon className="h-4 w-4" />
@@ -49,21 +51,10 @@ export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
       </Button>
 
       <section
-        data-open={isOpen}
-        className="transition-all data-[open=false]:hidden"
+        data-open={localIsOpen}
+        className="transition-all data-[open=false]:hidden pl-10 border-l border-border"
       >
-        {config.steps && config.steps.length > 0 && (
-          <div className="mt-4 space-y-4">
-            {config.steps.map((step, index) => (
-              <div key={index} className="pl-8">
-                <h4 className="text-sm font-medium">Step {step.stepNo}</h4>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {step.instruction}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+        <RemediationContainer alert={config} />
       </section>
     </div>
   );
