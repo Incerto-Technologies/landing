@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const GetEmail = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    const email = sessionStorage.getItem("remediation-email");
+    if (email) {
+      setEmail(email);
+      setSuccess(true);
+    }
+  }, []);
 
   const handleContactSubmit = async () => {
     const res = await fetch("https://incerto.in/api/magicpill/remediation", {
@@ -13,6 +21,7 @@ export const GetEmail = ({ children }: { children: React.ReactNode }) => {
     });
     const data = await res.json();
     console.log(data);
+    sessionStorage.setItem("remediation-email", email);
     setSuccess(true);
   };
 
