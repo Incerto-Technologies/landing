@@ -1,0 +1,1414 @@
+{
+    "success": true,
+    "message": "success",
+    "data": [
+        {
+            "id": "duplicate_macros",
+            "name": "Duplicate Clickhouse Macros",
+            "desc": "There are duplicate replica/shard macros in some cluster",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "**Give Each Node a Unique Macro:** In the ClickHouse config (e.g., ``/etc/clickhouse-server/config.xml``), ensure ``\u003cmacros\u003e\u003cshard\u003e...\u003c/shard\u003e\u003creplica\u003e...\u003c/replica\u003e\u003c/macros\u003e`` are unique per node.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "**Review Cluster Definitions:** Double-check your ``clusters.xml`` _(or cluster config section)_ so each node’s shard/replica aligns with the actual topology.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "**Restart with Correct Configs:** After fixing macros, restart nodes to ensure they pick up the new settings without duplicates.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "unreachable_host",
+            "name": "Unreachable Clickhouse Node",
+            "desc": "Some node in the cluster is unreachable",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Execute command to find which host is unreachable",
+                    "scriptId": "01JFF43HH4X7RYMM7B10DK3PCF",
+                    "scriptName": "clickhouse_unreachable_host.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "**Possible Reasons**\n\n- **Misconfigured Networking:** DNS issues, firewall blocks, or wrong IP addresses can block access.\n- **Outdated Cluster Config:** The config might show nodes that were part of the cluster in the past but are no longer valid.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "**Clean Up or Update Config:** Remove or update stale entries from the cluster definition so only valid nodes appear.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "**Check Node Status:** Ensure all nodes are actually running and not physically down.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 5,
+                    "instruction": "**Review Network Settings:** Verify DNS, firewall rules, and IP addresses are correct.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "multiple_zookeeper_sessions",
+            "name": "Multiple ZooKeeper Connections",
+            "desc": "Should not be more than one, may lead to bugs due to lack of linearizability (stale reads) that ZooKeeper consistency model allows.",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "**Possible Reasons**\n\n- **Network Glitches or Timeouts:** If ClickHouse loses connection to ZooKeeper, it might open a new session, causing multiple sessions at once.\n- **Configuration Issues:** Wrong or mismatched settings for ZooKeeper session timeouts or server addresses can lead to duplicated sessions.\n- **Heavy Load or Slow ZooKeeper:** Under heavy load, ZooKeeper might not respond quickly, forcing ClickHouse to think a session is lost and open a new one.\n- **Buggy or Old Versions:** Known bugs in older ClickHouse or ZooKeeper versions can cause session mishandling.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "**Check Network Stability:** Ensure there are no frequent drops or high latencies between ClickHouse nodes and ZooKeeper.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "**Tune Timeouts**: Align ClickHouse’s ``zookeeper_session_timeout_ms`` with your ZooKeeper setup in the ClickHouse server’s main config file _(often found at ``/etc/clickhouse-server/config.xml``)_, locate the ``\u003czookeeper\u003e`` section.\n\nYou’ll see a setting like ``\u003csession_timeout_ms\u003e`` (e.g., 30000 for 30 seconds). Adjust this to a reasonable value that matches your ZooKeeper setup—too low and sessions may drop; too high and stale sessions might linger.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "**Review Configuration:** Verify ZooKeeper addresses and session settings match on all cluster nodes.\n\nIn the ClickHouse server’s main config file (often found at ``/etc/clickhouse-server/config.xml``), locate the ``\u003czookeeper\u003e`` section, double-check all your ZooKeeper node addresses and ports.\n\nMake sure every ClickHouse node in your cluster has identical ZooKeeper settings (hosts, ports, timeouts).",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "no_keeper_connection",
+            "name": "No Keeper Connection",
+            "desc": "Node is not connected to any keeper",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "**Possible Reasons**\n\n- **No ZooKeeper Configured:** The node may be set up without any ZooKeeper addresses in its configuration file.\n- **Network or Firewall Block:** The node can’t connect to ZooKeeper because of network issues or firewall rules.\n- **ZooKeeper Service Down:** The ZooKeeper servers might be offline or not running properly.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "**Check Configuration:** In the server config (e.g., ``/etc/clickhouse-server/config.xml``), look for the ``\u003czookeeper\u003e`` section or ``\u003cclickhouse_keeper\u003e`` if using ClickHouse Keeper.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "**Verify Network:** Ensure your node can reach the ZooKeeper host (ping the IP or verify firewall rules).",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "high_keeper_latency",
+            "name": "High Keeper Latency",
+            "desc": "Clickhouse Keeper latency is more than 90 percentile",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "**Possible Reasons**\n\n- **Heavy Traffic on ZooKeeper/Keeper:** If too many requests pile up, it slows down response times.\n- **Network Congestion or High Latency:** Slow or unstable network links can increase Keeper round-trip times.\n- **Underpowered ZooKeeper/Keeper Setup:** Insufficient CPU, memory, or I/O on the Keeper servers causes delays.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "**Scale Keeper Resources:** Add more CPU, memory, or storage performance to ZooKeeper/Keeper nodes.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "**Improve Network:** Check for high latency or packet loss, and ensure firewalls/routing aren’t slowing traffic.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "**Distribute Load:** If you have many requests, add more ZooKeeper/Keeper nodes or distribute requests.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "high_keeper_storage_lock_wait",
+            "name": "High Keeper Storage Lock Wait",
+            "desc": "Clickhouse Keeper Storage Lock Wait is more than 95 percentile",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check resoures on clickhouse keeper",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "high_keeper_single_request_latency",
+            "name": "High Keeper Single Request Latency",
+            "desc": "Clickhouse Keeper Single Request Latency more than 95 percentile",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check resoures on clickhouse keeper",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "zookeeper_user_exception",
+            "name": "Keeper User Exception",
+            "desc": "Exceptions while working with ZooKeeper related to the data",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": null
+        },
+        {
+            "id": "zookeeper_hardware_exception",
+            "name": "Keeper Hardware Exception",
+            "desc": "Exceptions while working with ZooKeeper related to network",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": null
+        },
+        {
+            "id": "zookeeper_other_exception",
+            "name": "Keeper Other Exception",
+            "desc": "Exceptions while working other",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": null
+        },
+        {
+            "id": "zookeeper_commits_failed",
+            "name": "Number of failed commits",
+            "desc": "Number of failed commits",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": null
+        },
+        {
+            "id": "zookeeper_metadata_cleanup_error",
+            "name": "Zookeeper MetaData Cleanup error",
+            "desc": "Error was encountered in background cleanup task",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": null
+        },
+        {
+            "id": "1088c6ba-e8e3-4bf9-b683-c416e725b504",
+            "name": "Error connecting to clickhouse",
+            "desc": "Some error occured in collector when connecting to clickhouse",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "2fb37877-4c5f-433c-b807-f44c393f5059",
+                    "parent": "attribute",
+                    "field": "error",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "error",
+                            "scriptArgId": ""
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Collector couldnt connect to clickhouse, check if clickhouse is running and is reachable.\nError: {{.error}}",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "eddfda2c-7e03-4403-a62e-684b10df22e3",
+            "name": "Error executing clickhouse query",
+            "desc": "Some error occurred in collector when executing a query on clickhouse",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "df25adac-8974-485c-a247-07a04f8c1b78",
+                    "parent": "attribute",
+                    "field": "error",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "error",
+                            "scriptArgId": ""
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "df25adac-8974-485c-a247-07a04f8c1b78",
+                    "parent": "attribute",
+                    "field": "query",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "query",
+                            "scriptArgId": ""
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "df25adac-8974-485c-a247-07a04f8c1b78",
+                    "parent": "attribute",
+                    "field": "queryType",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "queryType",
+                            "scriptArgId": ""
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Verify query is correct.\nError: {{.error}}\n\nQuery Type: {{.queryType}}\n\nQuery: {{.query}}",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "c722de02-26f3-42f7-9258-6ef50e33b63b",
+            "name": "More than 10 Queries Running",
+            "desc": "There are more than 10 queries running at a moment in system.processes",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See process list",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "c722de02-26f3-42f7-9258-6ef50e33b63c",
+            "name": "More than 20 Queries Running",
+            "desc": "There are more than 20 queries running at a moment in system.processes",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See process list",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "d2b519c6-c35a-4763-a478-539f1e5928c3",
+            "name": "Running Queries High",
+            "desc": "Number of running queries (executing at the moment) are very high (greater then 99.0 percentile. ",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See current running processes",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "See the count of queries run by each user.",
+                    "scriptId": "concurrent_query_user.cmd",
+                    "scriptName": "concurrent_query_user.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Create a profile. Enter the maximum number of queires you want each user to be executing concurrently (5 is a good number). If the creation fails, manually change the name",
+                    "scriptId": "create_concurrent_limit_profile.cmd",
+                    "scriptName": "create_concurrent_limit_profile.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "List all the profiles available",
+                    "scriptId": "show_profile.cmd",
+                    "scriptName": "show_profile.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Apply the above created profile. Choose the user you want to apply it to (You might not be able to run it on default user.",
+                    "scriptId": "apply_concurrent_limit_profile.cmd",
+                    "scriptName": "apply_concurrent_limit_profile.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "eabe218f-0d35-47a0-a057-e2171377a786",
+            "name": "Data Changing Queries",
+            "desc": "Queries were done which can modify or delete data or change the state of the clickhouse (system, alter, drop, truncate)",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Look into the summary of query and who executed them.",
+                    "scriptId": "flagged_queries.cmd",
+                    "scriptName": "flagged_queries.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "error_in_parts",
+            "name": "Error in some parts",
+            "desc": "Some parts have some errors",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See the parts having error",
+                    "scriptId": "error_parts.cmd",
+                    "scriptName": "error_parts.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "failed_mutation",
+            "name": "Failing Mutations",
+            "desc": "Some mutations are failing",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See the mutations having error",
+                    "scriptId": "error_mutations.cmd",
+                    "scriptName": "error_mutations.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "failing_replication_queue",
+            "name": "Replcation Queue Problems",
+            "desc": "Some replication are in failing, this meand DDL queries might not work properly",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See the summary of failing replication",
+                    "scriptId": "replication_queue_summary.cmd",
+                    "scriptName": "replication_queue_summary.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "See the state of replicas",
+                    "scriptId": "replica_error_summary.cmd",
+                    "scriptName": "replica_error_summary.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "d2b519c6-c35a-4763-a478-539f1e5928c2",
+            "name": "Distributed Queries Stuck",
+            "desc": "Distributed ddl queue is has queries which are inactive. This can cause ddl queries to halt and timeout. ",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Restart the clickhouse. This is the universal method of solving such issues. ",
+                    "scriptId": "01JFF43HH5CTBZQRSQQ53V2KA5",
+                    "scriptName": "restart_clickhouse_docker.sh",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "flw_ru_ok",
+            "name": "Keeper Is Not Ok",
+            "desc": "Keeper did not return ok",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check keeper",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "22058528-735f-42fc-a013-85b65cf46ecc",
+            "name": "High Query Rate Detected",
+            "desc": "High number of queries are being done than usual. Do have rate limmiting in place ?",
+            "labels": [
+                "Query"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Get a summary of which user is contributing to the queries",
+                    "scriptId": "list_query_summary_by_user.cmd",
+                    "scriptName": "list_query_summary_by_user.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "List the intensive queries (sorted by duration, but feel free to change it)",
+                    "scriptId": "list_time_intesive_queries.cmd",
+                    "scriptName": "list_time_intesive_queries.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Kill selected queries, using query_id in step 1",
+                    "scriptId": "01JFF43HH4RYM7N8RDGXM3SJQ3",
+                    "scriptName": "kill_query_args.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Kill all the queries running more than 1 min (feel free to modify to kill based on memeory, read_bytes, result_bytes)",
+                    "scriptId": "01JFF43HH41MK8RBTZKAXJRXGB",
+                    "scriptName": "kill_query_all.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 5,
+                    "instruction": "Set a maximum query quota for the user to prevent future occurrences of high query rates.",
+                    "scriptId": "01JFF43HH5QK9KK17HHBX8S3TR",
+                    "scriptName": "quota_max_qps.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "39af70cf-c705-457e-bd17-5c10654e8022",
+            "name": "Total Query Time High",
+            "desc": "A query is executing longer than the acceptable threshold in ClickHouse, which may lead to performance degradation or resource exhaustion.",
+            "labels": [
+                "Query"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Identify and list all active queries that are exceeding the execution time threshold.",
+                    "scriptId": "01JFF43HH4SME2A842T760XTYF",
+                    "scriptName": "list_all_time_exceed_queries.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Kill selected queries, using query_id in step 1",
+                    "scriptId": "01JFF43HH4RYM7N8RDGXM3SJQ3",
+                    "scriptName": "kill_query_args.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Kill all the queries running more than 1 min",
+                    "scriptId": "01JFF43HH41MK8RBTZKAXJRXGB",
+                    "scriptName": "kill_query_all.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Set a maximum execution time quota for users to prevent future occurrences of long-running queries.",
+                    "scriptId": "01JFF43HH5A9KTS9XA366A710E",
+                    "scriptName": "quota_max_execution_time.sql.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "7af580b3-f6e7-45b5-afee-b9561ecf2444",
+            "name": "Insert Failed General",
+            "desc": "Insert query failed",
+            "labels": [
+                "Table \u0026 Data",
+                "Insertion Failures"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 2,
+            "attributes": [
+                {
+                    "triggerId": "a4fd99b1-cb33-4b60-9055-c43902186358",
+                    "parent": "attribute",
+                    "field": "data.query_id",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "",
+                            "scriptArgId": "01JFAZF1F14GWTCNZASAW0JPRE"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Look for the details such as query, duration, tables involved using following command. ",
+                    "scriptId": "01JFF43HH5T5H59S8YWA9XGEDM",
+                    "scriptName": "poco_exception_inserting.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "7af580b3-f6e7-45b5-afee-b9561ecf2441",
+            "name": "Insert Failed : Table Read Only",
+            "desc": "Tables were in read only mode, causing the insertion to be failed. ",
+            "labels": [
+                "Table \u0026 Data",
+                "Insertion Failures"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 2,
+            "attributes": [
+                {
+                    "triggerId": "a4fd99b1-cb33-4b60-9055-c43902186356",
+                    "parent": "attribute",
+                    "field": "data.query_id",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "",
+                            "scriptArgId": "01JFAZF1F14GWTCNZASAW0JPRE"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "You can use the remediation for \"Read Only Table\" problem. Look for the details such as query, duration, tables involved using following command. ",
+                    "scriptId": "01JFF43HH5T5H59S8YWA9XGEDM",
+                    "scriptName": "poco_exception_inserting.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "You can use the `SETTINGS distributed_insert_skip_read_only_replicas=1` at the end of the query to avoid errors on read_only_replicas. ",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "b6dd14e8-2cbd-4c6a-943b-d2de55d43146",
+            "name": "Query Running Since Minute",
+            "desc": "Queries have been running since a minute. This can mean either load is high, or that query is inefficient if, especially if it a select query",
+            "labels": [
+                "Query"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "6856a267-df71-4821-9c6d-72daded68b81",
+                    "parent": "attribute",
+                    "field": "data.query_id",
+                    "mapTo": [
+                        {
+                            "stepNo": 2,
+                            "keyword": "query_id",
+                            "scriptArgId": "01JFFZ0MFEDGSZRH5HCQ9FFKXX"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See all the long running queries",
+                    "scriptId": "01JFF43HH58286C288GWWDRF8T",
+                    "scriptName": "see_long_running_query.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Kill selected queries, using query_id in step 1",
+                    "scriptId": "01JFF43HH4RYM7N8RDGXM3SJQ3",
+                    "scriptName": "kill_query_args.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Kill all the queries running more than 1 min",
+                    "scriptId": "01JFF43HH41MK8RBTZKAXJRXGB",
+                    "scriptName": "kill_query_all.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Apply max execution time to a certina user",
+                    "scriptId": "01JFF43HH4SBR2CHYVF73XQ168",
+                    "scriptName": "apply_max_execution_time.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "free_disk_below_20_percent",
+            "name": "Low Disk Space",
+            "desc": "Available disk space is below 20%",
+            "labels": [
+                "Low Resource"
+            ],
+            "isError": false,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Checkout the disk which are full",
+                    "scriptId": "disk_20_summary.cmd",
+                    "scriptName": "disk_20_summary.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "As a safe bet please delete the logs in clickhouse. Especially the ones *.gz",
+                    "scriptId": "delete_clickhouse_log.sh",
+                    "scriptName": "delete_clickhouse_log.sh",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "You can delete the system.\u003ctables\u003e also. List the top 10 and truncate them (if you want)",
+                    "scriptId": "list_heavy_system_tables.cmd",
+                    "scriptName": "list_heavy_system_tables.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "7bdea596-a6ee-41d1-952d-5213dbcbc7c9",
+            "name": "Low Memory",
+            "desc": "Memory below 90 percentile",
+            "labels": [
+                "Low Resource"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check if any query is consuming high memory.",
+                    "scriptId": "01JFF43HH5EA3JCNPF3K7915JE",
+                    "scriptName": "show_processes_with_high_memory.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Kill that query.",
+                    "scriptId": "01JFF43HH4RYM7N8RDGXM3SJQ3",
+                    "scriptName": "kill_query_args.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "List down queries that take the highest memory.",
+                    "scriptId": "01JFF43HH6M85Y651YAYTJF7WW",
+                    "scriptName": "show_queries_with_highest_memory_usage.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Optimise the query and add `SETTINGS max_memory_usage = \u003cno_of_bytes\u003e` clause at the source of the memory.\nEg:\n```\nSELECT * FROM \u003ctable_name\u003e SETTINGS max_memory_usage = \u003cno_of_bytes\u003e;\n```",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 5,
+                    "instruction": "Exit Clickhouse",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 6,
+                    "instruction": "For #1, run the below cmd to update the `default` profile.",
+                    "scriptId": "01JFF43HH4XFBGHT1AY8HJBF85",
+                    "scriptName": "add_max_memory_usage_to_default_profile.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 7,
+                    "instruction": "If all the above doesn't help in reducing memory usage, it's time to increase memory.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "d2b519c6-c35a-4763-a078-539f1e5928c2",
+            "name": "OS Waith High",
+            "desc": "OS wait time is high. This means there is contention for CPU or that wait time for many queries is high due to locks.",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See process list",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "It is possible that OS is taking immense time just doing thread allocation. If you see that queires are pilling up restart the clickhouse",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "7af580b3-f6e7-45b5-afee-b9561ecf2442",
+            "name": "Inserting Problem : MySQL Remote Table Network Problem",
+            "desc": "There was a connection loss while inserting data from MySql remote table. ",
+            "labels": [
+                "Table \u0026 Data",
+                "Insertion Failures"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "a4fd99b1-cb33-4b60-9055-c43902186357",
+                    "parent": "attribute",
+                    "field": "data.query_id",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "",
+                            "scriptArgId": "01JFAZF1F14GWTCNZASAW0JPRE"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "There isn't anything you can do, network losses happen from time to time. You can analyze the query, time taken, exception thrown and tables involved using following command. Remediation is to RETRY (if its a script generated add retry logic there). ",
+                    "scriptId": "01JFF43HH5T5H59S8YWA9XGEDM",
+                    "scriptName": "poco_exception_inserting.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "b2c3d4e5-f6a7-8901-bcde-2345678901fg",
+            "name": "High Read",
+            "desc": "Reads bytes are more that usual (99.99%le) in ClickHouse, which may lead to performance degradation or resource exhaustion.",
+            "labels": [
+                "Query"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Identify and list all active queries that are exceeding the read memory bytes threshold.",
+                    "scriptId": "01JFF43HH4M05P91EWR21R51A8",
+                    "scriptName": "list_high_read_bytes_queries.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Kill selected queries, using query_id in step 1",
+                    "scriptId": "01JFF43HH4RYM7N8RDGXM3SJQ3",
+                    "scriptName": "kill_query_args.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Kill all queries running with more than 100MiB used (run to first list, then remove TEST suffix and execute again to kill)",
+                    "scriptId": "kill_memory_100Mib.cmd",
+                    "scriptName": "kill_memory_100Mib.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Set a maximum read memory bytes quota for users to prevent future occurrences of high read memory usage.",
+                    "scriptId": "01JFF43HH5NQ3Y739RZEXJ33M1",
+                    "scriptName": "quota_max_read_bytes.sql.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "82ebd564-32eb-476e-aa95-89ae7654f178",
+            "name": "Query Failing",
+            "desc": "Some queries are failing",
+            "labels": [
+                "Query"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Look into the summary, which shows queries grouped by exceptions and some data around it.",
+                    "scriptId": "list_exception_query.cmd",
+                    "scriptName": "list_exception_query.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "bbb30281-7198-4a81-b6f1-5a750b300770",
+            "name": "Query Pressure Building",
+            "desc": "This indicates the number of queries finished were lesser than the number of queries started in last minute",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Checkout the queries which might be slowing down, these if pile up we will get high qps",
+                    "scriptId": "list_time_intesive_queries.cmd",
+                    "scriptName": "list_time_intesive_queries.cmd",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "d2b519c6-c35a-470a-a478-539f1e5928c2",
+            "name": "Query Time High",
+            "desc": "Query time is high. This means query load is in 99.99%ile, meaning it rare to see this much query time. Either too many heavy queries or QPS is high. ",
+            "labels": [
+                "Query"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "See process list",
+                    "scriptId": "01JFF43HH6J69RC7G0XQYWHGA3",
+                    "scriptName": "show_processlist.cmd",
+                    "hasArgument": false
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "This means lots of time is going into actually executing the queries. Either high QPS or Heavy quereis (long running). We have remediaiton for both of these (if not firring, go to remediation seciton and find it.",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "22371b3e-d1b1-456e-b449-74b701d9cf37",
+            "name": "Read Only Tables Exists",
+            "desc": "Some Table are in read only mode",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "5365d199-3337-4e4e-91f5-87b2455bbb3b",
+                    "parent": "attribute",
+                    "field": "data.table",
+                    "mapTo": [
+                        {
+                            "stepNo": 2,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6SGBVNPEGJRENT61AQMV4K"
+                        },
+                        {
+                            "stepNo": 3,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6XZ5JBMA3PXF84ZXX7HS26"
+                        },
+                        {
+                            "stepNo": 4,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6ZNWZ785KXFRDSE6EZDXZM"
+                        },
+                        {
+                            "stepNo": 5,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6SGBVNPEGJRENT61AQMV4K"
+                        },
+                        {
+                            "stepNo": 7,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6XZ5JBMA3PXF84ZXX7HS26"
+                        },
+                        {
+                            "stepNo": 8,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6SWYKRGVBTMMSNYS61S2KG"
+                        },
+                        {
+                            "stepNo": 9,
+                            "keyword": "table",
+                            "scriptArgId": "01JE6SZAKD2GQBF4JAN6K9WAF5"
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "5365d199-3337-4e4e-91f5-87b2455bbb3b",
+                    "parent": "attribute",
+                    "field": "data.database",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "database",
+                            "scriptArgId": "01JE6Y4NY2X5N0XNTJBYK397PF"
+                        },
+                        {
+                            "stepNo": 4,
+                            "keyword": "db",
+                            "scriptArgId": "01JE6ZNWZ785KXFRDSE8QTA0R5"
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "5365d199-3337-4e4e-91f5-87b2455bbb3b",
+                    "parent": "attribute",
+                    "field": "data.replica_name",
+                    "mapTo": [
+                        {
+                            "stepNo": 6,
+                            "keyword": "replica_name",
+                            "scriptArgId": "01JE6SS9ZFZ33BPZAJA0025P9V"
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "5365d199-3337-4e4e-91f5-87b2455bbb3b",
+                    "parent": "attribute",
+                    "field": "data.zookeeper_path",
+                    "mapTo": [
+                        {
+                            "stepNo": 6,
+                            "keyword": "table_zk_path",
+                            "scriptArgId": "01JE6SS9ZFZ33BPZAJA1MQ4V16"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "This is CRITICAL for all following suggestion. ",
+                    "scriptId": "01JFF43HH6KJR0WBFT4VXZ03VE",
+                    "scriptName": "use_database.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "This is beginning of easy solution.\nDetach the the concerned table (if value is not auto fill then just fill it the details of table which is in the read only mode)",
+                    "scriptId": "01JFF43HH4XQDGKM710DS7C9RG",
+                    "scriptName": "detach_table.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Attach the the concerned table (if value is not auto fill then just fill it the details of table which is in the read only mode)",
+                    "scriptId": "01JFF43HH4EJ878J4GGK7HVGJC",
+                    "scriptName": "attach_table_1.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Check if the alerted table and database is still in read only mode. If it give '0' as output STOP!",
+                    "scriptId": "01JFF43HH4MRZ6EB0KMY2FDTED",
+                    "scriptName": "check_is_readonly_table.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 5,
+                    "instruction": "Detach the the concerned table (if value is not auto fill then just fill it the details of table which is in the read only mode). YES you need to do it again!",
+                    "scriptId": "01JFF43HH4XQDGKM710DS7C9RG",
+                    "scriptName": "detach_table.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 6,
+                    "instruction": "DROP the replica (don't worry we will restore is also)",
+                    "scriptId": "01JFF43HH6EN44DQJDYCE2JV6T",
+                    "scriptName": "system_drop_replica_from_zk.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 7,
+                    "instruction": "Attach the the concerned table (if value is not auto fill then just fill it the details of table which is in the read only mode).Yes AGAIN!",
+                    "scriptId": "01JFF43HH4EJ878J4GGK7HVGJC",
+                    "scriptName": "attach_table_1.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 8,
+                    "instruction": "Recreated the connection with zookeeper!",
+                    "scriptId": "01JFF43HH60FV004K15G71PWGS",
+                    "scriptName": "system_restore_table.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 9,
+                    "instruction": "Sync the replica from other one, using system command",
+                    "scriptId": "01JFF43HH6KJ04Y576F9FKA34A",
+                    "scriptName": "system_sync_table.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 10,
+                    "instruction": "Check if the table is still in readonly mode or not (use the cmd file check_is_readonly_table.cmd as in step 4)",
+                    "scriptId": "",
+                    "scriptName": "",
+                    "hasArgument": false
+                }
+            ]
+        },
+        {
+            "id": "9a3eb20f-f72b-474d-93fb-9e24de7315f2",
+            "name": "Too many parts",
+            "desc": "This happens when excessive data partitions overwhelm the system, leading to performance degradation and increased resource usage.",
+            "labels": [
+                "Table \u0026 Data"
+            ],
+            "isError": false,
+            "isInsight": true,
+            "priority": 0,
+            "attributes": [
+                {
+                    "triggerId": "e004ee39-7e29-4223-a0ff-a86eb22d31cb",
+                    "parent": "attribute",
+                    "field": "data.database",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "database",
+                            "scriptArgId": "01JD2A11VTEHW8PN670BZF3V1K"
+                        },
+                        {
+                            "stepNo": 2,
+                            "keyword": "database",
+                            "scriptArgId": "01JD2AFJSQDT7VY4NX6E1S3TG4"
+                        },
+                        {
+                            "stepNo": 3,
+                            "keyword": "database",
+                            "scriptArgId": "01JD2CN3A9G3PBPYC5VK509MTR"
+                        },
+                        {
+                            "stepNo": 4,
+                            "keyword": "database",
+                            "scriptArgId": "01JD9JCT8B8X046BW1CKH87BTR"
+                        }
+                    ]
+                },
+                {
+                    "triggerId": "e004ee39-7e29-4223-a0ff-a86eb22d31cb",
+                    "parent": "attribute",
+                    "field": "data.table",
+                    "mapTo": [
+                        {
+                            "stepNo": 1,
+                            "keyword": "table",
+                            "scriptArgId": "01JD2A11VTEHW8PN670DEXRDF8"
+                        },
+                        {
+                            "stepNo": 2,
+                            "keyword": "table",
+                            "scriptArgId": "01JD2AFJSQDT7VY4NX6H66AX7N"
+                        },
+                        {
+                            "stepNo": 3,
+                            "keyword": "table",
+                            "scriptArgId": "01JD2CN3A9G3PBPYC5VN51CQNM"
+                        },
+                        {
+                            "stepNo": 4,
+                            "keyword": "table",
+                            "scriptArgId": "01JD9JCT8B8X046BW1CMYP2CA8"
+                        }
+                    ]
+                }
+            ],
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check which partition has more parts",
+                    "scriptId": "01JFF43HH5WJQ163YT20KG0E92",
+                    "scriptName": "partition_part_count.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 2,
+                    "instruction": "Check when majority parts were created",
+                    "scriptId": "01JFF43HH5AYY50T7M8PTXB61V",
+                    "scriptName": "part_date_count.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 3,
+                    "instruction": "Check if there are some errors removing parts",
+                    "scriptId": "01JFF43HH5RZF9AT3XJPV2TMC6",
+                    "scriptName": "part_with_removal_error.cmd",
+                    "hasArgument": true
+                },
+                {
+                    "stepNo": 4,
+                    "instruction": "Check table is partitioned on what columns",
+                    "scriptId": "01JFF43HH4BBFZGRF0WJ548881",
+                    "scriptName": "find_partition_columns.cmd",
+                    "hasArgument": true
+                }
+            ]
+        },
+        {
+            "id": "ba3c3e50-dbef-4fe1-aa85-3448650e1bfa",
+            "name": "Worker was Down",
+            "desc": "Workers uptime was lesser than 10 minutes",
+            "labels": [
+                "Cluster Connectivity"
+            ],
+            "isError": true,
+            "isInsight": false,
+            "priority": 0,
+            "attributes": null,
+            "steps": [
+                {
+                    "stepNo": 1,
+                    "instruction": "Check the uptime of Clickhouse first",
+                    "scriptId": "01JFF43HH637AT76Z8YM6CXKYB",
+                    "scriptName": "uptime.cmd",
+                    "hasArgument": false
+                }
+            ]
+        }
+    ]
+}
