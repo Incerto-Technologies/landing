@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 
 export const GetEmail = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState("");
@@ -15,6 +17,16 @@ export const GetEmail = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const handleContactSubmit = async () => {
+    try {
+      z.string().email().parse(email);
+    } catch (error) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email",
+        variant: "destructive",
+      });
+      return;
+    }
     const res = await fetch("https://incerto.in/api/magicpill/remediation", {
       method: "POST",
       body: JSON.stringify({ email }),

@@ -186,6 +186,7 @@ export const useClickhouseSummary = () => {
     setIsLoading(true);
     const baseUrl = import.meta.env.VITE_API_URL;
     const summary = await fetch(`${baseUrl}/api/v1/alerts/config-remediations`);
+    // const summary = await fetch(`/config.json`);
     const data: ApiResponse<RemediationConfig[]> = await summary.json();
     console.log(data, "summary");
     setIsLoading(false);
