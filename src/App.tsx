@@ -4,6 +4,7 @@ import { Home } from "./pages/home";
 import { ErrorBoundary } from "./components/error-handler/error-handler";
 import { ClickhouseRemediationList } from "./pages/clickhouse-remediation-list";
 import { RootLayout } from "./components/layouts/root-layout";
+import { GetEmail } from "./pages/get-email";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
       },
       {
         path: "clickhouse-remediation",
-        element: <ClickhouseRemediationList />,
+        element: (
+          <GetEmail>
+            <ClickhouseRemediationList />
+          </GetEmail>
+        ),
       },
     ],
   },
