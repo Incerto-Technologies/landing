@@ -56,32 +56,34 @@ const createLabelTree = (
     let currentParent: ClickhouseSummaryData | null = null;
     const nodesToUpdate = new Set<ClickhouseSummaryData>();
 
-    config.labels.forEach((label: string, index: number) => {
-      const path = config.labels.slice(0, index + 1).join("/");
-      let node = labelMap.get(path);
+    config.labels
+      .filter((label) => !label.toLocaleLowerCase().startsWith("tag_"))
+      .forEach((label: string, index: number) => {
+        const path = config.labels.slice(0, index + 1).join("/");
+        let node = labelMap.get(path);
 
-      if (!node) {
-        node = {
-          label,
-          remediationConfig:
-            index === config.labels.length - 1 ? config : undefined,
-          totalNoOfInsights: 0,
-          totalNoOfErrors: 0,
-          recentFiringAlertAt: null,
-          children: [],
-        };
-        labelMap.set(path, node);
+        if (!node) {
+          node = {
+            label,
+            remediationConfig:
+              index === config.labels.length - 1 ? config : undefined,
+            totalNoOfInsights: 0,
+            totalNoOfErrors: 0,
+            recentFiringAlertAt: null,
+            children: [],
+          };
+          labelMap.set(path, node);
 
-        if (index === 0) {
-          rootNodes.push(node);
-        } else if (currentParent) {
-          currentParent.children?.push(node);
+          if (index === 0) {
+            rootNodes.push(node);
+          } else if (currentParent) {
+            currentParent.children?.push(node);
+          }
         }
-      }
 
-      nodesToUpdate.add(node);
-      currentParent = node;
-    });
+        nodesToUpdate.add(node);
+        currentParent = node;
+      });
 
     // Update metrics for all nodes in reverse order (leaf to root)
     Array.from(nodesToUpdate)
