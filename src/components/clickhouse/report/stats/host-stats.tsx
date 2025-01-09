@@ -1,33 +1,35 @@
+"use client";
+
 import {
   ClickhouseProblemSummary,
   ClickhouseProblemSummaryAlert,
+  ClickhouseProblemSummaryHost,
 } from "@/hooks/use-clickhouse-report";
 import { Server } from "lucide-react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { Pie, PieChart } from "recharts";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
-// Colors for the pie chart segments
-const COLORS = [
-  "rgb(15, 23, 42)", // slate-900
-  "rgb(51, 65, 85)", // slate-700
-  "rgb(71, 85, 105)", // slate-600
-  "rgb(100, 116, 139)", // slate-500
-  "rgb(148, 163, 184)", // slate-400
-];
+const COLORS = {
+  chrome: "hsl(217, 91%, 60%)", // blue
+  safari: "hsl(339, 90%, 68%)", // pink
+  firefox: "hsl(31, 97%, 72%)", // orange
+  edge: "hsl(262, 83%, 74%)", // purple
+  other: "hsl(142, 71%, 45%)", // green
+};
 
 // Helper function to group alerts by host
 const groupAlertsByHost = (
@@ -37,36 +39,67 @@ const groupAlertsByHost = (
     return [];
   }
 
-  const hostCounts: { [key: string]: number } = {};
+  const hostCounts: {
+    [key: string]: {
+      host: ClickhouseProblemSummaryHost;
+      count: number;
+    };
+  } = {};
 
   alerts.forEach((alert) => {
-    const hostName = alert.host.name;
-    hostCounts[hostName] = (hostCounts[hostName] || 0) + 1;
+    const hostId = alert.host.id;
+    if (!hostCounts[hostId]) {
+      hostCounts[hostId] = {
+        host: alert.host,
+        count: 0,
+      };
+    }
+    hostCounts[hostId].count += 1;
   });
 
-  return Object.entries(hostCounts)
-    .map(([name, value]) => ({
-      name,
-      value,
+  return Object.values(hostCounts)
+    .map((value, index) => ({
+      name: value.host.name,
+      value: value.count,
+      fill: Object.values(COLORS)[index % Object.keys(COLORS).length],
+      host: value.host,
     }))
-    .sort((a, b) => b.value - a.value) // Sort by value in descending order
+    .sort((a, b) => b.value - a.value)
     .slice(0, 5); // Take top 5 hosts
 };
 
-// Custom tooltip component
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-white border rounded-lg p-2 shadow-lg">
-        <p className="text-sm font-medium">{payload[0].name}</p>
-        <p className="text-sm text-muted-foreground">
-          Alerts: {payload[0].value}
-        </p>
-      </div>
-    );
-  }
-  return null;
+const createChartConfig = (chartData: any[]): ChartConfig => {
+  const config: any = {
+    value: {
+      label: "Alerts",
+    },
+  };
+
+  chartData.forEach((item) => {
+    config[item.name] = {
+      label: item.host.name,
+      color: item.fill,
+    };
+  });
+
+  return config as ChartConfig;
 };
+
+// const CustomLegend = ({ payload }: any) => {
+//   return (
+//     <div className="flex flex-wrap justify-center gap-4 mt-4">
+//       {payload.map((entry: any, index: number) => (
+//         <div key={index} className="flex items-center gap-2">
+//           <div
+//             className="w-3 h-3 rounded-sm"
+//             style={{ backgroundColor: entry.color }}
+//           />
+//           <span className="text-sm">{entry.value}</span>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
 export const HostStats = ({
   problem,
@@ -74,57 +107,35 @@ export const HostStats = ({
   problem: ClickhouseProblemSummary;
 }) => {
   const chartData = groupAlertsByHost(problem.alerts);
-  const totalAlerts = chartData.reduce((sum, item) => sum + item.value, 0);
+  const chartConfig = createChartConfig(chartData);
 
   return (
-    <Card className="bg-white">
+    <Card className="h-full bg-white">
       <CardHeader className="pb-2">
-        <div className="flex items-center gap-2">
-          <Server className="h-5 w-5 text-muted-foreground" />
-          <CardTitle className="text-lg font-semibold">
-            Host Distribution
-          </CardTitle>
-        </div>
-        <CardDescription className="text-sm text-muted-foreground">
-          Alert distribution by host
-        </CardDescription>
+        <CardTitle>Host Distribution</CardTitle>
+        <CardDescription>Alert distribution by host</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="h-[280px] w-full">
           {chartData.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
+            <ChartContainer
+              config={chartConfig}
+              className="mx-auto aspect-square max-h-[300px]"
+            >
               <PieChart>
-                <Pie
-                  data={chartData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
-                  paddingAngle={2}
-                >
-                  {chartData.map((_, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-                <Legend
-                  layout="vertical"
-                  align="right"
-                  verticalAlign="middle"
-                  formatter={(value) => (
-                    <span className="text-sm">{value}</span>
-                  )}
+                <Pie data={chartData} dataKey="value" />
+                <ChartLegend
+                  content={<ChartLegendContent nameKey="name" />}
+                  className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                />
+                <ChartTooltip
+                  content={<ChartTooltipContent nameKey="value" />}
                 />
               </PieChart>
-            </ResponsiveContainer>
+            </ChartContainer>
           ) : (
             <div className="h-full w-full flex flex-col items-center justify-center gap-2 bg-slate-50 rounded-lg border border-dashed">
-              <Server className="h-8 w-8 text-muted-foreground/50" />
+              <Server className="h-8 w-8 text-muted-foreground/50 animate-pulse" />
               <p className="text-sm text-muted-foreground">
                 No host data available
               </p>
@@ -132,14 +143,6 @@ export const HostStats = ({
           )}
         </div>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-1 pt-2 border-t">
-        <div className="flex items-center gap-2 text-sm font-medium">
-          Total Alerts: {totalAlerts}
-        </div>
-        <p className="text-sm text-muted-foreground">
-          Showing top 5 hosts by alert count
-        </p>
-      </CardFooter>
     </Card>
   );
 };

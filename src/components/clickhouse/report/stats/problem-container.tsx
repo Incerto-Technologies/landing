@@ -11,8 +11,10 @@ const Problem = ({ problem }: { problem: ClickhouseProblemSummary }) => {
     <div className="space-y-4">
       <h1 className="text-2xl font-bold">{problem.name}</h1>
 
-      <ProblemStats problem={problem} />
-      <HostStats problem={problem} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ProblemStats problem={problem} />
+        <HostStats problem={problem} />
+      </div>
     </div>
   );
 };
