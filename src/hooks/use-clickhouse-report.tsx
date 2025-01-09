@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { toast } from "./use-toast";
+import { fetchWithAuth } from "@/utils/fetch-with-auth";
+import { ApiResponse } from "@/types/server.type";
+import {
+  ClickhouseReportState,
+  ClickhouseSummaryState,
+} from "@/features/clickhouse-report";
+import { useAtom } from "jotai";
 
-type Report = {
+export type ClickhouseReport = {
   title: string;
   isOK: boolean;
 };
@@ -12,7 +19,7 @@ interface ApiResponseSummary {
   data: Summary | null;
 }
 
-interface Summary {
+export interface Summary {
   from: string; // ISO 8601 format
   to: string; // ISO 8601 format
   problems: Problem[];
@@ -45,8 +52,8 @@ interface Host {
 }
 
 export const useClickhouseReport = () => {
-  const [report, setReport] = useState<Report[] | null>(null);
-  const [summary, setSummary] = useState<Summary | null>(null);
+  const [report, setReport] = useAtom(ClickhouseReportState);
+  const [summary, setSummary] = useAtom(ClickhouseSummaryState);
   const [isLoadingReport, setIsLoadingReport] = useState(false);
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
 
@@ -54,8 +61,11 @@ export const useClickhouseReport = () => {
 
   const fetchReport = async () => {
     setIsLoadingReport(true);
-    const response = await fetch(`${baseUrl}/api/v1/alerts/report-summary`);
-    const data = await response.json();
+    const response = await fetchWithAuth(
+      `${baseUrl}/api/v1/alerts/report-summary`
+    );
+    const data: ApiResponse<ClickhouseReport[]> = await response.json();
+    console.log("data", data);
     if (data.data) {
       setReport(data.data);
     } else {
@@ -70,7 +80,9 @@ export const useClickhouseReport = () => {
 
   const fetchSummary = async () => {
     setIsLoadingSummary(true);
-    const response = await fetch(`${baseUrl}/api/v1/alerts/report-summary`);
+    const response = await fetchWithAuth(
+      `${baseUrl}/api/v1/alerts/report-summary`
+    );
     const data: ApiResponseSummary = await response.json();
     if (data.data) {
       setSummary(data.data);

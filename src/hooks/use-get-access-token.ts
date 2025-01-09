@@ -21,6 +21,7 @@ export const useGetAccessToken = () => {
     }
 
     const apiUrl = import.meta.env.VITE_API_URL;
+
     const formData = new FormData();
     formData.append("username", user.username);
     formData.append("password", user.password);
