@@ -19,7 +19,7 @@ import {
 
 const chartConfig = {
   count: {
-    label: "count",
+    label: "eventId",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
@@ -29,6 +29,7 @@ export const ProblemStats = ({
 }: {
   problem: ClickhouseProblemSummary;
 }) => {
+  console.log(problem, "problem");
   return (
     <Card>
       <CardHeader>
@@ -40,7 +41,7 @@ export const ProblemStats = ({
           <BarChart accessibilityLayer data={problem.alerts}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="eventTime"
               tickLine={false}
               tickMargin={10}
               axisLine={false}

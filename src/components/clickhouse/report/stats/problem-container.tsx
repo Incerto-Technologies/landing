@@ -8,6 +8,7 @@ const Problem = ({ problem }: { problem: ClickhouseProblemSummary }) => {
   return (
     <div>
       <h1>{problem.name}</h1>
+
       <ProblemStats problem={problem} />
     </div>
   );
@@ -19,9 +20,9 @@ export const ProblemContainer = () => {
     <div>
       <h1>Problem Status</h1>
       <div className="">
-        {summary?.problems ? (
-          summary.problems.map((item: ClickhouseProblemSummary) => (
-            <Problem key={item.id} problem={item} />
+        {summary ? (
+          summary.problems.map((problem) => (
+            <Problem key={problem.id} problem={problem} />
           ))
         ) : (
           <div className="flex justify-center items-center h-screen">
