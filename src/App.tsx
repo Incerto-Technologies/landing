@@ -4,8 +4,8 @@ import { Home } from "./pages/home";
 import { ErrorBoundary } from "./components/error-handler/error-handler";
 import { ClickhouseRemediationList } from "./pages/clickhouse-remediation-list";
 import { RootLayout } from "./components/layouts/root-layout";
-import { useGetAccessToken } from "./hooks/use-get-access-token";
-import { useEffect } from "react";
+import { GetEmail } from "./pages/get-email";
+import { Toaster } from "./components/ui/toaster";
 
 const router = createBrowserRouter([
   {
@@ -19,18 +19,21 @@ const router = createBrowserRouter([
       },
       {
         path: "clickhouse-remediation",
-        element: <ClickhouseRemediationList />,
+        element: (
+          <GetEmail>
+            <ClickhouseRemediationList />
+          </GetEmail>
+        ),
       },
     ],
   },
 ]);
 
 export const App = () => {
-  const { getAccessToken } = useGetAccessToken();
-
-  useEffect(() => {
-    getAccessToken();
-  }, []);
-
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  );
 };

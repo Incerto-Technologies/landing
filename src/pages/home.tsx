@@ -7,7 +7,7 @@ export const Home = () => {
   const [email, setEmail] = useState("");
 
   const handleContactSubmit = async () => {
-    await fetch("https://incerto.in/api/contact", {
+    await fetch("https://incerto.in/api/magicpill/demo", {
       method: "POST",
       body: JSON.stringify({ email }),
     });

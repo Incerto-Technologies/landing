@@ -3,9 +3,11 @@ import { RefreshCcw, AlertCircle } from "lucide-react";
 import { useClickhouseSummary } from "@/hooks/use-clickhouse-summary";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { useEffect } from "react";
+import { Input } from "../ui/input";
 
 export const Summary = () => {
-  const { summary, isLoading, setSummaryData } = useClickhouseSummary();
+  const { summary, isLoading, setSummaryData, searchTerm, handleSearch } =
+    useClickhouseSummary();
 
   useEffect(() => {
     console.log("summary", summary);
@@ -13,14 +15,18 @@ export const Summary = () => {
   }, []);
 
   return (
-    <div className="h-full min-h-screen bg-background px-4 py-6 md:px-6">
+    <div className="h-full bg-background px-4 py-6 md:px-6">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-semibold">System Summary</h1>
-            <p className="text-sm text-muted-foreground">
-              Monitor your Clickhouse Cluster's health and performance
-            </p>
+        <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+          <h1 className="text-xl md:text-2xl font-bold">
+            Clickhouse Remediation List
+          </h1>
+          <div className="w-full md:w-1/4">
+            <Input
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Search remediations..."
+            />
           </div>
         </div>
 
