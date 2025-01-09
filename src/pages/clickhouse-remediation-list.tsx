@@ -1,4 +1,4 @@
-import { Summary } from "@/components/summary/summary";
+import { Summary } from "@/components/clickhouse/remediation/summary/summary";
 
 export const ClickhouseRemediationList = () => {
   return (

@@ -7,7 +7,7 @@ import {
 import { RemediationConfig } from "@/types/clickhouse.types";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, ChevronUpIcon, Info } from "lucide-react";
-import { RemediationContainer } from "../remediation/container/container";
+import { RemediationContainer } from "../container/container";
 
 export const SummaryTreeHost = ({ config }: { config: RemediationConfig }) => {
   const [localIsOpen, setLocalIsOpen] = useState(false);

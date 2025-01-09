@@ -6,6 +6,7 @@ import { ClickhouseRemediationList } from "./pages/clickhouse-remediation-list";
 import { RootLayout } from "./components/layouts/root-layout";
 import { GetEmail } from "./pages/get-email";
 import { Toaster } from "./components/ui/toaster";
+import { ClickhouseReport } from "./pages/clickhouse-report";
 import { useGetAccessToken } from "./hooks/use-get-access-token";
 import { useEffect } from "react";
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             <ClickhouseRemediationList />
           </GetEmail>
         ),
+      },
+      {
+        path: "clickhouse-report/:id",
+        element: <ClickhouseReport />,
       },
     ],
   },
