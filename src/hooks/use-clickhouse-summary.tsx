@@ -5,6 +5,7 @@ import {
   RemediationConfig,
 } from "../types/clickhouse.types";
 import { ApiResponse } from "@/types/server.type";
+import { fetchWithAuth } from "@/utils/fetch-with-auth";
 
 const createLabelTree = (
   configs: RemediationConfig[]
@@ -112,8 +113,13 @@ export const useClickhouseSummary = () => {
 
   const getSummary = async () => {
     setIsLoading(true);
-    // const apiUrl = import.meta.env.VITE_API_URL;
-    const summary = await fetch(`/config.json`);
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const summary = await fetchWithAuth(
+      `${apiUrl}/api/v1/alerts/config-remediations`,
+      {
+        method: "GET",
+      }
+    );
     // const summary = await fetch(`${apiUrl}/api/v1/alerts/config-remediations`);
     const data: ApiResponse<RemediationConfig[]> = await summary.json();
     console.log(data, "summary");
