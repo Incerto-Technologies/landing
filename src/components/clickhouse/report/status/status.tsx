@@ -15,9 +15,7 @@ export const Status = () => {
         <Loading title="Getting report..." message="Please wait..." />
       ) : (
         <div className="space-y-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Clickhouse Status Report
-          </h1>
+          <h1 className="text-3xl font-bold">Clickhouse Status Report</h1>
           <div className="bg-white rounded-lg overflow-hidden">
             {report?.map((item, index) => (
               <div
