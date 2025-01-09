@@ -8,6 +8,7 @@ export const ClickhouseReport = () => {
   const { setClickhouseReport } = useClickhouseReport();
 
   useEffect(() => {
+    console.log("setClickhouseReport");
     setClickhouseReport();
   }, []);
 

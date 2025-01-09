@@ -1,9 +1,9 @@
 import { SummaryTree } from "./summary-tree";
 import { RefreshCcw, AlertCircle } from "lucide-react";
 import { useClickhouseSummary } from "@/hooks/use-clickhouse-summary";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useEffect } from "react";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 
 export const Summary = () => {
   const { summary, isLoading, setSummaryData, searchTerm, handleSearch } =

@@ -1,3 +1,14 @@
+import { useClickhouseReport } from "@/hooks/use-clickhouse-report";
+
 export const Status = () => {
-  return <div>Status</div>;
+  const { report, isLoadingReport } = useClickhouseReport();
+  return (
+    <div>
+      {isLoadingReport ? (
+        <div>Loading...</div>
+      ) : (
+        <div>{JSON.stringify(report)}</div>
+      )}
+    </div>
+  );
 };

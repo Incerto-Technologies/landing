@@ -1,4 +1,4 @@
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import { Copy, Play } from "lucide-react";
 import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
