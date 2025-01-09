@@ -16,16 +16,16 @@ export type ClickhouseReport = {
 interface ApiResponseSummary {
   success: boolean;
   message: string;
-  data: Summary | null;
+  data: ClickhouseSummary | null;
 }
 
-export interface Summary {
+export interface ClickhouseSummary {
   from: string; // ISO 8601 format
   to: string; // ISO 8601 format
-  problems: Problem[];
+  problems: ClickhouseProblemSummary[];
 }
 
-interface Problem {
+export interface ClickhouseProblemSummary {
   id: string;
   name: string;
   desc: string;
@@ -34,16 +34,16 @@ interface Problem {
   isInsight: boolean;
   priority: number;
   count: number;
-  alerts: Alert[];
+  alerts: ClickhouseProblemSummaryAlert[];
 }
 
-interface Alert {
+export interface ClickhouseProblemSummaryAlert {
   eventId: string;
   eventTime: string; // ISO 8601 format
-  host: Host;
+  host: ClickhouseProblemSummaryHost;
 }
 
-interface Host {
+export interface ClickhouseProblemSummaryHost {
   id: string;
   refCode: string;
   name: string;
@@ -81,7 +81,7 @@ export const useClickhouseReport = () => {
   const fetchSummary = async () => {
     setIsLoadingSummary(true);
     const response = await fetchWithAuth(
-      `${baseUrl}/api/v1/alerts/report-summary`
+      `${baseUrl}/api/v1/alerts/report-detail`
     );
     const data: ApiResponseSummary = await response.json();
     if (data.data) {
