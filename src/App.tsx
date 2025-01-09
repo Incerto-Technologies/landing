@@ -6,6 +6,8 @@ import { ClickhouseRemediationList } from "./pages/clickhouse-remediation-list";
 import { RootLayout } from "./components/layouts/root-layout";
 import { GetEmail } from "./pages/get-email";
 import { Toaster } from "./components/ui/toaster";
+import { useGetAccessToken } from "./hooks/use-get-access-token";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,12 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
+  const { getAccessToken } = useGetAccessToken();
+
+  useEffect(() => {
+    getAccessToken();
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />

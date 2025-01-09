@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import { AlertRemediationStep } from "@/types/alert.types";
 import AppMarkdownViewer from "@/components/ui/markdown";
+import { fetchWithAuth } from "@/utils/fetch-with-auth";
 
 type RemediationRunnerProps = {
   step: AlertRemediationStep & {
@@ -23,7 +24,7 @@ export const RemediationRunner: React.FC<RemediationRunnerProps> = ({
 
   const getScriptContent = async (scriptId: string) => {
     const baseUrl = import.meta.env.VITE_API_URL;
-    const res = await fetch(
+    const res = await fetchWithAuth(
       `${baseUrl}/api/v1/execution-entity/${scriptId}/content`
     );
     return res.json();
