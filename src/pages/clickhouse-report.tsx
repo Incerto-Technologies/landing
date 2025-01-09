@@ -14,9 +14,12 @@ export const ClickhouseReport = () => {
   }, []);
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <Status />
-      <ProblemContainer />
+
+      <div className="mt-10">
+        <ProblemContainer />
+      </div>
     </div>
   );
 };

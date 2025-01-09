@@ -10,7 +10,7 @@ export const Status = () => {
   }, [report]);
 
   return (
-    <div className="p-6">
+    <div>
       {isLoadingReport ? (
         <Loading title="Getting report..." message="Please wait..." />
       ) : (
