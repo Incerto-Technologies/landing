@@ -5,6 +5,7 @@ import {
   RemediationConfig,
 } from "../types/clickhouse.types";
 import { ApiResponse } from "@/types/server.type";
+import { fetchWithAuth } from "@/utils/fetch-with-auth";
 
 // Helper function to check if a node matches search
 const nodeMatchesSearch = (
@@ -185,7 +186,9 @@ export const useClickhouseSummary = () => {
   const getSummary = async () => {
     setIsLoading(true);
     const baseUrl = import.meta.env.VITE_API_URL;
-    const summary = await fetch(`${baseUrl}/api/v1/alerts/config-remediations`);
+    const summary = await fetchWithAuth(
+      `${baseUrl}/api/v1/alerts/config-remediations`
+    );
     // const summary = await fetch(`/config.json`);
     const data: ApiResponse<RemediationConfig[]> = await summary.json();
     console.log(data, "summary");
