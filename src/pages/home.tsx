@@ -2,15 +2,25 @@ import VideoGallery from "@/components/VideoGallery";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 
 export const Home = () => {
   const [email, setEmail] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleContactSubmit = async () => {
-    await fetch("https://incerto.in/api/magicpill/demo", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    });
+    try {
+      setLoading(true);
+      await fetch("https://incerto.in/api/magicpill/demo", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,8 +47,16 @@ export const Home = () => {
               <Button
                 className="h-full min-w-[120px] max-md:w-full p-2.5"
                 onClick={handleContactSubmit}
+                disabled={loading}
               >
-                Let's Go
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Submitting...
+                  </div>
+                ) : (
+                  "Let's Go"
+                )}
               </Button>
             </div>
           </div>
