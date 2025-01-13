@@ -29,10 +29,10 @@ export const Navbar = () => {
           {/* Desktop navigation */}
           <nav className="hidden lg:flex items-center space-x-4">
             <Link
-              className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 capitalize"
               to="/clickhouse-remediation"
             >
-              Our ClickHouse Remediation
+              solve clickhouse problems
             </Link>
           </nav>
         </div>
@@ -49,11 +49,11 @@ export const Navbar = () => {
       >
         <nav className="container py-4">
           <Link
-            className="block w-full text-center py-2 px-4 rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            className="block w-full text-center py-2 px-4 rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90 capitalize"
             to="/clickhouse-remediation"
             onClick={() => setIsOpen(false)}
           >
-            Our ClickHouse Remediation
+            solve clickhouse problems
           </Link>
         </nav>
       </div>

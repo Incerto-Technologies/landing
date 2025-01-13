@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 
@@ -16,10 +17,24 @@ export const GetEmail = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
   const handleContactSubmit = async () => {
     try {
+      setLoading(true);
       z.string().email().parse(email);
+
+      const res = await fetch("https://incerto.in/api/magicpill/remediation", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      console.log(data);
+      sessionStorage.setItem("remediation-email", email);
+      setSuccess(true);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       toast({
         title: "Invalid email",
         description: "Please enter a valid email",
@@ -27,14 +42,6 @@ export const GetEmail = ({ children }: { children: React.ReactNode }) => {
       });
       return;
     }
-    const res = await fetch("https://incerto.in/api/magicpill/remediation", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    console.log(data);
-    sessionStorage.setItem("remediation-email", email);
-    setSuccess(true);
   };
 
   return (
@@ -55,7 +62,16 @@ export const GetEmail = ({ children }: { children: React.ReactNode }) => {
               setEmail(e.target.value)
             }
           />
-          <Button onClick={handleContactSubmit}>Submit</Button>
+          <Button onClick={handleContactSubmit} disabled={loading}>
+            {loading ? (
+              <div className="flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Submitting...
+              </div>
+            ) : (
+              "Submit"
+            )}
+          </Button>
         </div>
       ) : (
         children
