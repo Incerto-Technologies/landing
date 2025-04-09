@@ -1,31 +1,32 @@
 import Link from "next/link"
 
 const CLIENTS = [
-  "/clients/ving.svg",
-  "/clients/client2.svg",
-  "/clients/client3.svg",
+  "/clients/vking.svg",
   "/clients/dhan.svg",
-  "/clients/vector.svg",
+  "/clients/dhruv.svg",
   "/clients/discite.svg",
+  "/clients/fyers.svg",
+  "/clients/kevit.svg",
+  "/clients/astra.svg",
 ]
 
 export function HeroSection() {
   return (
-    <section className="flex flex-col items-center justify-center px-4 pt-24">
+    <section className="flex flex-col items-center justify-center  pt-16">
       {/* Free Trial Banner */}
       <Link
-        href="/trial"
-        className="group relative mb-20 rounded-full bg-gradient-to-b from-[var(--color-card)] to-[var(--color-muted)] px-4 py-2 text-sm font-normal text-[var(--color-primary)] shadow-sm ring-1 ring-[var(--color-primary)] backdrop-blur-xl"
+        href="/discover"
+        className="group font-mono relative mb-8 rounded-full bg-gradient-to-b from-[var(--color-card)] to-[var(--color-muted)] px-4 py-2 text-sm font-normal text-[var(--color-primary)] shadow-sm ring-1 ring-[var(--color-primary)] backdrop-blur-xl"
       >
         Get 14 Days Free Trial
-        <span className="absolute -right-6 top-1/2 -translate-y-1/2 transition-transform group-hover:translate-x-1">
+        <span className="absolute -right-10 top-1/2 -translate-y-1/2 transition-transform group-hover:translate-x-1">
           →
         </span>
       </Link>
 
       {/* Hero Content */}
       <h1 className="max-w-4xl text-center text-[68px] font-normal leading-tight text-[var(--color-foreground)]">
-        Actionable Observability for Databases
+        Actionable Observability for <span className="text-primary">Databases</span>
       </h1>
       <p className="mt-6 max-w-3xl text-center text-[17px] font-medium leading-relaxed text-[var(--color-foreground)]">
         Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly
@@ -38,7 +39,7 @@ export function HeroSection() {
       <div className="mt-8 flex items-center gap-2">
         <Link
           href="/discover"
-          className="rounded-md bg-[var(--color-primary)] px-4 py-2 text-[13px] font-medium text-[var(--color-card)] shadow-sm ring-1 ring-[var(--color-primary)]/75 transition-colors hover:bg-[var(--color-primary)]/90"
+          className="rounded-md bg-primary px-4 py-2 text-[13px] font-medium text-foreground shadow-sm ring-1 ring-primary/75 transition-colors hover:bg-primary/90"
         >
           Discover Now
         </Link>
@@ -53,10 +54,7 @@ export function HeroSection() {
       {/* Clients Section */}
       <div className="mt-20 text-center">
         <h3 className="text-2xl font-medium text-[var(--color-foreground)]">Our Clients</h3>
-        <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
-          Trusted by fast-growing companies worldwide
-        </p>
-        <div className="mt-8 flex items-center justify-center gap-12">
+        <div className="my-8 flex items-center justify-center gap-12">
           {CLIENTS.map((client, index) => (
             <img
               key={index}
@@ -66,6 +64,9 @@ export function HeroSection() {
             />
           ))}
         </div>
+        <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
+          Trusted by fast-growing companies worldwide
+        </p>
       </div>
     </section>
   )
