@@ -74,9 +74,9 @@ const TABS: Tab[] = [
   },
 ]
 
-interface Props {}
 
-const TabsWithHighlights = (props: Props) => {
+
+const TabsWithHighlights = () => {
   const { resolvedTheme } = useTheme();
   const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
   const sectionRef = useRef(null);

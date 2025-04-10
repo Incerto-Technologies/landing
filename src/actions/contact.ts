@@ -32,7 +32,7 @@ export const sendContactForm = async (data: ContactFormData) => {
     });
 
     console.log("Contact form sent successfully");
-    return { success: true, data: contact };
+    return { success: true };
   } catch (error) {
     console.error("Error in contact form:", error);
     return { success: false, error: "Failed to send message" };

@@ -1,5 +1,3 @@
-"use client";
-
 import { GlowingEffect } from "@/components/ui/bento-grid";
 import Image from "next/image";
 

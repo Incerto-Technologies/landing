@@ -85,11 +85,13 @@ const Hero = () => {
         </h3>
         <div className="my-8 flex items-center justify-center gap-12">
           {CLIENTS.map((client, index) => (
-            <img
+            <Image
               key={index}
               src={client}
               alt="Client Logo"
               className="h-8 w-auto grayscale transition-all hover:grayscale-0"
+              width={32}
+              height={32}
             />
           ))}
         </div>
