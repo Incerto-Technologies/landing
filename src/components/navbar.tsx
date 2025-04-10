@@ -1,11 +1,12 @@
-import Link from "next/link"
+import Link from "next/link";
+import { ContactBtn } from "@/components/ui/contact";
 
 const NAV_ITEMS = [
   { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Resources", href: "/resources" },
   { label: "Company", href: "/company" },
-]
+];
 
 export function Navbar() {
   return (
@@ -29,14 +30,13 @@ export function Navbar() {
           ))}
 
           {/* CTA Button */}
-          <Link
-            href="/discover"
-            className="rounded-md bg-[#72E3AD] px-3 py-2 text-[11px] font-medium text-gray-900 shadow-sm ring-1 ring-[#16B674]/75 transition-colors hover:bg-[#65D69F]"
-          >
-            Discover Now
-          </Link>
+          <ContactBtn
+            className={
+              "rounded-md bg-[#72E3AD] px-3 py-2 text-[11px] font-medium text-gray-900 shadow-sm ring-1 ring-[#16B674]/75 transition-colors hover:bg-[#65D69F] mt-0"
+            }
+          />
         </div>
       </div>
     </nav>
-  )
-} 
+  );
+}
