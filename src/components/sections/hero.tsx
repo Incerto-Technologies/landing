@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CONTACT_LINK } from "@/lib/constants";
 import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
+import { Marquee } from "../ui/marquee";
 
 const CLIENTS = [
   "/clients/vking.svg",
@@ -74,7 +75,7 @@ const Hero = () => {
       {/* Clients Section */}
       <div className="mt-20 text-center">
         <h3 className="text-2xl font-medium  text-[var(--color-foreground)]">
-          Our Clients
+          Trusted By
         </h3>
         <div className="my-8 flex items-center justify-center gap-12">
           {CLIENTS.map((client, index) => (
@@ -87,7 +88,7 @@ const Hero = () => {
           ))}
         </div>
         <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
-          Trusted by fast-growing companies worldwide
+          fast-growing companies worldwide
         </p>
       </div>
     </SectionContainer>
