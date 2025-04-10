@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ContactBtn } from "../ui/contact";
+import { Marquee } from "../ui/marquee";
+
 const CLIENTS = [
   "/clients/vking.svg",
   "/clients/dhan.svg",
@@ -9,7 +12,6 @@ const CLIENTS = [
   "/clients/kevit.svg",
   "/clients/astra.svg",
 ];
-
 export function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center  pt-16">
@@ -50,12 +52,7 @@ export function HeroSection() {
 
       {/* CTA Buttons */}
       <div className="mt-8 flex items-center gap-2">
-        <Link
-          href="/discover"
-          className="rounded-md bg-primary px-4 py-2 text-[13px] font-medium text-foreground shadow-sm ring-1 ring-primary/75 transition-colors hover:bg-primary/90"
-        >
-          Discover Now
-        </Link>
+        <ContactBtn className="rounded-md bg-primary/50 px-4 py-2 text-[13px] font-medium shadow-sm border border-primary transition-colors hover:bg-primary/60 mt-0 text-foreground ring-0" />
         <Link
           href="/contact"
           className="rounded-md bg-[var(--color-card)] px-4 py-2 text-[13px] font-medium text-[var(--color-foreground)] shadow-sm ring-1 ring-[var(--color-border)] transition-colors hover:bg-[var(--color-muted)]"
@@ -65,21 +62,13 @@ export function HeroSection() {
       </div>
 
       {/* Clients Section */}
-      <div className="mt-20 text-center">
+
+      <div className="mt-20 text-center space-y-[15px]">
         <h3 className="text-2xl font-medium text-[var(--color-foreground)]">
-          Our Clients
+          Trusted By
         </h3>
-        <div className="my-8 flex items-center justify-center gap-12">
-          {CLIENTS.map((client, index) => (
-            <img
-              key={index}
-              src={client}
-              alt="Client Logo"
-              className="h-8 w-auto grayscale transition-all hover:grayscale-0"
-            />
-          ))}
-        </div>
-        <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
+        <Marquee images={CLIENTS} />
+        <p className="text-[13px] font-medium text-[var(--color-muted-foreground)]">
           Trusted by fast-growing companies worldwide
         </p>
       </div>
