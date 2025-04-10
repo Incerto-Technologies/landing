@@ -57,7 +57,7 @@ const TABS: Tab[] = [
           title: 'Incerto Query Optimization',
           sources: [
             {
-              src: `https://xguihxuzqibwxjnimxev.supabase.co/storage/v1/object/public/videos/marketing/website/supabase-rls${isDark ? '' : '-light'}`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnvnCut7D7LJjY501I4nfwSd6XtirEqosmpvRF`,
               type: 'video/mp4',
             },
           ],
