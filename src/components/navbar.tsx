@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContactBtn } from "@/components/ui/contact";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { label: "Features", href: "/features" },
