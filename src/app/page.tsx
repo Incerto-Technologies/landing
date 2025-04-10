@@ -1,15 +1,19 @@
-import { CTASection } from "@/components/sections/cta"
-import { FeaturesSection } from "@/components/sections/features"
-import { HeroSection } from "@/components/sections/hero"
-import { ImpactSection } from "@/components/sections/impact"
+import Hero from "@/components/sections/hero"
+import dynamic from "next/dynamic"
+
+const Features = dynamic(() => import("@/components/sections/features"))
+const Impact = dynamic(() => import("@/components/sections/impact"))
+const CTA = dynamic(() => import("@/components/sections/cta"))
 
 export default function Home() {
+
+
   return (
-    <main className="font-inter">
-      <HeroSection />
-      <FeaturesSection />
-      <ImpactSection />
-      <CTASection />
+    <main>
+      <Hero />
+      <Features />
+      <Impact />
+      <CTA />
     </main>
   )
 }
