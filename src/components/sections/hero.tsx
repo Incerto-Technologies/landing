@@ -3,7 +3,6 @@ import Image from "next/image";
 import { CONTACT_LINK } from "@/lib/constants";
 import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
-import { Marquee } from "../ui/marquee";
 
 const CLIENTS = [
   "/clients/vking.svg",
@@ -75,7 +74,18 @@ const Hero = () => {
           Trusted By
         </h3>
         <div className="my-8 flex items-center justify-center gap-12">
-          <Marquee images={CLIENTS} />
+          <div className="flex items-center gap-4">
+            {CLIENTS.map((client, index) => (
+              <Image
+                key={`first-${index}`}
+                src={client}
+                alt="Client Logo"
+                width={100}
+                height={100}
+                className="h-8 w-auto grayscale transition-all hover:grayscale-0"
+              />
+            ))}
+          </div>
         </div>
         <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
           fast-growing companies worldwide
