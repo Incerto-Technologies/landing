@@ -17,7 +17,7 @@ const CLIENTS = [
 
 const Hero = () => {
   return (
-    <SectionContainer className="pt-8 pb-10 md:pt-16 lg:pt-16 overflow-hidden text-center flex flex-col items-center justify-center">
+    <SectionContainer className="pt-8 pb-10 md:pt-16 lg:pt-16 overflow-hidden text-center flex flex-col items-center justify-center w-full max-w-full">
       {/* Free Trial Banner */}
       <Link
         href={CONTACT_LINK}
@@ -56,11 +56,9 @@ const Hero = () => {
       <div className="mt-8 flex items-center gap-2">
         <Link
           href={CONTACT_LINK}
-          className={
-            buttonVariants({
-              variant: "primary",
-            })
-          }
+          className={buttonVariants({
+            variant: "primary",
+          })}
         >
           Discover Now
         </Link>
@@ -71,21 +69,13 @@ const Hero = () => {
           Contact us
         </Link>
       </div>
-
       {/* Clients Section */}
       <div className="mt-20 text-center">
         <h3 className="text-2xl font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
         <div className="my-8 flex items-center justify-center gap-12">
-          {CLIENTS.map((client, index) => (
-            <img
-              key={index}
-              src={client}
-              alt="Client Logo"
-              className="h-8 w-auto grayscale transition-all hover:grayscale-0"
-            />
-          ))}
+          <Marquee images={CLIENTS} />
         </div>
         <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
           fast-growing companies worldwide
@@ -95,5 +85,4 @@ const Hero = () => {
   );
 };
 
-
-export default Hero;  
+export default Hero;
