@@ -14,7 +14,13 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img src="/incerto.png" alt="Incerto Logo" className="h-8" />
+          <Image
+            src="/incerto.png"
+            alt="Incerto Logo"
+            className="h-full w-auto"
+            width={128}
+            height={32}
+          />
         </Link>
 
         {/* Navigation */}
@@ -23,7 +29,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[11px] font-medium text-gray-900 transition-colors hover:text-gray-600"
+              className="text-sm font-medium text-gray-900 transition-colors hover:text-gray-600"
             >
               {item.label}
             </Link>
