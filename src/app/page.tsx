@@ -1,9 +1,13 @@
-import CTA from "@/components/sections/cta";
-import Features from "@/components/sections/features";
-import Hero from "@/components/sections/hero";
-import Impact from "@/components/sections/impact";
+import Hero from "@/components/sections/hero"
+import dynamic from "next/dynamic"
+
+const Features = dynamic(() => import("@/components/sections/features"))
+const Impact = dynamic(() => import("@/components/sections/impact"))
+const CTA = dynamic(() => import("@/components/sections/cta"))
 
 export default function Home() {
+
+
   return (
     <main>
       <Hero />
@@ -11,5 +15,5 @@ export default function Home() {
       <Impact />
       <CTA />
     </main>
-  );
+  )
 }

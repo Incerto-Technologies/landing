@@ -78,7 +78,7 @@ export function Footer() {
 
   return (
     <footer className="bg-[#FDFDFD]">
-      <div className="mx-auto max-w-7xl px-4 py-12">
+      <div className="mx-auto py-12 lg:container lg:px-16 xl:px-20">
         {/* Horizontal Divider */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[#DFDFDF] to-transparent" />
 
@@ -86,13 +86,13 @@ export function Footer() {
           {/* Logo */}
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center">
-              <Image
-                width={100}
-                height={100}
-                src="/incerto.png"
-                alt="Incerto Logo"
-                className="h-8"
-              />
+            <Image
+            src="/incerto.png"
+            alt="Incerto Logo"
+            className="h-full w-auto"
+            width={128}
+            height={32}
+          />
             </Link>
           </div>
 

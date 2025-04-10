@@ -3,7 +3,7 @@ import { ContactBtn } from "@/components/ui/contact-btn";
 import Image from "next/image";
 
 const NAV_ITEMS = [
-  { label: "Features", href: "#features" },
+  { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Resources", href: "/resources" },
   { label: "Company", href: "/company" },
@@ -12,7 +12,7 @@ const NAV_ITEMS = [
 export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-[#DFDFDF] bg-[#FCFCFC]/90 backdrop-blur-[4px]">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+      <div className="mx-auto flex h-16 items-center justify-between lg:container lg:px-16 xl:px-20">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image

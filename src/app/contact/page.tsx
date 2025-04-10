@@ -1,9 +1,11 @@
 import { ContactForm } from "@/components/contact-form";
+import SectionContainer from "@/components/layouts/section-container";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-24">
+    <main className="">
+      <SectionContainer >
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left Column - Text Content */}
           <div className="max-w-xl">
@@ -19,12 +21,12 @@ export default function ContactPage() {
             <div className="mt-8">
               <p className="text-gray-600">
                 Need technical help instead?{" "}
-                <a
+                <Link
                   href="mailto:support@incerto.in"
-                  className="text-green-600 hover:text-green-700"
+                  className="text-primary hover:text-primary/80"
                 >
                   Contact support
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -34,7 +36,7 @@ export default function ContactPage() {
             <ContactForm />
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </main>
   );
 }

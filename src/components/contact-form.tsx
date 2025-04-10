@@ -15,6 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
+import { useTransition, useState } from "react";
+import { sendContactForm } from "@/actions/contact";
+import { CheckCircle, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -34,6 +37,9 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export function ContactForm() {
+  const [isSending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,9 +50,33 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: FormValues) {
-    // You can handle form submission here
-    console.log(values);
+  async function onSubmit(values: FormValues) {
+    startTransition(async () => {
+      setError(null);
+      const { success, error } = await sendContactForm({
+        name: `${values.firstName} ${values.lastName}`,
+        email: values.email,
+        message: values.message,
+      });
+
+      if (success) {
+        form.reset();
+        setIsSuccess(true);
+      }
+      if (error) {
+        setIsSuccess(false);
+        setError(error);
+      }
+    });
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="text-primary text-xl space-y-4 text-center">
+        <CheckCircle className="size-26 mx-auto" />
+        Thank you for reaching out to us. <br /> We will get back to you soon.
+      </div>
+    );
   }
 
   return (
@@ -128,11 +158,25 @@ export function ContactForm() {
             </p>
           </div>
 
+          {error && (
+            <p className="text-red-500 text-sm">{error}</p>
+          )}
+
           <Button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600"
+            variant="primary"
+            className="w-full"
+            disabled={isSending}
           >
-            Request a demo
+            {isSending ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Sending...
+              </>
+            ) :  
+            (
+              "Request a demo"
+            )}
           </Button>
         </div>
       </form>

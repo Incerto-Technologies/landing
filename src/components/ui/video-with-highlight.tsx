@@ -36,8 +36,8 @@ const VideoWithHighlights = (props: Props) => {
       >
         {props.video.sources.map((source, i) => (
           <source
-            key={`${source.src}${i === 0 ? '.webm' : '.mp4'}`}
-            src={`${source.src}${i === 0 ? '.webm' : '.mp4'}`}
+            key={`${source.src}`}
+            src={`${source.src}`}
             type={source.type ?? i === 0 ? 'video/webm' : 'video/mp4'}
           />
         ))}

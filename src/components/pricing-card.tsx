@@ -8,7 +8,7 @@ interface PricingCardProps {
   popular?: boolean
   features: string[]
   buttonText: string
-  buttonVariant?: "default" | "outline"
+  buttonVariant?: "default" | "outline" | "primary"
   className?: string
 }
 
@@ -19,7 +19,7 @@ export function PricingCard({
   popular,
   features,
   buttonText,
-  buttonVariant = "default",
+  buttonVariant = "primary",
   className,
 }: PricingCardProps) {
   return (

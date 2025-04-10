@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import SectionContainer from "./layouts/section-container";
 
 const faqs = [
   {
@@ -52,10 +53,10 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <div className="mx-auto max-w-4xl px-4">
-      <h2 className="mb-12 text-center text-2xl font-semibold text-gray-900">
+    <SectionContainer>
+      <h3 className="mb-12 text-center text-2xl font-semibold text-gray-900">
         Frequently asked questions
-      </h2>
+      </h3>
       <Accordion type="single" collapsible className="w-full">
         {faqs.map((faq, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
@@ -75,6 +76,6 @@ export function FAQSection() {
           to receive help from our team.
         </p>
       </div>
-    </div>
+    </SectionContainer>
   );
 }
