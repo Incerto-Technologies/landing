@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/contact-form"
+import { ContactForm } from "@/components/contact-form";
 
 export default function ContactPage() {
   return (
@@ -11,13 +11,18 @@ export default function ContactPage() {
               Talk to our Sales team
             </h1>
             <p className="mt-4 text-lg text-gray-600">
-              Book a demo and set up a trial Enterprise account to see how INCERTO's scalable features can accelerate your business growth and app development.
+              Book a demo and set up a trial Enterprise account to see how
+              INCERTO&apos;s scalable features can accelerate your business
+              growth and app development.
             </p>
 
             <div className="mt-8">
               <p className="text-gray-600">
                 Need technical help instead?{" "}
-                <a href="mailto:support@incerto.in" className="text-green-600 hover:text-green-700">
+                <a
+                  href="mailto:support@incerto.in"
+                  className="text-green-600 hover:text-green-700"
+                >
                   Contact support
                 </a>
               </p>
@@ -31,5 +36,5 @@ export default function ContactPage() {
         </div>
       </div>
     </main>
-  )
-} 
+  );
+}

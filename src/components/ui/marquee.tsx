@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Marquee = ({ images }: { images: string[] }) => {
   const [imageRepeatCount, setImageRepeatCount] = useState(images.length * 4);
@@ -18,7 +18,7 @@ export const Marquee = ({ images }: { images: string[] }) => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [images.length]);
 
   return (
     <div className="relative overflow-hidden max-w-[100vw] w-full">
