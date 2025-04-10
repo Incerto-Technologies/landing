@@ -39,9 +39,9 @@ export default function FeaturesSection() {
         </span>
       </h2>
 
-      <Tabs defaultValue="query" className="bg-background">
+      <Tabs defaultValue="query" className="bg-transparent">
         <div className="mx-auto mt-8 flex max-w-fit items-center gap-4 rounded-full p-1">
-          <TabsList className="space-x-2">
+          <TabsList className="space-x-2 bg-transparent">
             {TABS.map((tab) => (
               <TabsTrigger
                 key={tab.value}

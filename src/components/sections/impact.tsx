@@ -1,13 +1,5 @@
 import SectionContainer from "../layouts/section-container";
-
-const IMPACT_METRICS = [
-  { number: "65%", text: "Reduction in MTTR" },
-  { number: "80%", text: "Reduction in MTTR" },
-  { number: "95%", text: "Cost saved on compute & storage" },
-  { number: "90%", text: "Reduce on-call time" },
-  { number: "<2s", text: "Time to detect exact root cause" },
-  { number: "65%", text: "Increase in Query Performance" },
-];
+import { GlowingEffectDemo } from "../ui/impact-bento";
 
 function ImpactCard({ number, text }: { number: string; text: string }) {
   return (
@@ -66,11 +58,12 @@ const Impact: React.FC<Props> = () => {
           it's all about the impact we do
         </span>
       </h3>
-      <div className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {IMPACT_METRICS.map((metric, index) => (
+      {/* <div className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"> */}
+      {/* {IMPACT_METRICS.map((metric, index) => (
           <ImpactCard key={index} {...metric} />
-        ))}
-      </div>
+        ))} */}
+      <GlowingEffectDemo />
+      {/* </div> */}
     </SectionContainer>
   );
 };
