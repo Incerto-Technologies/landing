@@ -39,8 +39,8 @@ export function FeaturesSection() {
         </span>
       </h2>
 
-      <Tabs defaultValue="query">
-        <div className="mx-auto mt-8 flex max-w-fit items-center gap-4 rounded-full bg-[var(--color-muted)]/10 p-1">
+      <Tabs defaultValue="query" className="bg-background">
+        <div className="mx-auto mt-8 flex max-w-fit items-center gap-4 rounded-full p-1">
           <TabsList className="space-x-2">
             {TABS.map((tab) => (
               <TabsTrigger
