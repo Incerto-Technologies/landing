@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ContactBtn } from "../ui/contact";
+import { CONTACT_LINK } from "@/lib/constants";
+import SectionContainer from "../layouts/section-container";
+import { buttonVariants } from "../ui/button";
 import { Marquee } from "../ui/marquee";
 
 const CLIENTS = [
@@ -12,13 +14,14 @@ const CLIENTS = [
   "/clients/kevit.svg",
   "/clients/astra.svg",
 ];
-export function HeroSection() {
+
+const Hero = () => {
   return (
-    <section className="flex flex-col items-center justify-center  pt-16">
+    <SectionContainer className="pt-8 pb-10 md:pt-16 lg:pt-16 overflow-hidden text-center flex flex-col items-center justify-center w-full max-w-full">
       {/* Free Trial Banner */}
       <Link
-        href="/discover"
-        className="p-[5px] rounded-full border-[#ededed] border w-[280px] font-mono group flex items-center h-[40px]"
+        href={CONTACT_LINK}
+        className="p-[5px] rounded-full mb-5  border-[#ededed] border w-[280px] font-mono group flex items-center h-[40px]"
       >
         <div className="border rounded-full px-4 py-1 border-primary bg-primary/30 text-[#097C4F] text-sm mr-[22px]">
           Get 14 Days Free Trial
@@ -36,8 +39,7 @@ export function HeroSection() {
       </Link>
 
       {/* Hero Content */}
-      <h1 className="max-w-4xl text-center h1">
-        {/* <h1 className="max-w-4xl text-center text-[68px] font-normal leading-tight text-[var(--color-foreground)]"> */}
+      <h1 className="text-foreground text-4xl font-medium sm:text-5xl sm:leading-none lg:text-7xl">
         Actionable Observability for{" "}
         <span className="text-primary/80">Databases</span>
       </h1>
@@ -52,26 +54,35 @@ export function HeroSection() {
 
       {/* CTA Buttons */}
       <div className="mt-8 flex items-center gap-2">
-        <ContactBtn className="rounded-md bg-primary/50 px-4 py-2 text-[13px] font-medium shadow-sm border border-primary transition-colors hover:bg-primary/60 mt-0 text-foreground ring-0" />
+        <Link
+          href={CONTACT_LINK}
+          className={buttonVariants({
+            variant: "primary",
+          })}
+        >
+          Discover Now
+        </Link>
         <Link
           href="/contact"
-          className="rounded-md bg-[var(--color-card)] px-4 py-2 text-[13px] font-medium text-[var(--color-foreground)] shadow-sm ring-1 ring-[var(--color-border)] transition-colors hover:bg-[var(--color-muted)]"
+          className="rounded-md bg-[var(--color-card)] px-4 py-2 text-sm font-medium text-[var(--color-foreground)] shadow-sm ring-1 ring-[var(--color-border)] transition-colors hover:bg-[var(--color-muted)]"
         >
           Contact us
         </Link>
       </div>
-
       {/* Clients Section */}
-
-      <div className="mt-20 text-center space-y-[15px]">
-        <h3 className="text-2xl font-medium text-[var(--color-foreground)]">
+      <div className="mt-20 text-center">
+        <h3 className="text-2xl font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
-        <Marquee images={CLIENTS} />
-        <p className="text-[13px] font-medium text-[var(--color-muted-foreground)]">
-          Trusted by fast-growing companies worldwide
+        <div className="my-8 flex items-center justify-center gap-12">
+          <Marquee images={CLIENTS} />
+        </div>
+        <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
+          fast-growing companies worldwide
         </p>
       </div>
-    </section>
+    </SectionContainer>
   );
-}
+};
+
+export default Hero;

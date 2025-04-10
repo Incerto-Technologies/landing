@@ -28,7 +28,7 @@ const TABS = [
   },
 ];
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   return (
     <section className="mt-[70px] px-4">
       <h2 className="text-center text-[34px] font-medium leading-tight text-[var(--color-foreground)]">

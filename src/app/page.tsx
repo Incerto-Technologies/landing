@@ -1,15 +1,15 @@
-import { CTASection } from "@/components/sections/cta"
-import { FeaturesSection } from "@/components/sections/features"
-import { HeroSection } from "@/components/sections/hero"
-import { ImpactSection } from "@/components/sections/impact"
+import CTA from "@/components/sections/cta";
+import Features from "@/components/sections/features";
+import Hero from "@/components/sections/hero";
+import Impact from "@/components/sections/impact";
 
 export default function Home() {
   return (
-    <main className="font-inter">
-      <HeroSection />
-      <FeaturesSection />
-      <ImpactSection />
-      <CTASection />
+    <main>
+      <Hero />
+      <Features />
+      <Impact />
+      <CTA />
     </main>
-  )
+  );
 }
