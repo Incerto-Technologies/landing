@@ -1,14 +1,21 @@
-import { ContactBtn } from "@/components/ui/contact";
+import { ContactBtn } from "@/components/ui/contact-btn";
+import SectionContainer from "../layouts/section-container";
 
-export function CTASection() {
+const CTA = () => {
   return (
-    <section className="mt-32 bg-[var(--color-card)] px-4 py-20">
+    <SectionContainer >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-[34px] font-medium text-[var(--color-foreground)]">
-          Database Problems. Try INCERTO For Free!
-        </h2>
-        <ContactBtn href="/discover" />
+      <h3 className="mb-8 text-2xl font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
+        <span className="text-secondary-foreground">
+          Database Problems.
+        </span>
+        Try Incerto For Free!
+      </h3>
+        
+        <ContactBtn />
       </div>
-    </section>
+    </SectionContainer>
   );
 }
+
+export default CTA;

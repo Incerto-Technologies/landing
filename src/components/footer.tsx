@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ModeToggle } from "./ui/theme-toggle"
 
 type FooterLink = {
   label: string
@@ -97,10 +98,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Border and Copyright */}
-        <div className="mt-12 border-t border-[#DFDFDF] pt-8">
-          <p className="text-[11px] font-medium text-gray-500">
+        <div className="mt-12 border-t border-[#DFDFDF] pt-8 flex justify-between items-center">
+          <p className="text-sm font-medium text-gray-500">
             © {currentYear} Copyright Incerto Technologies Pvt Ltd. All rights reserved.
           </p>
+          <ModeToggle />
         </div>
       </div>
     </footer>

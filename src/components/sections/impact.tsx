@@ -1,3 +1,5 @@
+import SectionContainer from "../layouts/section-container";
+
 const IMPACT_METRICS = [
   { number: "65%", text: "Reduction in MTTR" },
   { number: "80%", text: "Reduction in MTTR" },
@@ -5,7 +7,7 @@ const IMPACT_METRICS = [
   { number: "90%", text: "Reduce on-call time" },
   { number: "<2s", text: "Time to detect exact root cause" },
   { number: "65%", text: "Increase in Query Performance" },
-]
+];
 
 function ImpactCard({ number, text }: { number: string; text: string }) {
   return (
@@ -49,23 +51,28 @@ function ImpactCard({ number, text }: { number: string; text: string }) {
         </svg>
       </div>
     </div>
-  )
+  );
 }
 
-export function ImpactSection() {
-  return (
-    <section className="mt-32 px-4">
-      <h2 className="text-center text-[34px] font-medium leading-tight text-[var(--color-foreground)]">
-        Why Teams Love INCERTO?
-        <br />
-        <span className="text-[var(--color-muted-foreground)]">Its All About The Impact We Do</span>
-      </h2>
+interface Props {}
 
+const Impact: React.FC<Props> = () => {
+  return (
+    <SectionContainer className="text-center" id="features">
+      <h3 className="mb-8 text-2xl font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
+        Why teams love Incerto?
+        <br className="hidden sm:block" />
+        <span className="text-secondary-foreground">
+          it's all about the impact we do
+        </span>
+      </h3>
       <div className="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {IMPACT_METRICS.map((metric, index) => (
           <ImpactCard key={index} {...metric} />
         ))}
       </div>
-    </section>
-  )
-} 
+    </SectionContainer>
+  );
+};
+
+export default Impact;

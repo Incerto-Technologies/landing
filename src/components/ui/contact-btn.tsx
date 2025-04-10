@@ -3,7 +3,8 @@
 import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
-
+import { CONTACT_LINK } from "@/lib/constants";
+import { buttonVariants } from "./button";
 export const ContactBtn = ({
   href,
   className,
@@ -15,9 +16,11 @@ export const ContactBtn = ({
 }) => {
   return (
     <Link
-      href={href || "/discover"}
+      href={href || CONTACT_LINK}
       className={cn(
-        "mt-8 inline-flex rounded-md bg-[var(--color-primary)] px-4 py-2 text-[13px] font-medium text-[var(--color-card)] shadow-sm ring-1 ring-[var(--color-primary)]/75 transition-colors hover:bg-[var(--color-primary)]/90",
+        buttonVariants({
+          variant: "primary",
+        }),
         className
       )}
     >
