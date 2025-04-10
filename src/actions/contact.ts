@@ -18,7 +18,7 @@ export const sendContactForm = async (data: ContactFormData) => {
     await connectDB();
 
     // Save to database
-    const contact = await Contact.create({
+    await Contact.create({
       name,
       email,
       message,
