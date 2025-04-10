@@ -2,7 +2,7 @@
 
 import connectDB from "@/lib/mongodb";
 import { Contact } from "@/models/Contact";
-import { sendEmailContactForm } from "@/lib/mail";
+import { sendEmailContactForm } from "@/lib/send-contact-form-email";
 
 export type ContactFormData = {
   name: string;
@@ -31,6 +31,7 @@ export const sendContactForm = async (data: ContactFormData) => {
       message,
     });
 
+    console.log("Contact form sent successfully");
     return { success: true, data: contact };
   } catch (error) {
     console.error("Error in contact form:", error);
