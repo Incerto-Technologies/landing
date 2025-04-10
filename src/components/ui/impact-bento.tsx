@@ -63,7 +63,7 @@ interface GridItemProps {
 const GridItem = ({ area, title, percentage }: GridItemProps) => {
   return (
     <li
-      className={`min-h-[14rem] list-none ${area} group overflow-hidden bg-muted`}
+      className={`min-h-[14rem] list-none ${area} group bg-muted  overflow-hidden rounded-2xl md:rounded-3xl`}
     >
       <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
         <GlowingEffect
@@ -73,9 +73,9 @@ const GridItem = ({ area, title, percentage }: GridItemProps) => {
           proximity={64}
           inactiveZone={0.01}
         />
-        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 dark:shadow-[0px_0px_27px_0px_#2D2D2D]">
+        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 dark:shadow-[0px_0px_27px_0px_#2D2D2D] z-10">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
-            <div className="text-[105px] font-medium leading-[1.1] tracking-tight text-muted-foreground text-start">
+            <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start">
               {percentage}
             </div>
             <div className="space-y-3">
