@@ -2,7 +2,7 @@ import { Ref, forwardRef } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
-const sectionContainerVariants = cva('max-w-7xl relative mx-auto px-6', {
+const sectionContainerVariants = cva(' relative mx-auto container', {
   variants: {
     width: {
       normal: 'lg:px-16 xl:px-20',
@@ -34,9 +34,9 @@ interface Props extends VariantProps<typeof sectionContainerVariants> {
  */
 const SectionContainer = forwardRef(
   ({ children, className, id, width, height }: Props, ref: Ref<HTMLDivElement>) => (
-    <div ref={ref} id={id} className={cn(sectionContainerVariants({ width, height }), className)}>
+    <section ref={ref} id={id} className={cn(sectionContainerVariants({ width, height }), className)}>
       {children}
-    </div>
+    </section>
   )
 )
 

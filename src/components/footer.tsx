@@ -1,15 +1,16 @@
-import Link from "next/link"
-import { ModeToggle } from "./ui/theme-toggle"
+import Link from "next/link";
+import { ModeToggle } from "./ui/theme-toggle";
+import Image from "next/image";
 
 type FooterLink = {
-  label: string
-  href: string
-}
+  label: string;
+  href: string;
+};
 
 type FooterSection = {
-  title: string
-  links: FooterLink[]
-}
+  title: string;
+  links: FooterLink[];
+};
 
 const FOOTER_SECTIONS: FooterSection[] = [
   {
@@ -39,11 +40,9 @@ const FOOTER_SECTIONS: FooterSection[] = [
   },
   {
     title: "Contact",
-    links: [
-      { label: "support@incerto.in", href: "mailto:support@incerto.in" },
-    ],
+    links: [{ label: "support@incerto.in", href: "mailto:support@incerto.in" }],
   },
-]
+];
 
 function FooterSection({ title, links }: FooterSection) {
   return (
@@ -71,15 +70,15 @@ function FooterSection({ title, links }: FooterSection) {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#FDFDFD]">
-      <div className="mx-auto max-w-7xl px-4 py-12">
+      <div className="mx-auto py-12 lg:container lg:px-16 xl:px-20">
         {/* Horizontal Divider */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[#DFDFDF] to-transparent" />
 
@@ -87,7 +86,13 @@ export function Footer() {
           {/* Logo */}
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center">
-              <img src="/incerto.png" alt="Incerto Logo" className="h-8" />
+            <Image
+            src="/incerto.png"
+            alt="Incerto Logo"
+            className="h-full w-auto"
+            width={128}
+            height={32}
+          />
             </Link>
           </div>
 
@@ -100,11 +105,12 @@ export function Footer() {
         {/* Bottom Border and Copyright */}
         <div className="mt-12 border-t border-[#DFDFDF] pt-8 flex justify-between items-center">
           <p className="text-sm font-medium text-gray-500">
-            © {currentYear} Copyright Incerto Technologies Pvt Ltd. All rights reserved.
+            © {currentYear} Copyright Incerto Technologies Pvt Ltd. All rights
+            reserved.
           </p>
           <ModeToggle />
         </div>
       </div>
     </footer>
-  )
-} 
+  );
+}

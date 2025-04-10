@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import * as z from "zod"
-import { Button } from "@/components/ui/button"
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,10 +11,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useForm } from "react-hook-form"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -29,9 +29,9 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
-})
+});
 
-type FormValues = z.infer<typeof formSchema>
+type FormValues = z.infer<typeof formSchema>;
 
 export function ContactForm() {
   const form = useForm<FormValues>({
@@ -42,11 +42,11 @@ export function ContactForm() {
       email: "",
       message: "",
     },
-  })
+  });
 
   function onSubmit(values: FormValues) {
     // You can handle form submission here
-    console.log(values)
+    console.log(values);
   }
 
   return (
@@ -56,7 +56,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="firstName"
-            render={({ field }: { field: any }) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
@@ -69,7 +69,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="lastName"
-            render={({ field }: { field: any }) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
@@ -84,7 +84,7 @@ export function ContactForm() {
         <FormField
           control={form.control}
           name="email"
-          render={({ field }: { field: any }) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Company Email</FormLabel>
               <FormControl>
@@ -98,7 +98,7 @@ export function ContactForm() {
         <FormField
           control={form.control}
           name="message"
-          render={({ field }: { field: any }) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>What are you interested in?</FormLabel>
               <FormControl>
@@ -116,19 +116,27 @@ export function ContactForm() {
         <div className="space-y-4">
           <div className="border-t border-gray-200 pt-4">
             <p className="text-sm text-gray-500">
-              By submitting this form, I confirm that I have read and understood the{" "}
-              <a href="/privacy" className="text-green-600 hover:text-green-700">
+              By submitting this form, I confirm that I have read and understood
+              the{" "}
+              <a
+                href="/privacy"
+                className="text-green-600 hover:text-green-700"
+              >
                 Privacy Policy
               </a>
               .
             </p>
           </div>
 
-          <Button type="submit" className="w-full bg-green-500 hover:bg-green-600">
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-full"
+          >
             Request a demo
           </Button>
         </div>
       </form>
     </Form>
-  )
-} 
+  );
+}
