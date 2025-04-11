@@ -23,6 +23,7 @@ const VideoWithHighlights = (props: Props) => {
       <video
         className="relative z-10 block w-full h-full reduce-motion:hidden"
         height="100%"
+        key={props.video.title}
         width="100%"
         loop
         muted

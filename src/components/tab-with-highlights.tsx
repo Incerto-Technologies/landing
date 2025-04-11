@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, Suspense } from "react";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +19,7 @@ const TABS: Tab[] = [
     slug: "remediation",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"remediation"}
         video={{
           title: "Incerto Remediation",
           sources: [
@@ -27,9 +28,7 @@ const TABS: Tab[] = [
               type: "video/mp4",
             },
           ],
-          poster: `/images/index/dashboard/supabase-table-editor${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/remediation.png`,
         }}
       />
     ),
@@ -39,6 +38,7 @@ const TABS: Tab[] = [
     slug: "sql-editor",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"sql-editor"}
         video={{
           title: "Incerto SQL Editor",
           sources: [
@@ -47,9 +47,7 @@ const TABS: Tab[] = [
               type: "video/mp4",
             },
           ],
-          poster: `/images/index/dashboard/supabase-sql-editor${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/sql-editor.png`,
         }}
       />
     ),
@@ -59,6 +57,7 @@ const TABS: Tab[] = [
     slug: "query-optimization",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"query-optimization"}
         video={{
           title: "Incerto Query Optimization",
           sources: [
@@ -67,9 +66,7 @@ const TABS: Tab[] = [
               type: 'video/mp4',
             },
           ],
-          poster: `/images/index/dashboard/supabase-rls${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/query-optimization.png`,
         }}
       />
     ),
@@ -79,6 +76,18 @@ const TABS: Tab[] = [
 
 
 const TabsWithHighlights = () => {
+  return (
+    <Suspense fallback={
+      <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+        <div className="w-full h-[600px] animate-pulse bg-muted rounded-lg"></div>
+      </div>
+    }>
+      <TabsWithHighlightsContent />
+    </Suspense>
+  );
+};
+
+const TabsWithHighlightsContent = () => {
   const { resolvedTheme } = useTheme();
   const [activeTabSlug, setActiveTabSlug] = useQueryState("tab", {
     defaultValue: TABS[0].slug,
@@ -88,7 +97,7 @@ const TabsWithHighlights = () => {
 
   const Panel: any = TABS.find((tab) => tab.slug === activeTabSlug)?.panel ?? null;
 
-  console.log(isInView)
+  // console.log(isInView)
 
   const handleTabClick = (tabSlug: string) => {
     setActiveTabSlug(tabSlug);
