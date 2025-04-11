@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import TailwindIndicator from "@/components/tailwind-indicator";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,17 +33,19 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
+        <NuqsAdapter>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
         >
           <Navbar />
           {children}
           <Footer />
-          <TailwindIndicator />
-        </ThemeProvider>
+            <TailwindIndicator />
+          </ThemeProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

@@ -1,22 +1,25 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, Suspense } from "react";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
-
+import { useQueryState } from "nuqs";
 export type Tab = {
   label: string;
+  slug: string;
   panel: React.FC<{ isDark: boolean }>;
 };
 
 const TABS: Tab[] = [
   {
     label: "Remediation",
+    slug: "remediation",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"remediation"}
         video={{
           title: "Incerto Remediation",
           sources: [
@@ -25,17 +28,17 @@ const TABS: Tab[] = [
               type: "video/mp4",
             },
           ],
-          poster: `/images/index/dashboard/supabase-table-editor${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/remediation.png`,
         }}
       />
     ),
   },
   {
     label: "SQL Editor",
+    slug: "sql-editor",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"sql-editor"}
         video={{
           title: "Incerto SQL Editor",
           sources: [
@@ -44,17 +47,17 @@ const TABS: Tab[] = [
               type: "video/mp4",
             },
           ],
-          poster: `/images/index/dashboard/supabase-sql-editor${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/sql-editor.png`,
         }}
       />
     ),
   },
   {
     label: "Query Optimization",
+    slug: "query-optimization",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
+        key={"query-optimization"}
         video={{
           title: "Incerto Query Optimization",
           sources: [
@@ -63,9 +66,7 @@ const TABS: Tab[] = [
               type: 'video/mp4',
             },
           ],
-          poster: `/images/index/dashboard/supabase-rls${
-            isDark ? "" : "-light"
-          }.png`,
+          poster: `/features/query-optimization.png`,
         }}
       />
     ),
@@ -75,34 +76,53 @@ const TABS: Tab[] = [
 
 
 const TabsWithHighlights = () => {
+  return (
+    <Suspense fallback={
+      <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+        <div className="w-full h-[600px] animate-pulse bg-muted rounded-lg"></div>
+      </div>
+    }>
+      <TabsWithHighlightsContent />
+    </Suspense>
+  );
+};
+
+const TabsWithHighlightsContent = () => {
   const { resolvedTheme } = useTheme();
-  const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
+  const [activeTabSlug, setActiveTabSlug] = useQueryState("tab", {
+    defaultValue: TABS[0].slug,
+  });
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
-  const Panel: any = TABS[activeTabIdx]?.panel ?? null;
+  const Panel: any = TABS.find((tab) => tab.slug === activeTabSlug)?.panel ?? null;
 
-  const handleTabClick = (tabIndex: number) => {
-    setActiveTabIdx(tabIndex);
+  // console.log(isInView)
+
+  const handleTabClick = (tabSlug: string) => {
+    setActiveTabSlug(tabSlug);
   };
 
   return (
-    <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+    <div className="relative  flex flex-col gap-8 lg:gap-12 items-center">
       {/* Threshold element used to load video 500px before reaching the video component */}
       <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
       <div
-        className="relative w-full col-span-full flex justify-center gap-2"
+        className="relative w-full col-span-full  flex justify-center gap-2 overflow-x-auto pb-2 hide-scrollbar"
         role="tablist"
       >
-        {TABS.map((tab, index) => (
-          <Tab
-            key={index}
-            isActive={index === activeTabIdx}
-            label={tab.label}
-            onClick={() => handleTabClick(index)}
-          />
-        ))}
+        <div className="flex gap-2   min-w-max mx-auto">
+          {TABS.map((tab, index) => (
+            <Tab
+              key={index}
+              isActive={tab.slug === activeTabSlug}
+              label={tab.label}
+              onClick={() => handleTabClick(tab.slug)}
+            />
+          ))}
+        </div>
       </div>
+      <div className="max-md:px-6 w-full ">
       <BrowserFrame
         className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
         contentClassName="aspect-video border overflow-hidden rounded-lg"
@@ -110,7 +130,7 @@ const TabsWithHighlights = () => {
         {isInView && (
           <AnimatePresence mode="wait">
             <motion.div
-              key={TABS[activeTabIdx]?.label}
+              key={TABS.find((tab) => tab.slug === activeTabSlug)?.label}
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
@@ -127,6 +147,7 @@ const TabsWithHighlights = () => {
           </AnimatePresence>
         )}
       </BrowserFrame>
+      </div>
     </div>
   );
 };

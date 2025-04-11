@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { ModeToggle } from "./ui/theme-toggle";
 import Image from "next/image";
+import Link from "next/link";
 
 type FooterLink = {
   label: string;
@@ -16,9 +15,9 @@ const FOOTER_SECTIONS: FooterSection[] = [
   {
     title: "Features",
     links: [
-      { label: "Deep Research", href: "/features/deep-research" },
-      { label: "Query Optimization", href: "/features/query-optimization" },
-      { label: "Sql Editor", href: "/features/sql-editor" },
+      { label: "Remediation", href: "/?tab=remediation#features" },
+      { label: "Sql Editor", href: "/?tab=sql-editor#features" },
+      { label: "Query Optimization", href: "/?tab=query-optimization#features" },
     ],
   },
   {
@@ -40,7 +39,12 @@ const FOOTER_SECTIONS: FooterSection[] = [
   },
   {
     title: "Contact",
-    links: [{ label: "support@incerto.in", href: "mailto:support@incerto.in" }],
+    links: [
+      {
+        label: "Reach out",
+        href: "/contact"
+      },
+      { label: "support@incerto.in", href: "mailto:support@incerto.in" }],
   },
 ];
 

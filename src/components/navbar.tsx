@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ContactBtn } from "@/components/ui/contact-btn";
 import Image from "next/image";
 import MobileNavbar from "./mobile-navbar";
-import { useSelectedLayoutSegment } from "next/navigation";
 import { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -17,7 +16,6 @@ const NAV_ITEMS = [
 ];
 
 export function Navbar() {
-  const segment = useSelectedLayoutSegment();
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-[#DFDFDF] bg-[#FCFCFC]/90 backdrop-blur-[4px]">
