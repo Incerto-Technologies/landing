@@ -42,11 +42,11 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-        </nav>
-
-        <nav className="hidden md:block">
           <ContactBtn className="text-xs" />
         </nav>
+
+        {/* <nav className="hidden md:block">
+        </nav> */}
         {/* CTA Button */}
 
         <Button

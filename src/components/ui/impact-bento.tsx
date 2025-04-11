@@ -7,7 +7,7 @@ const IMPACT_METRICS = [
     number: "65%",
     text: "Reduction in MTTR",
     area: "md:col-span-2",
-    background: "mttr",
+    background: "globe",
     icon: "chart-line",
   },
   {
@@ -103,8 +103,8 @@ const GridItem = ({
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 overflow-hidden">
-          <BackgroundPattern type={background} />
+        <div className="absolute -right-1/3 -bottom-1/4 size-full overflow-hidden">
+            <BackgroundPattern type={background} />
         </div>
       </div>
     </li>
@@ -119,7 +119,6 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
   switch (type) {
     case "mttr":
       return (
-        <div className="absolute inset-0 flex items-center justify-center">
           <svg
             width="100%"
             height="100%"
@@ -160,11 +159,9 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-4"
             />
           </svg>
-        </div>
       );
     case "cost":
       return (
-        <div className="absolute inset-0 flex items-center justify-center">
           <svg
             width="100%"
             height="100%"
@@ -215,11 +212,9 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               $
             </text>
           </svg>
-        </div>
       );
     case "oncall":
       return (
-        <div className="absolute inset-0 flex items-center justify-center">
           <svg
             width="100%"
             height="100%"
@@ -264,11 +259,10 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
             />
           </svg>
-        </div>
       );
     case "detection":
       return (
-        <div className="absolute inset-0 flex items-center justify-center">
+        
           <svg
             width="100%"
             height="100%"
@@ -313,11 +307,10 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-7"
             />
           </svg>
-        </div>
+
       );
     case "performance":
       return (
-        <div className="absolute inset-0 flex items-center justify-center">
           <svg
             width="100%"
             height="100%"
@@ -358,7 +351,6 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-4"
             />
           </svg>
-        </div>
       );
     default:
       return (
