@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { ContactBtn } from "@/components/ui/contact-btn";
@@ -42,19 +42,18 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-
-          {/* CTA Button */}
-          <ContactBtn
-             className="text-xs"
-          />
         </nav>
 
-   
+        <nav className="hidden md:block">
+          <ContactBtn className="text-xs" />
+        </nav>
+        {/* CTA Button */}
+
         <Button
           aria-label="Menu"
           onClick={() => setShowMobileHeaderNav(!showMobileHeaderNav)}
           variant="secondary"
-          className="lg:hidden"
+          className="md:hidden"
           size="icon"
         >
           <span className="sr-only">
@@ -92,18 +91,16 @@ export function Navbar() {
             </svg>
           )}
         </Button>
-        </div>
+      </div>
 
-{
-  showMobileHeaderNav && (
-    <MobileNavbar links={NAV_ITEMS} setShowMobileHeaderNav={setShowMobileHeaderNav} >  
-      <ContactBtn
-             className="text-xs"
-          />
+      {showMobileHeaderNav && (
+        <MobileNavbar
+          links={NAV_ITEMS}
+          setShowMobileHeaderNav={setShowMobileHeaderNav}
+        >
+          <ContactBtn className="text-xs" />
         </MobileNavbar>
-      )
-}
-      
+      )}
     </header>
   );
 }
