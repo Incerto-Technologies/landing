@@ -1,36 +1,49 @@
 import { GlowingEffect } from "@/components/ui/bento-grid";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const IMPACT_METRICS = [
   {
     number: "65%",
     text: "Reduction in MTTR",
     area: "md:col-span-2",
+    background: "mttr",
+    icon: "chart-line",
   },
   {
     number: "80%",
     text: "Reduction in MTTR",
     area: "md:col-span-1",
+    background: "mttr",
+    icon: "chart-line",
   },
   {
     number: "95%",
     text: "Cost saved on compute & storage",
     area: "md:col-span-1 md:row-span-2",
+    background: "cost",
+    icon: "dollar-sign",
   },
   {
     number: "90%",
     text: "Reduce on-call time",
     area: "md:col-span-1",
+    background: "oncall",
+    icon: "clock",
   },
   {
     number: "<2s",
     text: "Time to detect exact root cause",
     area: "md:col-span-1",
+    background: "detection",
+    icon: "search",
   },
   {
     number: "65%",
     text: "Increase in Query Performance",
     area: "md:col-span-1",
+    background: "performance",
+    icon: "zap",
   },
 ];
 
@@ -43,6 +56,8 @@ export function ImpactBento() {
           area={metric.area}
           title={metric.text}
           percentage={metric.number}
+          background={metric.background}
+          icon={metric.icon}
         />
       ))}
     </ul>
@@ -53,12 +68,20 @@ interface GridItemProps {
   area: string;
   title: string;
   percentage: string;
+  background: string;
+  icon: string;
 }
 
-const GridItem = ({ area, title, percentage }: GridItemProps) => {
+const GridItem = ({
+  area,
+  title,
+  percentage,
+  background,
+  icon,
+}: GridItemProps) => {
   return (
     <li
-      className={`min-h-[14rem] list-none ${area} group bg-muted  overflow-hidden rounded-2xl md:rounded-3xl`}
+      className={`min-h-[14rem] list-none ${area} group overflow-hidden rounded-2xl md:rounded-3xl`}
     >
       <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
         <GlowingEffect
@@ -68,7 +91,7 @@ const GridItem = ({ area, title, percentage }: GridItemProps) => {
           proximity={64}
           inactiveZone={0.01}
         />
-        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2  z-10">
+        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 z-10">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
             <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start">
               {percentage}
@@ -80,18 +103,247 @@ const GridItem = ({ area, title, percentage }: GridItemProps) => {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 overflow-hidden -right-[190px] h-[calc(100%-3rem)]">
-          <div className="relative overflow-hidden h-full w-full">
-            <Image
-              src="/images/global1.svg"
-              alt="Impact Bento"
-              width={500}
-              height={500}
-              className="bg-center-left"
-            />
-          </div>
+        <div className="absolute inset-0 overflow-hidden">
+          <BackgroundPattern type={background} />
         </div>
       </div>
     </li>
   );
+};
+
+interface BackgroundPatternProps {
+  type: string;
+}
+
+const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
+  switch (type) {
+    case "mttr":
+      return (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10,50 L30,30 L50,50 L70,30 L90,50"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="5"
+              fill="currentColor"
+              fillOpacity="0.1"
+            />
+            <path
+              d="M20,70 L40,50 L60,60 L80,30"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+            <circle
+              cx="60"
+              cy="60"
+              r="3"
+              fill="currentColor"
+              fillOpacity="0.1"
+            />
+          </svg>
+        </div>
+      );
+    case "cost":
+      return (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <text
+              x="50"
+              y="55"
+              textAnchor="middle"
+              fontSize="20"
+              fill="currentColor"
+              fillOpacity="0.1"
+            >
+              $
+            </text>
+            <circle
+              cx="50"
+              cy="50"
+              r="30"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+            <text
+              x="50"
+              y="55"
+              textAnchor="middle"
+              fontSize="15"
+              fill="currentColor"
+              fillOpacity="0.05"
+            >
+              $
+            </text>
+          </svg>
+        </div>
+      );
+    case "oncall":
+      return (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <path
+              d="M50,30 L50,50 L65,65"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="30"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+            <path
+              d="M50,40 L50,60 L60,70"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+          </svg>
+        </div>
+      );
+    case "detection":
+      return (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="30"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="10"
+              fill="currentColor"
+              fillOpacity="0.1"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="20"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="5"
+              fill="currentColor"
+              fillOpacity="0.05"
+            />
+          </svg>
+        </div>
+      );
+    case "performance":
+      return (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20,80 L40,60 L60,70 L80,40"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.1"
+            />
+            <circle
+              cx="60"
+              cy="70"
+              r="5"
+              fill="currentColor"
+              fillOpacity="0.1"
+            />
+            <path
+              d="M10,70 L30,50 L50,60 L70,30"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="1"
+              strokeOpacity="0.05"
+            />
+            <circle
+              cx="50"
+              cy="60"
+              r="3"
+              fill="currentColor"
+              fillOpacity="0.05"
+            />
+          </svg>
+        </div>
+      );
+    default:
+      return (
+        <Image
+          src="/images/global1.svg"
+          alt="Impact Bento"
+          width={500}
+          height={500}
+          className="bg-center-left opacity-10"
+        />
+      );
+  }
 };
