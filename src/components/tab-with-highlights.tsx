@@ -15,7 +15,7 @@ export type Tab = {
 
 const TABS: Tab[] = [
   {
-    label: "Remediation",
+    label: "AI Remediation",
     slug: "remediation",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
@@ -29,6 +29,45 @@ const TABS: Tab[] = [
             },
           ],
           poster: `/features/remediation.png`,
+        }}
+      />
+    ),
+  },
+
+  {
+    label: "Query Optimizer",
+    slug: "query-optimizer",
+    panel: ({ isDark }: { isDark: boolean }) => (
+      <VideoWithHighlights
+        key={"query-optimization"}
+        video={{
+          title: "Incerto Query Optimization",
+          sources: [
+            {
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              type: 'video/mp4',
+            },
+          ],
+          poster: `/features/query-optimization.png`,
+        }}
+      />
+    ),
+  },
+  {
+    label: "Deep Research",
+    slug: "deep-research",
+    panel: ({ isDark }: { isDark: boolean }) => (
+      <VideoWithHighlights
+        key={"deep-research"}
+        video={{
+          title: "Incerto Deep Research",
+          sources: [
+            {
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              type: "video/mp4",
+            },
+          ],
+          poster: `/features/deep-research.png`,
         }}
       />
     ),
@@ -53,20 +92,39 @@ const TABS: Tab[] = [
     ),
   },
   {
-    label: "Query Optimization",
-    slug: "query-optimization",
+    label: "SQL Editor",
+    slug: "sql-editor",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
-        key={"query-optimization"}
+        key={"sql-editor"}
         video={{
-          title: "Incerto Query Optimization",
+          title: "Incerto SQL Editor",
           sources: [
             {
               src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
-              type: 'video/mp4',
+              type: "video/mp4",
             },
           ],
-          poster: `/features/query-optimization.png`,
+          poster: `/features/sql-editor.png`,
+        }}
+      />
+    ),
+  },
+  {
+    label: "Misc.",
+    slug: "misc",
+    panel: ({ isDark }: { isDark: boolean }) => (
+      <VideoWithHighlights
+        key={"misc"}
+        video={{
+          title: "Incerto Misc",
+          sources: [
+            {
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              type: "video/mp4",
+            },
+          ],
+          poster: `/features/misc.png`,
         }}
       />
     ),
@@ -108,10 +166,10 @@ const TabsWithHighlightsContent = () => {
       {/* Threshold element used to load video 500px before reaching the video component */}
       <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
       <div
-        className="relative w-full col-span-full  flex justify-center gap-2 overflow-x-auto pb-2 hide-scrollbar"
+        className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6  pb-2 hide-scrollbar"
         role="tablist"
       >
-        <div className="flex gap-2   min-w-max mx-auto">
+      
           {TABS.map((tab, index) => (
             <Tab
               key={index}
@@ -120,7 +178,7 @@ const TabsWithHighlightsContent = () => {
               onClick={() => handleTabClick(tab.slug)}
             />
           ))}
-        </div>
+  
       </div>
       <div className="max-md:px-6 w-full ">
       <BrowserFrame
@@ -163,7 +221,7 @@ const Tab = ({ label, isActive, onClick }: TabProps) => (
     onClick={onClick}
     aria-selected={isActive}
     role="tab"
-    className="md:cursor-pointer"
+    className="md:cursor-pointer w-max"
   >
     <Badge
       size="large"

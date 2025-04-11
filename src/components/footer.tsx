@@ -15,26 +15,11 @@ const FOOTER_SECTIONS: FooterSection[] = [
   {
     title: "Features",
     links: [
-      { label: "Remediation", href: "/?tab=remediation#features" },
-      { label: "Sql Editor", href: "/?tab=sql-editor#features" },
-      { label: "Query Optimization", href: "/?tab=query-optimization#features" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Docs", href: "/docs" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "Slack", href: "/slack" },
-      { label: "Changelog", href: "/changelog" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About us", href: "/about" },
-      { label: "Blogs", href: "/blog" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "AI Remediation", href: "/?tab=remediation#features" },
+      { label: "Query Optimizer", href: "/?tab=query-optimizer#features" },
+      { label: "Deep Research", href: "/?tab=deep-research#features" },
+      { label: "SQL Editor", href: "/?tab=sql-editor#features" },
+      { label: "Misc.", href: "/?tab=misc#features" },
     ],
   },
   {

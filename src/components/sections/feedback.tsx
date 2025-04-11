@@ -61,11 +61,7 @@ const Feedback = () => {
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
 
         <h3 className="mb-8 text-2xl text-center  font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
-          Checkout!
-          <br />
-          <span className="text-secondary-foreground ">
-            What Our Clients Say
-          </span>
+        What clients say about Incerto?
         </h3>
 
         <div className="relative max-w-[800px] mx-auto overflow-hidden">

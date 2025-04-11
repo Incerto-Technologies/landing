@@ -55,7 +55,7 @@ export function FAQSection() {
   return (
     <SectionContainer>
       <h3 className="mb-12 text-center text-2xl font-semibold text-gray-900">
-        Frequently asked questions
+        Frequently Asked Questions
       </h3>
       <Accordion type="single" collapsible className="w-full">
         {faqs.map((faq, index) => (
@@ -69,11 +69,11 @@ export function FAQSection() {
       </Accordion>
       <div className="mt-12 text-center">
         <p className="text-gray-600">
-          Can&apos;t find the answer to your question?{" "}
+          Still have questions?{" "}
           <a href="/contact" className="text-green-600 hover:text-green-700">
-            Open a support ticket
+            Contact Us
           </a>{" "}
-          to receive help from our team.
+          now!
         </p>
       </div>
     </SectionContainer>

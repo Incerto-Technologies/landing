@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { label: "Pricing", href: "/pricing" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -32,7 +32,7 @@ export function Navbar() {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-10">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}

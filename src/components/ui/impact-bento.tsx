@@ -1,6 +1,5 @@
 import { GlowingEffect } from "@/components/ui/bento-grid";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 const IMPACT_METRICS = [
   {
@@ -104,7 +103,7 @@ const GridItem = ({
           </div>
         </div>
         <div className="absolute -right-1/3 -bottom-1/4 size-full overflow-hidden">
-            <BackgroundPattern type={background} />
+          <BackgroundPattern type={background} />
         </div>
       </div>
     </li>
@@ -119,238 +118,236 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
   switch (type) {
     case "mttr":
       return (
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-all duration-500"
-          >
-            <path
-              d="M10,50 L30,30 L50,50 L70,30 L90,50"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="5"
-              fill="currentColor"
-              fillOpacity="0.1"
-              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
-            />
-            <path
-              d="M20,70 L40,50 L60,60 L80,30"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
-            />
-            <circle
-              cx="60"
-              cy="60"
-              r="3"
-              fill="currentColor"
-              fillOpacity="0.1"
-              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-4"
-            />
-          </svg>
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-all duration-500"
+        >
+          <path
+            d="M10,50 L30,30 L50,50 L70,30 L90,50"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="5"
+            fill="currentColor"
+            fillOpacity="0.1"
+            className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
+          />
+          <path
+            d="M20,70 L40,50 L60,60 L80,30"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
+          />
+          <circle
+            cx="60"
+            cy="60"
+            r="3"
+            fill="currentColor"
+            fillOpacity="0.1"
+            className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-4"
+          />
+        </svg>
       );
     case "cost":
       return (
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-all duration-500"
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-all duration-500"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
+          />
+          <text
+            x="50"
+            y="55"
+            textAnchor="middle"
+            fontSize="20"
+            fill="currentColor"
+            fillOpacity="0.1"
+            className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:text-[22px]"
           >
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
-            />
-            <text
-              x="50"
-              y="55"
-              textAnchor="middle"
-              fontSize="20"
-              fill="currentColor"
-              fillOpacity="0.1"
-              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:text-[22px]"
-            >
-              $
-            </text>
-            <circle
-              cx="50"
-              cy="50"
-              r="30"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
-            />
-            <text
-              x="50"
-              y="55"
-              textAnchor="middle"
-              fontSize="15"
-              fill="currentColor"
-              fillOpacity="0.05"
-              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:text-[17px]"
-            >
-              $
-            </text>
-          </svg>
+            $
+          </text>
+          <circle
+            cx="50"
+            cy="50"
+            r="30"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
+          />
+          <text
+            x="50"
+            y="55"
+            textAnchor="middle"
+            fontSize="15"
+            fill="currentColor"
+            fillOpacity="0.05"
+            className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:text-[17px]"
+          >
+            $
+          </text>
+        </svg>
       );
     case "oncall":
       return (
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-all duration-500"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
-            />
-            <path
-              d="M50,30 L50,50 L65,65"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="30"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
-            />
-            <path
-              d="M50,40 L50,60 L60,70"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
-            />
-          </svg>
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-all duration-500"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
+          />
+          <path
+            d="M50,30 L50,50 L65,65"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="30"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
+          />
+          <path
+            d="M50,40 L50,60 L60,70"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
+          />
+        </svg>
       );
     case "detection":
       return (
-        
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-all duration-500"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="30"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-35"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="10"
-              fill="currentColor"
-              fillOpacity="0.1"
-              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-12"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="20"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-25"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="5"
-              fill="currentColor"
-              fillOpacity="0.05"
-              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-7"
-            />
-          </svg>
-
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-all duration-500"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="30"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-35"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="10"
+            fill="currentColor"
+            fillOpacity="0.1"
+            className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-12"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="20"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-25"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="5"
+            fill="currentColor"
+            fillOpacity="0.05"
+            className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-7"
+          />
+        </svg>
       );
     case "performance":
       return (
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="transition-all duration-500"
-          >
-            <path
-              d="M20,80 L40,60 L60,70 L80,40"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.1"
-              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
-            />
-            <circle
-              cx="60"
-              cy="70"
-              r="5"
-              fill="currentColor"
-              fillOpacity="0.1"
-              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
-            />
-            <path
-              d="M10,70 L30,50 L50,60 L70,30"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-              strokeOpacity="0.05"
-              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
-            />
-            <circle
-              cx="50"
-              cy="60"
-              r="3"
-              fill="currentColor"
-              fillOpacity="0.05"
-              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-4"
-            />
-          </svg>
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          className="transition-all duration-500"
+        >
+          <path
+            d="M20,80 L40,60 L60,70 L80,40"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
+          />
+          <circle
+            cx="60"
+            cy="70"
+            r="5"
+            fill="currentColor"
+            fillOpacity="0.1"
+            className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
+          />
+          <path
+            d="M10,70 L30,50 L50,60 L70,30"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="1"
+            strokeOpacity="0.05"
+            className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
+          />
+          <circle
+            cx="50"
+            cy="60"
+            r="3"
+            fill="currentColor"
+            fillOpacity="0.05"
+            className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-4"
+          />
+        </svg>
       );
     default:
       return (

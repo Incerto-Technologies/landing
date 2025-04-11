@@ -8,7 +8,7 @@ export default function ContactPage() {
       <SectionContainer >
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left Column - Text Content */}
-          <div className="max-w-xl">
+          <div className="max-w-xl max-md:text-center ">
             <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none  text-gray-900">
               Talk to our Sales team
             </h1>
