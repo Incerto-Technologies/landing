@@ -83,7 +83,7 @@ const GridItem = ({
     <li
       className={`min-h-[14rem] list-none ${area} group overflow-hidden rounded-2xl md:rounded-3xl`}
     >
-      <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3">
+      <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 transition-all duration-300 group-hover:border-muted-foreground/20">
         <GlowingEffect
           spread={40}
           glow={true}
@@ -93,11 +93,11 @@ const GridItem = ({
         />
         <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 z-10">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
-            <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start">
+            <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start transition-all duration-300 group-hover:text-foreground">
               {percentage}
             </div>
             <div className="space-y-3">
-              <h3 className="-tracking-4 text-start pt-0.5 font-sans text-[21px] font-medium text-balance">
+              <h3 className="-tracking-4 text-start pt-0.5 font-sans text-[21px] font-medium text-balance transition-all duration-300 group-hover:text-foreground">
                 {title}
               </h3>
             </div>
@@ -125,6 +125,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
             height="100%"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            className="transition-all duration-500"
           >
             <path
               d="M10,50 L30,30 L50,50 L70,30 L90,50"
@@ -132,6 +133,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
             />
             <circle
               cx="50"
@@ -139,6 +141,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="5"
               fill="currentColor"
               fillOpacity="0.1"
+              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
             />
             <path
               d="M20,70 L40,50 L60,60 L80,30"
@@ -146,6 +149,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
             />
             <circle
               cx="60"
@@ -153,6 +157,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="3"
               fill="currentColor"
               fillOpacity="0.1"
+              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-4"
             />
           </svg>
         </div>
@@ -165,6 +170,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
             height="100%"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            className="transition-all duration-500"
           >
             <circle
               cx="50"
@@ -174,6 +180,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
             />
             <text
               x="50"
@@ -182,6 +189,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fontSize="20"
               fill="currentColor"
               fillOpacity="0.1"
+              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:text-[22px]"
             >
               $
             </text>
@@ -193,6 +201,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
             />
             <text
               x="50"
@@ -201,6 +210,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fontSize="15"
               fill="currentColor"
               fillOpacity="0.05"
+              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:text-[17px]"
             >
               $
             </text>
@@ -215,6 +225,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
             height="100%"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            className="transition-all duration-500"
           >
             <circle
               cx="50"
@@ -224,6 +235,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-45"
             />
             <path
               d="M50,30 L50,50 L65,65"
@@ -231,6 +243,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
             />
             <circle
               cx="50"
@@ -240,6 +253,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-35"
             />
             <path
               d="M50,40 L50,60 L60,70"
@@ -247,6 +261,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
             />
           </svg>
         </div>
@@ -259,6 +274,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
             height="100%"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            className="transition-all duration-500"
           >
             <circle
               cx="50"
@@ -268,6 +284,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5] group-hover:r-35"
             />
             <circle
               cx="50"
@@ -275,6 +292,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="10"
               fill="currentColor"
               fillOpacity="0.1"
+              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-12"
             />
             <circle
               cx="50"
@@ -284,6 +302,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5] group-hover:r-25"
             />
             <circle
               cx="50"
@@ -291,6 +310,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="5"
               fill="currentColor"
               fillOpacity="0.05"
+              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-7"
             />
           </svg>
         </div>
@@ -303,6 +323,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
             height="100%"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
+            className="transition-all duration-500"
           >
             <path
               d="M20,80 L40,60 L60,70 L80,40"
@@ -310,6 +331,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.1"
+              className="transition-all duration-500 group-hover:stroke-opacity-30 group-hover:stroke-[1.5]"
             />
             <circle
               cx="60"
@@ -317,6 +339,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="5"
               fill="currentColor"
               fillOpacity="0.1"
+              className="transition-all duration-500 group-hover:fill-opacity-30 group-hover:r-6"
             />
             <path
               d="M10,70 L30,50 L50,60 L70,30"
@@ -324,6 +347,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               fill="none"
               strokeWidth="1"
               strokeOpacity="0.05"
+              className="transition-all duration-500 group-hover:stroke-opacity-20 group-hover:stroke-[1.5]"
             />
             <circle
               cx="50"
@@ -331,6 +355,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
               r="3"
               fill="currentColor"
               fillOpacity="0.05"
+              className="transition-all duration-500 group-hover:fill-opacity-20 group-hover:r-4"
             />
           </svg>
         </div>
@@ -342,7 +367,7 @@ const BackgroundPattern = ({ type }: BackgroundPatternProps) => {
           alt="Impact Bento"
           width={500}
           height={500}
-          className="bg-center-left opacity-10"
+          className="bg-center-left opacity-10 transition-all duration-500 group-hover:opacity-20"
         />
       );
   }
