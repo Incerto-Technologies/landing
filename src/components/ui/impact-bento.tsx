@@ -71,7 +71,7 @@ const GridItem = ({ area, title, percentage }: GridItemProps) => {
           proximity={64}
           inactiveZone={0.01}
         />
-        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 dark:shadow-[0px_0px_27px_0px_#2D2D2D] z-10">
+        <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2  z-10">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
             <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start">
               {percentage}

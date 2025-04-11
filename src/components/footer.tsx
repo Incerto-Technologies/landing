@@ -108,7 +108,7 @@ export function Footer() {
             © {currentYear} Copyright Incerto Technologies Pvt Ltd. All rights
             reserved.
           </p>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </div>
       </div>
     </footer>

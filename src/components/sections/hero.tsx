@@ -6,13 +6,13 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 const CLIENTS = [
-  "/clients/vking.svg",
-  "/clients/dhan.svg",
+  "/clients/ving.svg",
   "/clients/dhruv.svg",
-  "/clients/discite.svg",
-  "/clients/fyers.svg",
-  "/clients/kevit.svg",
   "/clients/astra.svg",
+  "/clients/kevit.svg",   
+  "/clients/dhan.svg",
+  "/clients/fyers.svg",
+  // "/clients/discite.svg",
 ];
 
 const Hero = () => {
@@ -89,7 +89,15 @@ const Hero = () => {
               key={index}
               src={client}
               alt="Client Logo"
-              className="h-8 w-auto grayscale transition-all hover:grayscale-0"
+              className={cn("h-8 w-auto grayscale transition-all hover:grayscale-0", 
+                {
+
+                  "h-7": client === "/clients/dhruv.svg",
+                  "h-10": client === "/clients/dhan.svg" || client === "/clients/fyers.svg",
+                  "h-11 rounded-md overflow-hidden" : client === "/clients/ving.svg",
+                  "h-12": client === "/clients/kevit.svg"
+                }
+              )}
               width={32}
               height={32}
             />
