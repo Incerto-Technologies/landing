@@ -6,11 +6,9 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
 
-
-
 const Hero = () => {
   return (
-    <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center">
+    <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
       {/* Free Trial Banner */}
       <Link
         href={CONTACT_LINK}
@@ -69,7 +67,7 @@ const Hero = () => {
       </div>
 
       {/* Clients Section */}
-      <div className="mt-20 space-y-5 text-center">
+      <div className="space-y-5 text-center mt-[10vh]">
         <h3 className="text-xl md:text-2xl leading-tight font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
