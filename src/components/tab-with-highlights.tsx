@@ -6,15 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
-
+import { useQueryState } from "nuqs";
 export type Tab = {
   label: string;
+  slug: string;
   panel: React.FC<{ isDark: boolean }>;
 };
 
 const TABS: Tab[] = [
   {
     label: "Remediation",
+    slug: "remediation",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         video={{
@@ -34,6 +36,7 @@ const TABS: Tab[] = [
   },
   {
     label: "SQL Editor",
+    slug: "sql-editor",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         video={{
@@ -53,6 +56,7 @@ const TABS: Tab[] = [
   },
   {
     label: "Query Optimization",
+    slug: "query-optimization",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         video={{
@@ -76,16 +80,18 @@ const TABS: Tab[] = [
 
 const TabsWithHighlights = () => {
   const { resolvedTheme } = useTheme();
-  const [activeTabIdx, setActiveTabIdx] = useState<number>(0);
+  const [activeTabSlug, setActiveTabSlug] = useQueryState("tab", {
+    defaultValue: TABS[0].slug,
+  });
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
-  const Panel: any = TABS[activeTabIdx]?.panel ?? null;
+  const Panel: any = TABS.find((tab) => tab.slug === activeTabSlug)?.panel ?? null;
 
   console.log(isInView)
 
-  const handleTabClick = (tabIndex: number) => {
-    setActiveTabIdx(tabIndex);
+  const handleTabClick = (tabSlug: string) => {
+    setActiveTabSlug(tabSlug);
   };
 
   return (
@@ -100,9 +106,9 @@ const TabsWithHighlights = () => {
           {TABS.map((tab, index) => (
             <Tab
               key={index}
-              isActive={index === activeTabIdx}
+              isActive={tab.slug === activeTabSlug}
               label={tab.label}
-              onClick={() => handleTabClick(index)}
+              onClick={() => handleTabClick(tab.slug)}
             />
           ))}
         </div>
@@ -115,7 +121,7 @@ const TabsWithHighlights = () => {
         {isInView && (
           <AnimatePresence mode="wait">
             <motion.div
-              key={TABS[activeTabIdx]?.label}
+              key={TABS.find((tab) => tab.slug === activeTabSlug)?.label}
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
