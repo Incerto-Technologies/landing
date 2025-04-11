@@ -9,7 +9,7 @@ const pricingPlans = [
     description: "For production applications with the power to scale.",
     price: "$25",
     popular: true,
-    buttonText: "Discover Now",
+    buttonText: "Try Now",
     buttonVariant: "primary" as const,
     features: [
       "100,000 monthly active users",
@@ -26,7 +26,7 @@ const pricingPlans = [
     description:
       "Add features such as SSO, control over backups, and industry certifications.",
     price: "$599",
-    buttonText: "Discover Now",
+    buttonText: "Try Now",
     buttonVariant: "primary" as const,
     features: [
       "SOC2",

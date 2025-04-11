@@ -22,7 +22,7 @@ export const ContactBtn = ({
         className
       )}
     >
-      {children ? children : "Discover Now"}
+      {children ? children : "Try Now"}
     </Link>
   );
 };

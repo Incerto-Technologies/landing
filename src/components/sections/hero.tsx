@@ -63,7 +63,7 @@ const Hero = () => {
             })
           }
         >
-          Discover Now
+          Try Now
         </Link>
         <Link
           href="/contact"

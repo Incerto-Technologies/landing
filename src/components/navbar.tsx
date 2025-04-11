@@ -5,8 +5,9 @@ import Image from "next/image";
 const NAV_ITEMS = [
   { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Resources", href: "/resources" },
-  { label: "Company", href: "/company" },
+  // { label: "Resources", href: "/resources" },
+  // { label: "Company", href: "/company" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
