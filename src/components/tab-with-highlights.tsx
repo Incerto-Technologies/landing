@@ -82,27 +82,32 @@ const TabsWithHighlights = () => {
 
   const Panel: any = TABS[activeTabIdx]?.panel ?? null;
 
+  console.log(isInView)
+
   const handleTabClick = (tabIndex: number) => {
     setActiveTabIdx(tabIndex);
   };
 
   return (
-    <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+    <div className="relative  flex flex-col gap-8 lg:gap-12 items-center">
       {/* Threshold element used to load video 500px before reaching the video component */}
       <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
       <div
-        className="relative w-full col-span-full flex justify-center gap-2"
+        className="relative w-full col-span-full  flex justify-center gap-2 overflow-x-auto pb-2 hide-scrollbar"
         role="tablist"
       >
-        {TABS.map((tab, index) => (
-          <Tab
-            key={index}
-            isActive={index === activeTabIdx}
-            label={tab.label}
-            onClick={() => handleTabClick(index)}
-          />
-        ))}
+        <div className="flex gap-2   min-w-max mx-auto">
+          {TABS.map((tab, index) => (
+            <Tab
+              key={index}
+              isActive={index === activeTabIdx}
+              label={tab.label}
+              onClick={() => handleTabClick(index)}
+            />
+          ))}
+        </div>
       </div>
+      <div className="max-md:px-6 w-full ">
       <BrowserFrame
         className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
         contentClassName="aspect-video border overflow-hidden rounded-lg"
@@ -127,6 +132,7 @@ const TabsWithHighlights = () => {
           </AnimatePresence>
         )}
       </BrowserFrame>
+      </div>
     </div>
   );
 };
