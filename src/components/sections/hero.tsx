@@ -4,16 +4,9 @@ import { CONTACT_LINK } from "@/lib/constants";
 import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
+import Logos from "./logos";
 
-const CLIENTS = [
-  "/clients/ving.svg",
-  "/clients/dhruv.svg",
-  "/clients/astra.svg",
-  "/clients/kevit.svg",   
-  "/clients/dhan.svg",
-  "/clients/fyers.svg",
-  // "/clients/discite.svg",
-];
+
 
 const Hero = () => {
   return (
@@ -39,16 +32,15 @@ const Hero = () => {
       </Link>
 
       {/* Hero Content */}
-      <h1 className="text-foreground text-4xl font-medium sm:text-5xl sm:leading-none lg:text-7xl">
-        Actionable Observability for{" "}
-        <br className="hidden sm:block" />
+      <h1 className="text-foreground text-3xl font-semibold md:font-medium md:text-5xl sm:leading-none lg:text-7xl">
+        Actionable Observability for <br className="hidden sm:block" />
         <span className="text-primary/80">Databases</span>
       </h1>
-      <p className="mt-6 max-w-3xl text-center text-[17px] font-medium leading-relaxed text-[var(--color-foreground)] font-sans">
+      <p className="mt-6 max-w-3xl text-center text-sm md:text-[17px] font-medium leading-relaxed text-[var(--color-foreground)] font-sans">
         Gain full visibility into your database performance with real-time
         monitoring and intelligent insights. Instantly detect anomalies,
         identify root causes, and take corrective actions with a single click.
-        Reduce downtime, optimize queries, and ensure peak efficiency—without
+        Reduce downtime, optimize queries, and ensure peak efficiency without
         the guesswork. Experience the power of proactive database observability,
         all in one seamless platform.
       </p>
@@ -57,11 +49,9 @@ const Hero = () => {
       <div className="mt-8 flex items-center gap-2">
         <Link
           href={CONTACT_LINK}
-          className={
-            buttonVariants({
-              variant: "primary",
-            })
-          }
+          className={buttonVariants({
+            variant: "primary",
+          })}
         >
           Try Now
         </Link>
@@ -79,30 +69,11 @@ const Hero = () => {
       </div>
 
       {/* Clients Section */}
-      <div className="mt-20 text-center">
-        <h3 className="text-2xl font-medium  text-[var(--color-foreground)]">
+      <div className="mt-20 space-y-5 text-center">
+        <h3 className="text-xl md:text-2xl leading-tight font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
-        <div className="my-8 flex items-center justify-center gap-12">
-          {CLIENTS.map((client, index) => (
-            <Image
-              key={index}
-              src={client}
-              alt="Client Logo"
-              className={cn("h-8 w-auto grayscale transition-all hover:grayscale-0", 
-                {
-
-                  "h-7": client === "/clients/dhruv.svg",
-                  "h-10": client === "/clients/dhan.svg" || client === "/clients/fyers.svg",
-                  "h-11 rounded-md overflow-hidden" : client === "/clients/ving.svg",
-                  "h-12": client === "/clients/kevit.svg"
-                }
-              )}
-              width={32}
-              height={32}
-            />
-          ))}
-        </div>
+        <Logos />
         <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
           fast-growing companies worldwide
         </p>
@@ -111,5 +82,4 @@ const Hero = () => {
   );
 };
 
-
-export default Hero;  
+export default Hero;

@@ -9,7 +9,7 @@ export default function ContactPage() {
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left Column - Text Content */}
           <div className="max-w-xl">
-            <h1 className="text-4xl font-semibold text-gray-900">
+            <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none  text-gray-900">
               Talk to our Sales team
             </h1>
             <p className="mt-4 text-lg text-gray-600">

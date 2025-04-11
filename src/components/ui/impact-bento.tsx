@@ -5,41 +5,38 @@ const IMPACT_METRICS = [
   {
     number: "65%",
     text: "Reduction in MTTR",
-    area: "col-span-2",
+    area: "md:col-span-2",
   },
   {
     number: "80%",
     text: "Reduction in MTTR",
-    area: "col-span-1",
+    area: "md:col-span-1",
   },
   {
     number: "95%",
     text: "Cost saved on compute & storage",
-    area: "col-span-1 row-span-2",
-    // area: "col-span-1",
+    area: "md:col-span-1 md:row-span-2",
   },
   {
     number: "90%",
     text: "Reduce on-call time",
-    area: "col-span-1",
+    area: "md:col-span-1",
   },
   {
     number: "<2s",
     text: "Time to detect exact root cause",
-    area: "col-span-1",
+    area: "md:col-span-1",
   },
   {
     number: "65%",
     text: "Increase in Query Performance",
-    area: "col-span-1",
-    // area: "row-span-2 col-start-3",
+    area: "md:col-span-1",
   },
 ];
 
-export function GlowingEffectDemo() {
+export function ImpactBento() {
   return (
-    // <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-5 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-3">
-    <ul className="grid grid-cols-4 grid-rows-2 gap-4">
+    <ul className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4">
       {IMPACT_METRICS.map((metric) => (
         <GridItem
           key={metric.text + metric.number}

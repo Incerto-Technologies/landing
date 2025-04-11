@@ -2,10 +2,10 @@ import { Ref, forwardRef } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
-const sectionContainerVariants = cva(' relative mx-auto container', {
+const sectionContainerVariants = cva(' relative mx-auto container ', {
   variants: {
     width: {
-      normal: 'lg:px-16 xl:px-20',
+      normal: 'px-6 lg:px-16 xl:px-20',
       smallScreenFull: 'max-w-full lg:container px-0',
     },
     height: {

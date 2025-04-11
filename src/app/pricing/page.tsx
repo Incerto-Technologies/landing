@@ -62,10 +62,10 @@ export default function PricingPage() {
       {/* Header */}
       <SectionContainer className="flex flex-col items-center justify-center   space-y-16">
         <div className="text-center">
-          <h1 className="text-4xl font-semibold text-gray-900">
+          <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none text-gray-900">
             <span className="text-primary">Predictable pricing</span>, designed to scale
           </h1>
-          <p className="mt-2 text-lg text-gray-600">
+          <p className="mt-2 text-base md:text-lg text-gray-600">
             Start building for free, collaborate with your team, then scale to
             millions of users
           </p>

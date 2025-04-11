@@ -40,9 +40,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://xguihxuzqibwxjnimxev.supabase.co/storage/v1/object/public/videos/marketing/website/supabase-sql-editor${
-                isDark ? "" : "-light"
-              }`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
               type: "video/mp4",
             },
           ],
@@ -61,7 +59,7 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnvnCut7D7LJjY501I4nfwSd6XtirEqosmpvRF`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
               type: 'video/mp4',
             },
           ],

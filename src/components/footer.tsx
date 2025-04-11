@@ -78,13 +78,13 @@ export function Footer() {
 
   return (
     <footer className="bg-[#FDFDFD]">
-      <div className="mx-auto py-12 lg:container lg:px-16 xl:px-20">
+      <div className="mx-auto py-12 px-6 lg:container lg:px-16 xl:px-20">
         {/* Horizontal Divider */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[#DFDFDF] to-transparent" />
 
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6">
+        <div className="mt-12 grid gap-8 grid-cols-2 md:grid-cols-5 lg:grid-cols-6">
           {/* Logo */}
-          <div className="col-span-1 lg:col-span-2">
+          <div className="col-span-2 max-md:mb-4 md:col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center">
             <Image
             src="/incerto.png"

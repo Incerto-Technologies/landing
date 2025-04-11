@@ -8,7 +8,8 @@ const Features: React.FC = () => (
     <h3 className="mb-8 text-2xl font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
       What Incerto can do for you?
       <br className="hidden sm:block" />
-      <span className="text-secondary-foreground">
+      <span className="text-secondary-foreground ">
+        {" "}
         without leaving the dashboard
       </span>
     </h3>

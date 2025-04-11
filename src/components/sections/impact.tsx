@@ -1,5 +1,5 @@
 import SectionContainer from "../layouts/section-container";
-import { GlowingEffectDemo } from "../ui/impact-bento";
+import { ImpactBento } from "../ui/impact-bento";
 
 const Impact = () => {
   return (
@@ -11,7 +11,7 @@ const Impact = () => {
           it&apos;s all about the impact we do
         </span>
       </h3>
-      <GlowingEffectDemo />
+      <ImpactBento />
     </SectionContainer>
   );
 };

@@ -1,15 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-
-export const Marquee = ({ images }: { images: string[] }) => {
+import { cn } from "@/lib/utils";
+export const Marquee = ({ children, length, className, hideMarqueeOnBigScreen = false }: { children: React.ReactNode, length: number, className?: string, hideMarqueeOnBigScreen?: boolean }) => {
   return (
     <div className="relative overflow-hidden max-w-[100vw] w-full">
       <motion.div
-        className="flex items-center gap-12"
+        className={cn("flex items-center gap-12", className, hideMarqueeOnBigScreen && " md:hidden")}
         animate={{
-          x: [0, -images.length * 100],
+          x: [0, -length * 100],
         }}
         transition={{
           x: {
@@ -20,29 +19,13 @@ export const Marquee = ({ images }: { images: string[] }) => {
           },
         }}
       >
-        {/* First set of images */}
-        {images.map((image, index) => (
-          <Image
-            key={`first-${index}`}
-            src={image}
-            alt="Client Logo"
-            width={100}
-            height={100}
-            className="h-8 w-auto grayscale transition-all hover:grayscale-0"
-          />
-        ))}
-        {/* Duplicate set for seamless loop */}
-        {images.map((image, index) => (
-          <Image
-            key={`second-${index}`}
-            src={image}
-            alt="Client Logo"
-            width={100}
-            height={100}
-            className="h-8 w-auto grayscale transition-all hover:grayscale-0"
-          />
-        ))}
+        {children}
       </motion.div>
+      
+
+            <div className={cn("flex items-center gap-12", hideMarqueeOnBigScreen && "hidden md:flex")}>
+              {children}
+      </div>
     </div>
   );
 };
