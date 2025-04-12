@@ -44,7 +44,7 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnoQSD2AZLRZYv7yKAX5PiO1a26dGfuH3tnQm9`,
               type: 'video/mp4',
             },
           ],
@@ -82,26 +82,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
-              type: "video/mp4",
-            },
-          ],
-          poster: `/features/sql-editor.png`,
-        }}
-      />
-    ),
-  },
-  {
-    label: "SQL Editor",
-    slug: "sql-editor",
-    panel: ({ isDark }: { isDark: boolean }) => (
-      <VideoWithHighlights
-        key={"sql-editor"}
-        video={{
-          title: "Incerto SQL Editor",
-          sources: [
-            {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygndvcluK5EZrkXU5tgJM0YpKe1hjnV2yxfz9LC`,
               type: "video/mp4",
             },
           ],
