@@ -103,13 +103,18 @@ const GridItem = ({
             </div>
           </div>
         </div>
-        <div className={cn("absolute -right-1/3 -bottom-1/4 size-full opacity-60 transition-all  duration-500 group-hover:opacity-100", {
-          "-rotate-45 -bottom-1/6  group-hover:-bottom-1/12 ": background === "globe",
-          "opacity-30 group-hover:opacity-100 group-hover:-rotate-12 group-hover:-right-36 group-hover:bottom-2": background === "mttr" || background === "performance",
-          "group-hover:-rotate-180  group-hover:animate-spin group-hover:-right-36 group-hover:bottom-2": background === "cost",
-          "group-hover:-rotate-180  group-hover:animate-ping  group-hover:-right-20 group-hover:bottom-2 ": background === "detection",
+        <div className={cn("absolute -right-1/3 -bottom-1/4 size-full opacity-30 transition-all  duration-500 group-hover:opacity-100", {
+          "-rotate-45 opacity-60 -bottom-1/6  group-hover:-bottom-1/12 ": background === "globe",
+          "opacity-30 group-hover:opacity-100 group-hover:-rotate-12 group-hover:-right-36 group-hover:bottom-2": background === "mttr",
+         "-bottom-[70%] opacity-30  -right-[70%]  group-hover:-bottom-[50%] group-hover:-right-[50%] ": background === "performance",
+          "group-hover:-rotate-180 opacity-30   group-hover:animate-spin group-hover:-right-36 group-hover:bottom-2": background === "cost",
+          "group-hover:-rotate-180 opacity-30    group-hover:animate-ping  group-hover:-right-20 group-hover:bottom-2 ": background === "detection",
+
         })}>
-          <BackgroundPattern type={background}  className="text-muted-foreground group-hover:text-primary"/>
+          <BackgroundPattern type={background}  className={cn("text-muted-foreground group-hover:text-primary", {
+          "scale-150": background === "performance",
+
+          })}/>
         </div>
       </div>
     </li>
@@ -306,48 +311,11 @@ const BackgroundPattern = ({ type, className }: BackgroundPatternProps) => {
         </svg>
       );
     case "performance":
-      return (
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 100 100"
-          xmlns="http://www.w3.org/2000/svg"
-          className={cn(className)}
-        >
-          <path
-            d="M10,50 L30,30 L50,50 L70,30 L90,50"
-            stroke="currentColor"
-            fill="none"
-            strokeWidth="0.6"
-            strokeOpacity="0.6"
-            
-          />
-          <circle
-            cx="50"
-            cy="49"
-            r="3"
-            fill="currentColor"
-            fillOpacity="1"
-            
-          />
-          <path
-            d="M20,70 L40,50 L60,60 L80,30"
-            stroke="currentColor"
-            fill="none"
-            strokeWidth="0.6"
-            strokeOpacity="0.6"
-            
-          />
-          <circle
-            cx="60"
-            cy="60"
-            r="3"
-            fill="currentColor"
-            fillOpacity="1"
-
-          />
-        </svg>
-      );
+      return(
+        <svg xmlns="http://www.w3.org/2000/svg"         width="100%"
+        height="100%"
+        viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.618501" className={cn(className)}><path className="" d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+      )
     default:
       return (
         <svg className={className} width="427" height="427" viewBox="0 0 427 427" fill="none" xmlns="http://www.w3.org/2000/svg">
