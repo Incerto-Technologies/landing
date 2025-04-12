@@ -117,17 +117,6 @@ const Feedback = () => {
                         <div className="text-xs  text-muted-foreground">
                           {testimonial.position}
                         </div>
-                        <div>
-
-                        <Link
-                          href={testimonial.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-blue-500 hover:underline underline-offset-4 transition-colors"
-                          >
-                          Case Study
-                        </Link>
-                          </div>
                       </div>
                     </div>
                   </div>
