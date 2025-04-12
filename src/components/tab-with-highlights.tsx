@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -7,16 +7,24 @@ import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import { useQueryState } from "nuqs";
+import { ChevronRight } from "lucide-react";
 export type Tab = {
   label: string;
   slug: string;
   panel: React.FC<{ isDark: boolean }>;
+  flow: string[];
 };
 
 const TABS: Tab[] = [
   {
     label: "AI Remediation",
     slug: "remediation",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -37,6 +45,12 @@ const TABS: Tab[] = [
   {
     label: "Query Optimizer",
     slug: "query-optimizer",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"query-optimization"}
@@ -56,6 +70,12 @@ const TABS: Tab[] = [
   {
     label: "Deep Research",
     slug: "deep-research",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"deep-research"}
@@ -75,6 +95,12 @@ const TABS: Tab[] = [
   {
     label: "SQL Editor",
     slug: "sql-editor",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"sql-editor"}
@@ -94,6 +120,12 @@ const TABS: Tab[] = [
   {
     label: "Misc.",
     slug: "misc",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"misc"}
@@ -134,7 +166,8 @@ const TabsWithHighlightsContent = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
-  const Panel: any = TABS.find((tab) => tab.slug === activeTabSlug)?.panel ?? null;
+  const activeTab = useMemo(() => TABS.find((tab) => tab.slug === activeTabSlug), [activeTabSlug]);
+  const Panel: any = activeTab?.panel ?? null;
 
   // console.log(isInView)
 
@@ -143,11 +176,11 @@ const TabsWithHighlightsContent = () => {
   };
 
   return (
-    <div className="relative  flex flex-col gap-8 lg:gap-12 items-center">
+    <div className="relative  flex flex-col gap-4 lg:gap-6 items-center">
       {/* Threshold element used to load video 500px before reaching the video component */}
       <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
       <div
-        className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6  pb-2 hide-scrollbar"
+        className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6   hide-scrollbar"
         role="tablist"
       >
       
@@ -161,7 +194,16 @@ const TabsWithHighlightsContent = () => {
           ))}
   
       </div>
+      <div className="flex items-center gap-2">
+            {activeTab?.flow.map((step, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">{step}</span> 
+                <ChevronRight className={cn("w-4 h-4", index === activeTab?.flow.length - 1 ? "hidden" : "")} />
+              </div>
+            ))}
+          </div>
       <div className="max-md:px-6 w-full ">
+     
       <BrowserFrame
         className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
         contentClassName="aspect-video border overflow-hidden rounded-lg"
@@ -187,6 +229,7 @@ const TabsWithHighlightsContent = () => {
         )}
       </BrowserFrame>
       </div>
+
     </div>
   );
 };
