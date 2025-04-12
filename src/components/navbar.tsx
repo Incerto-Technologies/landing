@@ -31,8 +31,8 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-10">
+        {/* Navigation - Centered */}
+        <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -42,13 +42,14 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <ContactBtn className="text-xs" />
         </nav>
 
-        {/* <nav className="hidden md:block">
-        </nav> */}
-        {/* CTA Button */}
+        {/* CTA Button - Right Aligned */}
+        <div className="hidden md:block">
+          <ContactBtn className="text-xs" />
+        </div>
 
+        {/* Mobile Menu Button */}
         <Button
           aria-label="Menu"
           onClick={() => setShowMobileHeaderNav(!showMobileHeaderNav)}

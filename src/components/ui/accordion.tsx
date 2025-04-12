@@ -50,6 +50,7 @@ function AccordionTrigger({
 function AccordionContent({
   className,
   children,
+  dangerouslySetInnerHTML,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
   return (
@@ -58,7 +59,7 @@ function AccordionContent({
       className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}
     >
-      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+      {!dangerouslySetInnerHTML ? <div className={cn("pt-0 pb-4", className)}>{children}</div> : <div className={cn("pt-0 pb-4", className)} dangerouslySetInnerHTML={dangerouslySetInnerHTML} />}
     </AccordionPrimitive.Content>
   )
 }

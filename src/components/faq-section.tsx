@@ -8,46 +8,59 @@ import SectionContainer from "./layouts/section-container";
 
 const faqs = [
   {
-    question: "Can I cap my usage so my bill doesn't run over?",
+    question: "What is this Database Observability tool?",
     answer:
-      "Yes, you can set usage limits in your account settings to prevent unexpected charges. We'll notify you when you're approaching your limits.",
+      "It's an on-premise solution designed to monitor, analyze, and troubleshoot your database systems in real-time. It provides in-depth insights into performance, schema, query health, and anomalies, with AI-powered suggestions for remediation.",
   },
   {
-    question:
-      "I'm worried I could end up with a huge bill at the end of the month.",
+    question: "How is the pricing structured?",
     answer:
-      "We provide real-time usage monitoring and alerts to help you stay within your budget. You can also set hard limits on resource usage.",
+      "We charge based on the <strong>number of databases you choose to monitor</strong>. This includes all features—no per-user or per-query costs. It's simple and scalable as your database footprint grows.",
   },
   {
-    question: "When will I be billed?",
+    question: "Is this a SaaS product?",
     answer:
-      "Billing occurs at the end of each month for the resources you've used. You'll receive an invoice with detailed usage breakdown.",
+      "<strong>No.</strong> This is <strong>not a SaaS</strong> product. It is fully <strong>self-hosted on your infrastructure</strong>, ensuring you have complete control over deployment, upgrades, and data flow.",
   },
   {
-    question: "Are you going to change your pricing in the future?",
+    question: "Where is my data stored?",
     answer:
-      "We strive to maintain consistent pricing. If any changes occur, we'll provide advance notice and grandfather existing customers on their current plans.",
+      "All your database telemetry, logs, and configuration data are stored <strong>locally on your infrastructure</strong>. We do <strong>not store or access</strong> your data on any external servers.",
   },
   {
-    question: "What happens if I cancel my subscription?",
+    question: "Does any data leave my environment?",
     answer:
-      "You can cancel anytime. You'll have access to your resources until the end of your billing period. We provide tools to export your data.",
+      "The only external communication is with <strong>OpenAI and/or Anthropic APIs</strong> for optional AI-based remediation suggestions. You can fully control and audit what is sent, and these integrations can be disabled if desired.",
   },
   {
-    question: "Do I get a notification if I am approaching my usage limits?",
+    question: "What kind of insights does the tool provide?",
     answer:
-      "Yes, we send email notifications when you reach 80% and 90% of your usage limits to help you avoid any service interruptions.",
+      "It detects and surfaces: Query performance bottlenecks, Schema inefficiencies, Failed insertions or replication issues, Disk/memory pressure on database nodes, Zookeeper (or other cluster coordination) failures, Sudden spikes in latency or throughput.",
   },
   {
-    question:
-      "What if I need one project for development and one for production?",
+    question: "What databases do you support?",
     answer:
-      "You can create multiple projects under one account. Each project is billed separately based on its resource usage.",
+      "The tool currently specializes in <strong>ClickHouse</strong>, but support for other OLAP and OLTP databases is planned. Please contact us for upcoming support details.",
   },
   {
-    question: "Can I pause a free project?",
+    question: "Do I need internet access to run the tool?",
     answer:
-      "Yes, you can pause free projects at any time. This helps conserve resources when you're not actively using them.",
+      "Internet access is only required if: You enable AI integrations (OpenAI/Anthropic), You want to fetch updates or use optional telemetry sharing (disabled by default). Otherwise, the tool functions <strong>completely offline</strong>.",
+  },
+  {
+    question: "Can I control what data goes to OpenAI or Anthropic?",
+    answer:
+      "Absolutely. You can: View and redact prompts before they're sent, Opt-in/opt-out for specific AI agents, Host your own API gateway for logging and filtering outbound requests.",
+  },
+  {
+    question: "How do upgrades and support work?",
+    answer:
+      "You get: Versioned releases with changelogs, Optional support contracts for SLAs, Documentation and playbooks for upgrade procedures.",
+  },
+  {
+    question: "What are the system requirements?",
+    answer:
+      "A typical deployment requires a single node: 4 vCPU, 8 GB RAM. Full specs depend on the number of databases and traffic.",
   },
 ];
 
@@ -63,7 +76,7 @@ export function FAQSection() {
             <AccordionTrigger className="text-left">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent>{faq.answer}</AccordionContent>
+            <AccordionContent dangerouslySetInnerHTML={{ __html: faq.answer }} />
           </AccordionItem>
         ))}
       </Accordion>

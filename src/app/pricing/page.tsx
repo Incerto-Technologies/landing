@@ -6,6 +6,7 @@ import CTA from "@/components/sections/cta";
 import SectionContainer from "@/components/layouts/section-container";
 import { CurrencyToggle, type Currency, currencySymbols, exchangeRates } from "@/components/currency-toggle";
 import { CheckIcon } from "lucide-react";
+import Link from "next/link";
 import { formatCurrency } from "@/lib/utils";
 
 const pricingPlans = [
@@ -50,14 +51,16 @@ export default function PricingPage() {
 
   return (
     <main className="">
-      {/* Header */}
-      <SectionContainer className="flex flex-col items-center justify-center space-y-16">
+
+      <SectionContainer className="flex flex-col items-center justify-center space-y-10">
         <div className="text-center">
           <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none text-gray-900">
-            Plans & Pricing
+            Pricing
           </h1>
           <p className="mt-2 text-base md:text-lg text-gray-600">
-            Whether you are a small company or a large enterprise – we have the right plan for you. Contact us for custom requirements like annual plans or compare our plans below.
+            Whether you are a small company or a large enterprise – we have the right plan for you. 
+            <br />
+            <Link href="/contact" className="text-primary">Contact us</Link> for custom requirements like annual plans or compare our plans below.
           </p>
         </div>
 
