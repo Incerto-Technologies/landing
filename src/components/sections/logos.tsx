@@ -21,6 +21,11 @@ const logos = [
     name: "astra",
   },
   {
+    image: "/clients/bytebeam.svg",
+    alt: "bytebeam",
+    name: "bytebeam",
+  },
+  {
     image: "/clients/kevit.svg",
     alt: "kevit",
     name: "kevit",
@@ -69,13 +74,13 @@ const Logos = () => {
               width={32} 
               height={32}
               className={cn(
-                "h-8 max-md:h-6 w-auto grayscale transition-all hover:grayscale-0",
+                "h-6  w-auto grayscale transition-all hover:grayscale-0",
                 {
                   "h-7": logo.name === "dhruv",
-                  "h-10": logo.name === "dhan" || logo.name === "fyers",
+                  "h-10": logo.name === "dhan" || logo.name === "fyers" || logo.name === "bytebeam",
                   "h-11 rounded-md overflow-hidden max-md:h-8": logo.name === "ving",
-                  "h-12 max-md:h-9": logo.name === "kevit",
-                }
+                  "h-9": logo.name === "kevit",
+                  }
               )}
             />
           ))
@@ -92,12 +97,13 @@ const Logos = () => {
               width={32} 
               height={32}
               className={cn(
-                "h-8 max-md:h-6 w-auto grayscale transition-all hover:grayscale-0",
+                "h-8  w-auto grayscale transition-all hover:grayscale-0",
                 {
-                  "h-7": logo.name === "dhruv",
-                  "h-10": logo.name === "dhan" || logo.name === "fyers",
+                  "h-7": logo.name === "dhruv" ,
+                  "h-10": logo.name === "dhan" || logo.name === "fyers" ,
                   "h-11 rounded-md overflow-hidden max-md:h-8": logo.name === "ving",
                   "h-12 max-md:h-9": logo.name === "kevit",
+                  "h-14": logo.name === "bytebeam",
                 }
               )}
             />
