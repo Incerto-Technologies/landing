@@ -62,7 +62,9 @@ const Hero = () => {
       </div>
 
       {/* Clients Section */}
-      <div className="space-y-5 text-center mt-[10vh]">
+      <div className="space-y-5 relative overflow-hidden text-center mt-[10vh]">
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
+
         <h3 className="text-xl md:text-2xl leading-tight font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
