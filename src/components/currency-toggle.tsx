@@ -32,7 +32,7 @@ export function CurrencyToggle({ onCurrencyChange }: CurrencyToggleProps) {
         <button
           key={currency}
           onClick={() => handleCurrencyChange(currency)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-full md:cursor-pointer text-sm font-medium transition-all ${
             selectedCurrency === currency
               ? 'bg-primary text-white'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
