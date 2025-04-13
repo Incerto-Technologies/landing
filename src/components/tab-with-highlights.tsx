@@ -7,7 +7,7 @@ import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import { useQueryState } from "nuqs";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 export type Tab = {
   label: string;
   slug: string;
@@ -174,7 +174,7 @@ const TabsWithHighlightsContent = () => {
             {activeTab?.flow && activeTab?.flow.map((step, index) => (
               <div key={index} className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">{step}</span> 
-                <ChevronRight className={cn("w-4 h-4", index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : "")} />
+                <ArrowRight className={cn("w-4 h-4 text-primary/80", index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : "")} />
               </div>
             ))}
           </div>

@@ -1,50 +1,43 @@
 import { GlowingEffect } from "@/components/ui/bento-grid";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { cn } from "@/lib/utils"; 
 
 const IMPACT_METRICS = [
   {
-    number: "65%",
-    text: "Reduction in MTTR",
+    number: "75%",
+    text: "MTTR Reduction",
     area: "md:col-span-2",
-    background: "globe",
-    icon: "chart-line",
-  },
-  {
-    number: "80%",
-    text: "Reduction in MTTR",
-    area: "md:col-span-1",
     background: "mttr",
-    icon: "chart-line",
-  },
-  {
-    number: "95%",
-    text: "Cost saved on compute & storage",
-    area: "md:col-span-1 md:row-span-2",
-    background: "cost",
-    icon: "dollar-sign",
-  },
-  {
-    number: "90%",
-    text: "Reduce on-call time",
-    area: "md:col-span-1",
-    background: "oncall",
-    icon: "clock",
   },
   {
     number: "<2s",
     text: "Time to detect exact root cause",
     area: "md:col-span-1",
     background: "detection",
-    icon: "search",
   },
   {
-    number: "65%",
+    text: "Dig Deeper Insights with AI",
+    area: "md:col-span-1 md:row-span-2",
+    background: "globe",
+  },
+  {
+      number: "90%",
+      text: "Reduce on-call time",
+      area: "md:col-span-1",
+      background: "oncall",
+  },
+  {
+    number: "4x",
     text: "Increase in Query Performance",
     area: "md:col-span-1",
     background: "performance",
-    icon: "zap",
   },
+  {
+    number: "98%",
+    text: "Cost saved on compute & storage",
+    area: "md:col-span-1 ",
+    background: "cost",
+  },
+
 ];
 
 export function ImpactBento() {
@@ -57,7 +50,6 @@ export function ImpactBento() {
           title={metric.text}
           percentage={metric.number}
           background={metric.background}
-          icon={metric.icon}
         />
       ))}
     </ul>
@@ -67,9 +59,8 @@ export function ImpactBento() {
 interface GridItemProps {
   area: string;
   title: string;
-  percentage: string;
+  percentage?: string;
   background: string;
-  icon: string;
 }
 
 const GridItem = ({
@@ -77,7 +68,6 @@ const GridItem = ({
   title,
   percentage,
   background,
-  icon,
 }: GridItemProps) => {
   return (
     <li
@@ -93,9 +83,9 @@ const GridItem = ({
         />
         <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-2 z-10">
           <div className="relative flex flex-1 flex-col justify-between gap-3">
-            <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start transition-all duration-300 group-hover:text-foreground">
+           {percentage && <div className="text-7xl font-medium leading-[1.1] tracking-tight text-muted-foreground text-start transition-all duration-300 group-hover:text-foreground">
               {percentage}
-            </div>
+            </div>}
             <div className="space-y-3">
               <h3 className="-tracking-4 text-start pt-0.5 font-sans text-[21px] font-medium text-balance transition-all duration-300 group-hover:text-foreground">
                 {title}
@@ -104,8 +94,9 @@ const GridItem = ({
           </div>
         </div>
         <div className={cn("absolute -right-1/3 -bottom-1/4 size-full opacity-30 transition-all  duration-500 group-hover:opacity-100", {
-          "-rotate-45 opacity-60 -bottom-1/6  group-hover:-bottom-1/12 ": background === "globe",
-          "opacity-30 group-hover:opacity-100 group-hover:-rotate-12 group-hover:-right-36 group-hover:bottom-2": background === "mttr",
+          "-rotate-45 opacity-60 -bottom-1/3  group-hover:-bottom-1/4 ": background === "globe",
+          "bottom-0 scale-200 -right-2/3 group-hover:-right-2/5 ": background === "mttr",
+          "opacity-30 group-hover:opacity-100 group-hover:-rotate-12 group-hover:-right-36 group-hover:bottom-2": background === "oncall",
          "-bottom-[70%] opacity-30  -right-[70%]  group-hover:-bottom-[50%] group-hover:-right-[50%] ": background === "performance",
           "group-hover:-rotate-180 opacity-30   group-hover:animate-spin group-hover:-right-36 group-hover:bottom-2": background === "cost",
           "group-hover:-rotate-180 opacity-30    group-hover:animate-ping  group-hover:-right-20 group-hover:bottom-2 ": background === "detection",
@@ -113,7 +104,6 @@ const GridItem = ({
         })}>
           <BackgroundPattern type={background}  className={cn("text-muted-foreground group-hover:text-primary", {
           "scale-150": background === "performance",
-
           })}/>
         </div>
       </div>
@@ -128,7 +118,7 @@ interface BackgroundPatternProps {
 
 const BackgroundPattern = ({ type, className }: BackgroundPatternProps) => {
   switch (type) {
-    case "mttr":
+    case "oncall":
       return (
         <svg
           width="100%"
@@ -214,7 +204,7 @@ const BackgroundPattern = ({ type, className }: BackgroundPatternProps) => {
 
         </svg>
       );
-    case "oncall":
+    case "mttr":
       return (
         <svg
           width="100%"
@@ -239,7 +229,7 @@ const BackgroundPattern = ({ type, className }: BackgroundPatternProps) => {
             fill="none"
             strokeWidth="1"
             strokeOpacity="0.6"
-            className="transition-transform duration-300 origin-center group-hover:rotate-45"
+            className="transition-transform duration-1000 origin-center group-hover:rotate-45"
             
           />
           <circle
