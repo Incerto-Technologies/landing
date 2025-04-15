@@ -35,7 +35,7 @@ const Hero = () => {
         <span className="text-primary/80">Databases</span>
       </h1>
       <p className="mt-6 max-w-3xl text-center text-sm md:text-[17px] font-medium leading-relaxed text-[var(--color-foreground)] font-sans">
-      Agentic AI to Observe, Detect, & Fix Databases Issues Instantly!.
+      Agentic AI to Observe, Detect, & Fix Databases Issues Instantly!
       </p>
 
       {/* CTA Buttons */}

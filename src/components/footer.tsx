@@ -77,7 +77,7 @@ export function Footer() {
             <div className="mt-6 mx-1 flex items-center space-x-4">
               {/* YouTube */}
               <Link
-                href="https://www.youtube.com/channel/UCGMqTLUaCiMsP_N3gSJ4liQ" 
+                href="https://www.youtube.com/@Incerto-Observability" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-900 size-7"

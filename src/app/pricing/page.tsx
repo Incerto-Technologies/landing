@@ -12,7 +12,7 @@ import { formatCurrency } from "@/lib/utils";
 const pricingPlans = [
   {
     title: "STANDARD",
-    price: 249,
+    price: 149,
     buttonText: "Contact Us",
     buttonVariant: "primary" as const,
     features: [
