@@ -12,9 +12,9 @@ const Hero = () => {
       {/* Free Trial Banner */}
       <Link
         href={CONTACT_LINK}
-        className="p-[5px] rounded-full mb-5  border-[#ededed] border w-[280px] font-mono group flex items-center h-[40px]"
+        className="p-[5px] rounded-full mb-5  border-[#ededed] border w-[240px] group flex items-center h-[40px]"
       >
-        <div className="border rounded-full px-4 py-1 border-primary bg-primary/30 text-[#097C4F] text-sm mr-[22px]">
+        <div className="border rounded-full px-4 py-1 border-primary bg-[#72E3AD] text-sm mr-[10px]">
           Get 14 Days Free Trial
         </div>
 
@@ -35,12 +35,7 @@ const Hero = () => {
         <span className="text-primary/80">Databases</span>
       </h1>
       <p className="mt-6 max-w-3xl text-center text-sm md:text-[17px] font-medium leading-relaxed text-[var(--color-foreground)] font-sans">
-        Gain full visibility into your database performance with real-time
-        monitoring and intelligent insights. Instantly detect anomalies,
-        identify root causes, and take corrective actions with a single click.
-        Reduce downtime, optimize queries, and ensure peak efficiency without
-        the guesswork. Experience the power of proactive database observability,
-        all in one seamless platform.
+      Agentic AI to Observe, Detect, & Fix Databases Issues Instantly!
       </p>
 
       {/* CTA Buttons */}
@@ -62,19 +57,18 @@ const Hero = () => {
             "bg-[var(--color-card)] text-[var(--color-foreground)] shadow-sm  ring-[var(--color-border)] transition-colors hover:bg-[var(--color-muted)]"
           )}
         >
-          Contact us
+          Contact Us
         </Link>
       </div>
 
       {/* Clients Section */}
-      <div className="space-y-5 text-center mt-[10vh]">
+      <div className="space-y-5 relative overflow-hidden text-center mt-[10vh]">
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
+
         <h3 className="text-xl md:text-2xl leading-tight font-medium  text-[var(--color-foreground)]">
           Trusted By
         </h3>
         <Logos />
-        <p className="mt-2 text-[13px] font-medium text-[var(--color-muted-foreground)]">
-          fast-growing companies worldwide
-        </p>
       </div>
     </SectionContainer>
   );

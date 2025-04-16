@@ -143,23 +143,14 @@ export function ContactForm() {
           )}
         />
 
-        <div className="space-y-4">
-          <div className="border-t border-gray-200 pt-4">
-            <p className="text-sm text-gray-500">
-              By submitting this form, I confirm that I have read and understood
-              the{" "}
-              <a
-                href="/privacy"
-                className="text-green-600 hover:text-green-700"
-              >
-                Privacy Policy
-              </a>
-              .
-            </p>
-          </div>
+       
 
           {error && (
-            <p className="text-red-500 text-sm">{error}</p>
+             <div className="space-y-4">
+             <div className="border-t border-gray-200 pt-4">
+             <p className="text-red-500 text-sm">{error}</p>
+             </div>
+             </div>
           )}
 
           <Button
@@ -175,10 +166,10 @@ export function ContactForm() {
               </>
             ) :  
             (
-              "Request a demo"
+              "Submit"
             )}
           </Button>
-        </div>
+        
       </form>
     </Form>
   );

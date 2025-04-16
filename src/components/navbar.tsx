@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { label: "Pricing", href: "/pricing" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -31,8 +31,8 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Navigation - Centered */}
+        <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -44,11 +44,12 @@ export function Navbar() {
           ))}
         </nav>
 
-        <nav className="hidden md:block">
+        {/* CTA Button - Right Aligned */}
+        <div className="hidden md:block">
           <ContactBtn className="text-xs" />
-        </nav>
-        {/* CTA Button */}
+        </div>
 
+        {/* Mobile Menu Button */}
         <Button
           aria-label="Menu"
           onClick={() => setShowMobileHeaderNav(!showMobileHeaderNav)}

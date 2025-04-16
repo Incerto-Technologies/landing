@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -7,16 +7,24 @@ import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import { useQueryState } from "nuqs";
+import { ArrowRight } from "lucide-react";
 export type Tab = {
   label: string;
   slug: string;
   panel: React.FC<{ isDark: boolean }>;
+  flow?: string[];
 };
 
 const TABS: Tab[] = [
   {
-    label: "Remediation",
+    label: "AI Remediation",
     slug: "remediation",
+    flow: [
+      "Analyze",
+      "Observe",
+      "Remediate",
+      "Fixed"
+    ],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -33,6 +41,45 @@ const TABS: Tab[] = [
       />
     ),
   },
+
+  {
+    label: "Query Optimizer",
+    slug: "query-optimizer",
+    panel: ({ isDark }: { isDark: boolean }) => (
+      <VideoWithHighlights
+        key={"query-optimization"}
+        video={{
+          title: "Incerto Query Optimization",
+          sources: [
+            {
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnoQSD2AZLRZYv7yKAX5PiO1a26dGfuH3tnQm9`,
+              type: 'video/mp4',
+            },
+          ],
+          poster: `/features/query-optimization.png`,
+        }}
+      />
+    ),
+  },
+  {
+    label: "Deep Research",
+    slug: "deep-research",
+    panel: ({ isDark }: { isDark: boolean }) => (
+      <VideoWithHighlights
+        key={"deep-research"}
+        video={{
+          title: "Incerto Deep Research",
+          sources: [
+            {
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              type: "video/mp4",
+            },
+          ],
+          poster: `/features/deep-research.png`,
+        }}
+      />
+    ),
+  },
   {
     label: "SQL Editor",
     slug: "sql-editor",
@@ -43,7 +90,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygndvcluK5EZrkXU5tgJM0YpKe1hjnV2yxfz9LC`,
               type: "video/mp4",
             },
           ],
@@ -53,20 +100,20 @@ const TABS: Tab[] = [
     ),
   },
   {
-    label: "Query Optimization",
-    slug: "query-optimization",
+    label: "Misc.",
+    slug: "misc",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
-        key={"query-optimization"}
+        key={"misc"}
         video={{
-          title: "Incerto Query Optimization",
+          title: "Incerto Misc",
           sources: [
             {
               src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
-              type: 'video/mp4',
+              type: "video/mp4",
             },
           ],
-          poster: `/features/query-optimization.png`,
+          poster: `/features/misc.png`,
         }}
       />
     ),
@@ -95,7 +142,8 @@ const TabsWithHighlightsContent = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
-  const Panel: any = TABS.find((tab) => tab.slug === activeTabSlug)?.panel ?? null;
+  const activeTab = useMemo(() => TABS.find((tab) => tab.slug === activeTabSlug), [activeTabSlug]);
+  const Panel: any = activeTab?.panel ?? null;
 
   // console.log(isInView)
 
@@ -104,14 +152,14 @@ const TabsWithHighlightsContent = () => {
   };
 
   return (
-    <div className="relative  flex flex-col gap-8 lg:gap-12 items-center">
+    <div className="relative  flex flex-col gap-4 lg:gap-6 items-center">
       {/* Threshold element used to load video 500px before reaching the video component */}
       <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
       <div
-        className="relative w-full col-span-full  flex justify-center gap-2 overflow-x-auto pb-2 hide-scrollbar"
+        className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6   hide-scrollbar"
         role="tablist"
       >
-        <div className="flex gap-2   min-w-max mx-auto">
+      
           {TABS.map((tab, index) => (
             <Tab
               key={index}
@@ -120,9 +168,18 @@ const TabsWithHighlightsContent = () => {
               onClick={() => handleTabClick(tab.slug)}
             />
           ))}
-        </div>
+  
       </div>
+      <div className="flex items-center gap-2">
+            {activeTab?.flow && activeTab?.flow.map((step, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">{step}</span> 
+                <ArrowRight className={cn("w-4 h-4 text-primary/80", index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : "")} />
+              </div>
+            ))}
+          </div>
       <div className="max-md:px-6 w-full ">
+     
       <BrowserFrame
         className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
         contentClassName="aspect-video border overflow-hidden rounded-lg"
@@ -148,6 +205,7 @@ const TabsWithHighlightsContent = () => {
         )}
       </BrowserFrame>
       </div>
+
     </div>
   );
 };
@@ -163,7 +221,7 @@ const Tab = ({ label, isActive, onClick }: TabProps) => (
     onClick={onClick}
     aria-selected={isActive}
     role="tab"
-    className="md:cursor-pointer"
+    className="md:cursor-pointer w-max"
   >
     <Badge
       size="large"

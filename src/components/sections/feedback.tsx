@@ -3,65 +3,66 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import SectionContainer from "../layouts/section-container";
 
-// Dummy testimonial data
-const testimonials = [
+
+const testimonials =[
   {
-    name: "John Smith",
-    role: "Senior Developer",
-    image: "/dashboard.png",
-    linkedin: "https://linkedin.com/in/johnsmith",
-    company: "https://company.com",
-    companyName: "Tech Corp",
-    quote:
-      "Working with @supabase has been one of the best dev experiences I've had lately. Incredibly easy to set up, great documentation, and so many fewer hoops to jump through than the competition. I definitely plan to use it on any and all future projects.",
+    "id": 0,
+    "name": "Pranav Khambayatkar",
+    "position": "Senior VP Engineering at Fyers",
+    "profile": "/clients/avatar/pranav-khambayatkar.webp",
+    "companyLogo": "/clients/fyers.svg",
+    "link": "https://incerto.in/blog/india-s-leading-brokerage-firm-unlocks-85-cost-savings-using-incerto-s-industry-first-custom-observability-solution-powered-by-opentelemetry",
+    "message": "Incerto has been a great help in transforming Fyers observability landscape. Their end-to-end implementation with open source technologies provided meaningful insights into our infrastructure. Real-time observability and proactive alerting mitigated issues swiftly, reducing MTTR (Mean time to resolve) significantly. Crucially, Incerto ensured seamless SIEM compliance and delivered a highly customized solution tailored to our unique needs."
   },
   {
-    name: "Sarah Johnson",
-    role: "Product Manager",
-    image: "/dashboard.png",
-    linkedin: "https://linkedin.com/in/sarahjohnson",
-    company: "https://company.com",
-    companyName: "Product Co",
-    quote:
-      "Working with @supabase has been one of the best dev experiences I've had lately. Incredibly easy to set up, great documentation, and so many fewer hoops to jump through than the competition. I definitely plan to use it on any and all future projects.",
+    "id": 1,
+    "name": "Dhruman Bhadeshiya",
+    "position": "CTO & Co-Founder",
+    "profile": "/clients/avatar/dhruman.jpeg",
+    "companyLogo": "/clients/kevit.svg",
+    "link": "https://incerto.in/blog",
+    "message": "Transforming observability in the CPaaS sector, Kevit is setting new standards with Incerto's custom-built platform. Migrating from New Relic, we've achieved a 90% reduction in monthly expenses and significant savings on cloud egress costs. Incerto's tailored stack ensures seamless data retention for one year, meeting our audit and compliance requirements. With complete data ownership, our infrastructure is now optimized for peak performance. Kevit is proud to lead the way in advanced observability solutions with Incerto."
   },
   {
-    name: "Michael Chen",
-    role: "CTO",
-    image: "/dashboard.png",
-    linkedin: "https://linkedin.com/in/michaelchen",
-    company: "https://company.com",
-    companyName: "Startup Inc",
-    quote:
-      "Working with @supabase has been one of the best dev experiences I've had lately. Incredibly easy to set up, great documentation, and so many fewer hoops to jump through than the competition. I definitely plan to use it on any and all future projects.",
+    "id": 2,
+    "name": "Kunal Singh",
+    "position": "Co-Founder Discite Analytics & AI",
+    "profile": "/clients/avatar/kunalsingh.webp",
+    "companyLogo": "/clients/discite.svg",
+    "link": "https://incerto.in/blog",
+    "message": "I would highly recommend them. They bring very high ownership to the projects they work on with no followups required, and they are really good problem solvers so its easy to trust them with some critical issues you are facing."
   },
   {
-    name: "Emily Davis",
-    role: "Lead Engineer",
-    image: "/dashboard.png",
-    linkedin: "https://linkedin.com/in/emilydavis",
-    company: "https://company.com",
-    companyName: "Engineering Co",
-    quote:
-      "Working with @supabase has been one of the best dev experiences I've had lately. Incredibly easy to set up, great documentation, and so many fewer hoops to jump through than the competition. I definitely plan to use it on any and all future projects.",
+    "id": 3,
+    "name": "Sunil Naik",
+    "position": "Director Dhruv Technology Solutions",
+    "profile": "/clients/avatar/sunilnaik.webp",
+    "companyLogo": "/clients/dhruv.svg",
+    "link": "https://incerto.in/blog",
+    "message": "This team has some rare skills with incredible flexibility and subject matter expertise. They have worked diligently to meet and exceed our expectations."
   },
-];
+  {
+    "id": 4,
+    "name": "Aditya Pushpati",
+    "position": "CEO Ving",
+    "profile": "/clients/avatar/adityapushpati.webp",
+    "companyLogo": "/clients/ving.svg",
+    "link": "https://incerto.in/blog",
+    "message": "Meticulous. That's the word I would use to describe our engagement with Incerto Technologies. Their planning and attention to detail was commendable. The team looked into aspects that we missed and suggested the multiple options to choose from, in terms of approach to meet our product goals. Very professional and consultative."
+  },
+]
 
 const Feedback = () => {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <SectionContainer className=" relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
 
-      <div className="container mx-auto px-6 lg:px-16 xl:px-20 relative">
-        <div className="text-center mb-16">
-          <h2 className="text-[33.75px] font-medium leading-[1.185] mb-4">
-            Checkout!
-            <br />
-            <span className="text-muted-foreground">What Our Clients Say</span>
-          </h2>
-        </div>
+        <h3 className="mb-8 text-2xl text-center  font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
+        What clients say about Incerto?
+        </h3>
 
         <div className="relative max-w-[800px] mx-auto overflow-hidden">
           {/* Left fade gradient */}
@@ -71,7 +72,7 @@ const Feedback = () => {
           <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
 
           <div className="flex">
-            <div className="flex animate-marquee">
+            <div className="grid grid-rows-1 grid-flow-col    animate-marquee space-x-6">
               {[
                 ...testimonials,
                 ...testimonials,
@@ -80,12 +81,12 @@ const Feedback = () => {
               ].map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-none w-[304px] bg-white rounded-2xl border border-[#D6D3D1] p-6 flex flex-col gap-3 mr-6"
+                  className="flex-none w-[350px] h-fit  bg-white rounded-2xl border border-[#D6D3D1] p-6 flex flex-col gap-3 "
                 >
                   <div className="flex items-center gap-3">
                     <div className="relative w-10 h-10 rounded-full border border-[#393939] overflow-hidden">
                       <Image
-                        src={testimonial.image}
+                        src={testimonial.profile}
                         alt={testimonial.name}
                         fill
                         className="object-cover"
@@ -97,7 +98,7 @@ const Feedback = () => {
                           {testimonial.name}
                         </span>
                         <Link
-                          href={testimonial.linkedin}
+                          href={testimonial.link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-[#898989] hover:text-[#171717] transition-colors"
@@ -112,30 +113,20 @@ const Feedback = () => {
                           </svg>
                         </Link>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] text-muted-foreground">
-                          {testimonial.role}
-                        </span>
-                        <span className="text-[11px] text-[#898989]">•</span>
-                        <Link
-                          href={testimonial.company}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[11px] text-blue-500 hover:underline underline-offset-4 transition-colors"
-                        >
-                          {testimonial.companyName}
-                        </Link>
+                      <div className=" w-full items-center ">
+                        <div className="text-xs  text-muted-foreground">
+                          {testimonial.position}
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-[15.1px] leading-[1.589]">
-                    {testimonial.quote}
+                  <p className="text-sm leading-relaxed">
+                    {testimonial.message}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </div>
 
@@ -155,7 +146,7 @@ const Feedback = () => {
           animation-play-state: paused;
         }
       `}</style>
-    </section>
+    </SectionContainer>
   );
 };
 
