@@ -5,7 +5,8 @@ import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import TailwindIndicator from "@/components/tailwind-indicator";
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script id="clarity-script" src="/js/clarity.js" />
+      </head>
       <body
         className={`${inter.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
@@ -39,10 +43,10 @@ export default function RootLayout({
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-          <Footer />
+          >
+            <Navbar />
+            {children}
+            <Footer />
             <TailwindIndicator />
           </ThemeProvider>
         </NuqsAdapter>
