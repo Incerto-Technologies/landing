@@ -30,16 +30,14 @@ const Hero = () => {
       </Link>
 
       {/* Hero Content */}
-      <h1 className="text-foreground text-3xl font-semibold md:font-medium md:text-5xl sm:leading-none lg:text-7xl">
-        Actionable Observability for <br className="hidden sm:block" />
-        <span className="text-primary/80">Databases</span>
+      <h1 className="text-foreground text-4xl font-semibold md:font-medium md:text-6xl lg:text-7xl leading-tight md:leading-tight lg:leading-tight max-w-5xl">
+        <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">Agentic AI</span> <br />
+        <span className="text-foreground/90 font-medium">Which Solve</span> <br />
+        <span className="text-foreground font-bold">All Database Problems</span>
       </h1>
-      <p className="mt-6 max-w-3xl text-center text-sm md:text-[17px] font-medium leading-relaxed text-[var(--color-foreground)] font-sans">
-      Agentic AI to Observe, Detect, & Fix Databases Issues Instantly!
-      </p>
 
       {/* CTA Buttons */}
-      <div className="mt-8 flex items-center gap-2">
+      <div className="mt-10 flex items-center gap-3">
         <Link
           href={CONTACT_LINK}
           className={buttonVariants({
