@@ -32,7 +32,7 @@ const Hero = () => {
       {/* Hero Content */}
       <h1 className="text-foreground text-4xl font-semibold md:font-medium md:text-6xl lg:text-7xl leading-tight md:leading-tight lg:leading-tight max-w-5xl">
         <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">Agentic AI</span> <br />
-        <span className="text-foreground/90 font-medium">Which Solve</span> <br />
+        <span className="text-foreground/90 font-medium">That Solves</span> <br />
         <span className="text-foreground font-bold">All Database Problems</span>
       </h1>
 

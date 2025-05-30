@@ -19,7 +19,7 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Incerto - Agentic AI Which Solve All Database Problems",
+  title: "Incerto - Agentic AI That Solves All Database Problems",
   description:
     "Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly detect anomalies, identify root causes, and take corrective actions.",
 };
