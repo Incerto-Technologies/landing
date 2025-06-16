@@ -27,7 +27,7 @@ const TABS: Tab[] = [
           title: "Incerto Remediation",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7n6SEx7adVYe3EDhHObxpW1vIlstrKQafw2oj`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7DX7GASrf4oDJhwHGjraRVM5uqEYkxeOP9IKN`,
               type: "video/mp4",
             },
           ],
@@ -47,7 +47,7 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7rETTo9eLspygwAh4JqmK31QncXaBZoGbjFU8`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7oOJTdgRXsAlQGYjpD7FmaJKkIS98XiyeVBEC`,
               type: "video/mp4",
             },
           ],
@@ -66,7 +66,7 @@ const TABS: Tab[] = [
           title: "Incerto Deep Research",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn72RSILQgjAzxSEGo5qTUkcRahg6v1W7ipH3n0`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7CMwswVL0RA1TX2QOCbBgwIqY4J89hxGdnlcF`,
               type: "video/mp4",
             },
           ],
@@ -85,7 +85,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7vFyyNdWHUE9AfcbwFC3Nah8BzXGSxTLM4nil`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7R9MLh6uvetIkDPSYLbWVz6NQ1xaZwyT08u34`,
               type: "video/mp4",
             },
           ],
