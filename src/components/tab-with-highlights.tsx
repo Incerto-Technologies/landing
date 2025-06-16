@@ -19,12 +19,7 @@ const TABS: Tab[] = [
   {
     label: "AI Remediation",
     slug: "remediation",
-    flow: [
-      "Analyze",
-      "Observe",
-      "Remediate",
-      "Fixed"
-    ],
+    flow: ["Analyze", "Observe", "Remediate", "Fixed"],
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -32,11 +27,11 @@ const TABS: Tab[] = [
           title: "Incerto Remediation",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnn3UW4P0zxlPY9SbMuc0WaKvEQCyDXROpZqIz`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7n6SEx7adVYe3EDhHObxpW1vIlstrKQafw2oj`,
               type: "video/mp4",
             },
           ],
-          poster: `/features/remediation.png`,
+          poster: `/features/ai-remediation.png`,
         }}
       />
     ),
@@ -52,11 +47,11 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnoQSD2AZLRZYv7yKAX5PiO1a26dGfuH3tnQm9`,
-              type: 'video/mp4',
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7rETTo9eLspygwAh4JqmK31QncXaBZoGbjFU8`,
+              type: "video/mp4",
             },
           ],
-          poster: `/features/query-optimization.png`,
+          poster: `/features/query.jpg`,
         }}
       />
     ),
@@ -71,11 +66,11 @@ const TABS: Tab[] = [
           title: "Incerto Deep Research",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn72RSILQgjAzxSEGo5qTUkcRahg6v1W7ipH3n0`,
               type: "video/mp4",
             },
           ],
-          poster: `/features/deep-research.png`,
+          poster: `/features/deep-research.jpg`,
         }}
       />
     ),
@@ -90,45 +85,26 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygndvcluK5EZrkXU5tgJM0YpKe1hjnV2yxfz9LC`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7vFyyNdWHUE9AfcbwFC3Nah8BzXGSxTLM4nil`,
               type: "video/mp4",
             },
           ],
-          poster: `/features/sql-editor.png`,
+          poster: `/features/sql-editor.jpg`,
         }}
       />
     ),
   },
-  {
-    label: "Misc.",
-    slug: "misc",
-    panel: ({ isDark }: { isDark: boolean }) => (
-      <VideoWithHighlights
-        key={"misc"}
-        video={{
-          title: "Incerto Misc",
-          sources: [
-            {
-              src: `https://7e494ve81x.ufs.sh/f/YOMccJiK3ygnkXm7ULICz5OiyjlvmurnSXN8J9p3xawtBIGZ`,
-              type: "video/mp4",
-            },
-          ],
-          poster: `/features/misc.png`,
-        }}
-      />
-    ),
-  },
-]
-
-
+];
 
 const TabsWithHighlights = () => {
   return (
-    <Suspense fallback={
-      <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
-        <div className="w-full h-[600px] animate-pulse bg-muted rounded-lg"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+          <div className="w-full h-[600px] animate-pulse bg-muted rounded-lg"></div>
+        </div>
+      }
+    >
       <TabsWithHighlightsContent />
     </Suspense>
   );
@@ -142,7 +118,10 @@ const TabsWithHighlightsContent = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
-  const activeTab = useMemo(() => TABS.find((tab) => tab.slug === activeTabSlug), [activeTabSlug]);
+  const activeTab = useMemo(
+    () => TABS.find((tab) => tab.slug === activeTabSlug),
+    [activeTabSlug]
+  );
   const Panel: any = activeTab?.panel ?? null;
 
   // console.log(isInView)
@@ -159,53 +138,55 @@ const TabsWithHighlightsContent = () => {
         className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6   hide-scrollbar"
         role="tablist"
       >
-      
-          {TABS.map((tab, index) => (
-            <Tab
-              key={index}
-              isActive={tab.slug === activeTabSlug}
-              label={tab.label}
-              onClick={() => handleTabClick(tab.slug)}
-            />
-          ))}
-  
+        {TABS.map((tab, index) => (
+          <Tab
+            key={index}
+            isActive={tab.slug === activeTabSlug}
+            label={tab.label}
+            onClick={() => handleTabClick(tab.slug)}
+          />
+        ))}
       </div>
       <div className="flex items-center gap-2">
-            {activeTab?.flow && activeTab?.flow.map((step, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">{step}</span> 
-                <ArrowRight className={cn("w-4 h-4 text-primary/80", index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : "")} />
-              </div>
-            ))}
-          </div>
-      <div className="max-md:px-6 w-full ">
-     
-      <BrowserFrame
-        className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
-        contentClassName="aspect-video border overflow-hidden rounded-lg"
-      >
-        {isInView && (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={TABS.find((tab) => tab.slug === activeTabSlug)?.label}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.1, delay: 0.2 },
-              }}
-              exit={{ opacity: 0, transition: { duration: 0.05 } }}
-              className="relative w-full max-w-full h-full"
-            >
-              <Panel
-                key={resolvedTheme?.includes("dark")}
-                isDark={resolvedTheme?.includes("dark")}
+        {activeTab?.flow &&
+          activeTab?.flow.map((step, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">{step}</span>
+              <ArrowRight
+                className={cn(
+                  "w-4 h-4 text-primary/80",
+                  index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : ""
+                )}
               />
-            </motion.div>
-          </AnimatePresence>
-        )}
-      </BrowserFrame>
+            </div>
+          ))}
       </div>
-
+      <div className="max-md:px-6 w-full ">
+        <BrowserFrame
+          className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
+          contentClassName="aspect-video border overflow-hidden rounded-lg"
+        >
+          {isInView && (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={TABS.find((tab) => tab.slug === activeTabSlug)?.label}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.1, delay: 0.2 },
+                }}
+                exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                className="relative w-full max-w-full h-full"
+              >
+                <Panel
+                  key={resolvedTheme?.includes("dark")}
+                  isDark={resolvedTheme?.includes("dark")}
+                />
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </BrowserFrame>
+      </div>
     </div>
   );
 };
