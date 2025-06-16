@@ -51,7 +51,7 @@ const TABS: Tab[] = [
               type: "video/mp4",
             },
           ],
-          poster: `/features/query.jpg`,
+          poster: `/features/query.png`,
         }}
       />
     ),
