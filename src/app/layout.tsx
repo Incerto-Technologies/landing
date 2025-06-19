@@ -33,6 +33,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script id="clarity-script" src="/js/clarity.js" />
+        <Script id="gtag-script" src="/js/gtag.js" />
+        <Script
+          id="clarity-script"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17224396662"
+          async
+        />
       </head>
       <body
         className={`${inter.variable} ${sourceCodePro.variable} font-sans antialiased`}
