@@ -5,7 +5,6 @@ import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
-import { FlipWords } from "../ui/flip-words";
 import RollUpText from "../ui/roll-up-words";
 
 const Hero = () => {

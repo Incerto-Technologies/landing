@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, Suspense, useMemo, useState } from "react";
+import React, { useRef, Suspense, useMemo, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import {
   AnimatePresence,
@@ -146,25 +146,27 @@ const TabsWithHighlightsContent = () => {
   const Panel: any = activeTab?.panel ?? null;
 
   return (
-    <div ref={containerRef} className="relative h-[200vh]">
-      <div className="sticky top-24 flex h-screen flex-col items-center pt-10">
-        <div className="relative flex flex-col items-center gap-4 lg:gap-6">
+    <div ref={containerRef} className={cn("relative h-[200vh]")}>
+      <div className={cn("sticky top-24 flex flex-col items-center pt-10")}>
+        <div className="relative flex w-full flex-col items-center gap-4 lg:gap-6">
           {/* Threshold element used to load video 500px before reaching the video component */}
           <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
-          <div
-            className="grid grid-rows-1 grid-flow-col space-x-2 overflow-x-auto max-md:w-full max-md:px-6 hide-scrollbar"
-            role="tablist"
-          >
-            {TABS.map((tab, index) => (
-              <Tab
-                key={index}
-                isActive={tab.slug === activeTabSlug}
-                label={tab.label}
-                onClick={() => {
-                  /* Clicks are disabled in favor of scroll */
-                }}
-              />
-            ))}
+          <div className="w-full md:w-auto">
+            <div
+              className="grid grid-rows-1 grid-flow-col justify-start md:justify-center space-x-2 overflow-x-auto w-full px-6 md:px-0 hide-scrollbar"
+              role="tablist"
+            >
+              {TABS.map((tab, index) => (
+                <Tab
+                  key={index}
+                  isActive={tab.slug === activeTabSlug}
+                  label={tab.label}
+                  onClick={() => {
+                    setActiveTabSlug(tab.slug);
+                  }}
+                />
+              ))}
+            </div>
           </div>
           <div className="flex items-center gap-2">
             {activeTab?.flow &&
@@ -182,7 +184,7 @@ const TabsWithHighlightsContent = () => {
                 </div>
               ))}
           </div>
-          <div className="w-full max-md:px-6 ">
+          <div className="w-full px-6 md:px-0 ">
             <BrowserFrame
               className="w-full max-w-6xl mx-auto overflow-hidden bg-default lg:order-last"
               contentClassName="aspect-video border overflow-hidden rounded-lg"
@@ -225,13 +227,11 @@ const Tab = ({ label, isActive, onClick }: TabProps) => (
     onClick={onClick}
     aria-selected={isActive}
     role="tab"
-    className="w-max md:cursor-pointer"
-    disabled
+    className="w-max cursor-pointer"
   >
     <Badge
       size="large"
       className={cn(
-        // `text-left py-1.5 px-3 lg:py-2 lg:px-8 border rounded-md bg-alternative hover:border-foreground text-lg opacity-80 transition-all`,
         "py-1.5 px-3 lg:py-2 lg:px-8",
         "hover:border-foreground-lighter hover:text-foreground",
         `opacity-80`,
