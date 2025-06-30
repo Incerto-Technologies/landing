@@ -5,14 +5,15 @@ import { Contact } from "@/models/Contact";
 import { sendEmailContactForm } from "@/lib/send-contact-form-email";
 
 export type ContactFormData = {
-  name: string;
+  name?: string;
   email: string;
-  message: string;
+  mobile?: string;
+  message?: string;
 };
 
 export const sendContactForm = async (data: ContactFormData) => {
   try {
-    const { name, email, message } = data;
+    const { name, email, message, mobile } = data;
 
     // Connect to MongoDB
     await connectDB();
@@ -22,6 +23,7 @@ export const sendContactForm = async (data: ContactFormData) => {
       name,
       email,
       message,
+      mobile,
     });
 
     // Send email notification
@@ -29,6 +31,7 @@ export const sendContactForm = async (data: ContactFormData) => {
       name,
       email,
       message,
+      mobile,
     });
 
     console.log("Contact form sent successfully");
