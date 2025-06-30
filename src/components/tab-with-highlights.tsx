@@ -1,13 +1,20 @@
 "use client";
-import React, { useRef, Suspense, useMemo } from "react";
+import React, { useRef, Suspense, useMemo, useState } from "react";
 import { useTheme } from "next-themes";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import { useQueryState } from "nuqs";
 import { ArrowRight } from "lucide-react";
+
 export type Tab = {
   label: string;
   slug: string;
@@ -112,80 +119,96 @@ const TabsWithHighlights = () => {
 
 const TabsWithHighlightsContent = () => {
   const { resolvedTheme } = useTheme();
-  const [activeTabSlug, setActiveTabSlug] = useQueryState("tab", {
-    defaultValue: TABS[0].slug,
-  });
+  const [activeTabSlug, setActiveTabSlug] = useState(TABS[0].slug);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const newIndex = Math.min(
+      Math.floor(latest * TABS.length),
+      TABS.length - 1
+    );
+    if (TABS[newIndex] && TABS[newIndex].slug !== activeTabSlug) {
+      setActiveTabSlug(TABS[newIndex].slug);
+    }
+  });
+
   const activeTab = useMemo(
-    () => TABS.find((tab) => tab.slug === activeTabSlug),
+    () => TABS.find((tab) => tab.slug === activeTabSlug) || TABS[0],
     [activeTabSlug]
   );
   const Panel: any = activeTab?.panel ?? null;
 
-  // console.log(isInView)
-
-  const handleTabClick = (tabSlug: string) => {
-    setActiveTabSlug(tabSlug);
-  };
-
   return (
-    <div className="relative  flex flex-col gap-4 lg:gap-6 items-center">
-      {/* Threshold element used to load video 500px before reaching the video component */}
-      <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
-      <div
-        className="grid grid-rows-1 space-x-2 grid-flow-col overflow-x-auto max-md:w-full max-md:px-6   hide-scrollbar"
-        role="tablist"
-      >
-        {TABS.map((tab, index) => (
-          <Tab
-            key={index}
-            isActive={tab.slug === activeTabSlug}
-            label={tab.label}
-            onClick={() => handleTabClick(tab.slug)}
-          />
-        ))}
-      </div>
-      <div className="flex items-center gap-2">
-        {activeTab?.flow &&
-          activeTab?.flow.map((step, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">{step}</span>
-              <ArrowRight
-                className={cn(
-                  "w-4 h-4 text-primary/80",
-                  index === (activeTab?.flow?.length ?? 0) - 1 ? "hidden" : ""
-                )}
-              />
-            </div>
-          ))}
-      </div>
-      <div className="max-md:px-6 w-full ">
-        <BrowserFrame
-          className="overflow-hidden lg:order-last bg-default w-full max-w-6xl mx-auto"
-          contentClassName="aspect-video border overflow-hidden rounded-lg"
-        >
-          {isInView && (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={TABS.find((tab) => tab.slug === activeTabSlug)?.label}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.1, delay: 0.2 },
+    <div ref={containerRef} className="relative h-[200vh]">
+      <div className="sticky top-24 flex h-screen flex-col items-center pt-10">
+        <div className="relative flex flex-col items-center gap-4 lg:gap-6">
+          {/* Threshold element used to load video 500px before reaching the video component */}
+          <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
+          <div
+            className="grid grid-rows-1 grid-flow-col space-x-2 overflow-x-auto max-md:w-full max-md:px-6 hide-scrollbar"
+            role="tablist"
+          >
+            {TABS.map((tab, index) => (
+              <Tab
+                key={index}
+                isActive={tab.slug === activeTabSlug}
+                label={tab.label}
+                onClick={() => {
+                  /* Clicks are disabled in favor of scroll */
                 }}
-                exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                className="relative w-full max-w-full h-full"
-              >
-                <Panel
-                  key={resolvedTheme?.includes("dark")}
-                  isDark={resolvedTheme?.includes("dark")}
-                />
-              </motion.div>
-            </AnimatePresence>
-          )}
-        </BrowserFrame>
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            {activeTab?.flow &&
+              activeTab?.flow.map((step, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">{step}</span>
+                  <ArrowRight
+                    className={cn(
+                      "w-4 h-4 text-primary/80",
+                      index === (activeTab?.flow?.length ?? 0) - 1
+                        ? "hidden"
+                        : ""
+                    )}
+                  />
+                </div>
+              ))}
+          </div>
+          <div className="w-full max-md:px-6 ">
+            <BrowserFrame
+              className="w-full max-w-6xl mx-auto overflow-hidden bg-default lg:order-last"
+              contentClassName="aspect-video border overflow-hidden rounded-lg"
+            >
+              {isInView && (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab.label}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.1, delay: 0.2 },
+                    }}
+                    exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                    className="relative h-full w-full max-w-full"
+                  >
+                    <Panel
+                      key={resolvedTheme?.includes("dark")}
+                      isDark={resolvedTheme?.includes("dark")}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              )}
+            </BrowserFrame>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -202,7 +225,8 @@ const Tab = ({ label, isActive, onClick }: TabProps) => (
     onClick={onClick}
     aria-selected={isActive}
     role="tab"
-    className="md:cursor-pointer w-max"
+    className="w-max md:cursor-pointer"
+    disabled
   >
     <Badge
       size="large"
