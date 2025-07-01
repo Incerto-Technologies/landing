@@ -17,7 +17,7 @@ export default function RollUpText({
       setIndex((prev) => (prev + 1) % words.length);
     }, 3000); // Change word every 3 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [words.length]);
 
   return (
     <div className="overflow-hidden h-[2em] w-[30.5rem] relative">
