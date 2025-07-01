@@ -29,7 +29,7 @@ export default function RollUpText({
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.5 }}
           style={{ position: "absolute", width: "100%" }}
-          className="flex items-center justify-center text-foreground font-bold"
+          className="flex items-center justify-center text-foreground font-bold gap-3"
         >
           {words[index]}
           <Image
