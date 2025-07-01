@@ -3,7 +3,7 @@ import { ContactFormData } from "@/actions/contact";
 import { sendMail } from "./mail";
 
 export async function sendEmailContactForm(data: ContactFormData) {
-  const { name, email, message } = data;
+  const { name, email, message, mobile } = data;
 
   const html = `
   <!DOCTYPE html>
@@ -42,7 +42,7 @@ export async function sendEmailContactForm(data: ContactFormData) {
     
     <p><span class="info-label">Name:</span> ${name}</p>
     <p><span class="info-label">Email:</span> <a href="mailto:${email}">${email}</a></p>
-    
+    <p><span class="info-label">Mobile:</span> ${mobile}</p>
     <p><span class="info-label">Message:</span></p>
     <div class="message-content">
         ${message}

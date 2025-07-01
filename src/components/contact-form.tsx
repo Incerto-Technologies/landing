@@ -20,18 +20,22 @@ import { sendContactForm } from "@/actions/contact";
 import { CheckCircle, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "First name must be at least 2 characters.",
-  }),
-  lastName: z.string().min(2, {
-    message: "Last name must be at least 2 characters.",
-  }),
+  name: z.string().optional(),
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
+  mobile: z
+    .string()
+    .optional()
+    .refine(
+      (data) => {
+        if (!data) return true;
+        const regex = /^[0-9]{10}$/;
+        return regex.test(data);
+      },
+      { message: "Please enter a valid mobile number." }
+    ),
+  message: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -43,10 +47,10 @@ export function ContactForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       message: "",
+      mobile: undefined,
     },
   });
 
@@ -54,9 +58,10 @@ export function ContactForm() {
     startTransition(async () => {
       setError(null);
       const { success, error } = await sendContactForm({
-        name: `${values.firstName} ${values.lastName}`,
+        name: values.name,
         email: values.email,
         message: values.message,
+        mobile: values.mobile?.toString(),
       });
 
       if (success) {
@@ -82,43 +87,43 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="First name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Last name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Company Email</FormLabel>
+              <FormLabel>
+                Email<sup className="text-red-500">*</sup>
+              </FormLabel>
               <FormControl>
-                <Input placeholder="you@company.com" type="email" {...field} />
+                <Input placeholder="you@example.com" type="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name (Optional)</FormLabel>
+              <FormControl>
+                <Input placeholder="Name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="mobile"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Mobile (Optional)</FormLabel>
+              <FormControl>
+                <Input placeholder="Mobile" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -130,7 +135,7 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What are you interested in?</FormLabel>
+              <FormLabel>What are you interested in? (Optional)</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us about your needs..."
@@ -143,33 +148,29 @@ export function ContactForm() {
           )}
         />
 
-       
+        {error && (
+          <div className="space-y-4">
+            <div className="border-t border-gray-200 pt-4">
+              <p className="text-red-500 text-sm">{error}</p>
+            </div>
+          </div>
+        )}
 
-          {error && (
-             <div className="space-y-4">
-             <div className="border-t border-gray-200 pt-4">
-             <p className="text-red-500 text-sm">{error}</p>
-             </div>
-             </div>
+        <Button
+          type="submit"
+          variant="primary"
+          className="w-full"
+          disabled={isSending}
+        >
+          {isSending ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Sending...
+            </>
+          ) : (
+            "Submit"
           )}
-
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-full"
-            disabled={isSending}
-          >
-            {isSending ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Sending...
-              </>
-            ) :  
-            (
-              "Submit"
-            )}
-          </Button>
-        
+        </Button>
       </form>
     </Form>
   );

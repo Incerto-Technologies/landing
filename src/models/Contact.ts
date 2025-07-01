@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const contactSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required"],
     trim: true,
   },
   email: {
@@ -15,7 +14,10 @@ const contactSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    required: [true, "Message is required"],
+    trim: true,
+  },
+  mobile: {
+    type: String,
     trim: true,
   },
   createdAt: {

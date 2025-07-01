@@ -5,6 +5,7 @@ import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
+import RollUpText from "../ui/roll-up-words";
 
 const Hero = () => {
   return (
@@ -31,9 +32,23 @@ const Hero = () => {
 
       {/* Hero Content */}
       <h1 className="text-foreground text-4xl font-semibold md:font-medium md:text-6xl lg:text-7xl leading-tight md:leading-tight lg:leading-tight max-w-5xl">
-        <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">Agentic AI</span> <br />
-        <span className="text-foreground/90 font-medium">That Solves</span> <br />
-        <span className="text-foreground font-bold">All Database Problems</span>
+        <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">
+          Agentic AI
+        </span>{" "}
+        <br />
+        <span className="text-foreground/90 font-medium">for</span> <br />
+        <RollUpText
+          animations={[
+            {
+              name: "ClickHouse",
+              image: "/clickhouse.svg",
+            },
+            {
+              name: "Postgres",
+              image: "/postgres.png",
+            },
+          ]}
+        />
       </h1>
 
       {/* CTA Buttons */}
@@ -61,7 +76,7 @@ const Hero = () => {
 
       {/* Clients Section */}
       <div className="space-y-5 relative overflow-hidden text-center mt-[10vh]">
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
 
         <h3 className="text-xl md:text-2xl leading-tight font-medium  text-[var(--color-foreground)]">
           Trusted By
