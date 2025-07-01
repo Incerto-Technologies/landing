@@ -89,10 +89,26 @@ export function ContactForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Email<sup className="text-red-500">*</sup>
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="you@example.com" type="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Name (Optional)</FormLabel>
               <FormControl>
                 <Input placeholder="Name" {...field} />
               </FormControl>
@@ -105,23 +121,9 @@ export function ContactForm() {
           name="mobile"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mobile</FormLabel>
+              <FormLabel>Mobile (Optional)</FormLabel>
               <FormControl>
                 <Input placeholder="Mobile" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="you@example.com" type="email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -133,7 +135,7 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What are you interested in?</FormLabel>
+              <FormLabel>What are you interested in? (Optional)</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us about your needs..."

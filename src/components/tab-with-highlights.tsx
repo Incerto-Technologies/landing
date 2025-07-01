@@ -12,14 +12,16 @@ import { Badge } from "@/components/ui/badge";
 import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
+import VideoModal from "./ui/video-modal";
 import { useQueryState } from "nuqs";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 
 export type Tab = {
   label: string;
   slug: string;
   panel: React.FC<{ isDark: boolean }>;
   flow?: string[];
+  video?: string;
 };
 
 const TABS: Tab[] = [
@@ -27,6 +29,8 @@ const TABS: Tab[] = [
     label: "AI Remediation",
     slug: "remediation",
     flow: ["Analyze", "Observe", "Remediate", "Fixed"],
+    video:
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7DX7GASrf4oDJhwHGjraRVM5uqEYkxeOP9IKN",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -47,6 +51,8 @@ const TABS: Tab[] = [
   {
     label: "Query Optimizer",
     slug: "query-optimizer",
+    video:
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7oOJTdgRXsAlQGYjpD7FmaJKkIS98XiyeVBEC",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"query-optimization"}
@@ -66,6 +72,8 @@ const TABS: Tab[] = [
   {
     label: "Deep Research",
     slug: "deep-research",
+    video:
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7CMwswVL0RA1TX2QOCbBgwIqY4J89hxGdnlcF",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"deep-research"}
@@ -85,6 +93,8 @@ const TABS: Tab[] = [
   {
     label: "SQL Editor",
     slug: "sql-editor",
+    video:
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7R9MLh6uvetIkDPSYLbWVz6NQ1xaZwyT08u34",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"sql-editor"}
@@ -242,5 +252,103 @@ const Tab = ({ label, isActive, onClick }: TabProps) => (
     </Badge>
   </button>
 );
+
+export const MobileTabsWithHighlights = () => {
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    videoSrc: string;
+    title: string;
+    poster: string;
+  }>({
+    isOpen: false,
+    videoSrc: "",
+    title: "",
+    poster: "",
+  });
+
+  const openModal = (tab: Tab) => {
+    if (tab.video) {
+      setModalState({
+        isOpen: true,
+        videoSrc: tab.video,
+        title: tab.label,
+        poster: `/features/${tab.slug}.png`,
+      });
+    }
+  };
+
+  const closeModal = () => {
+    setModalState((prev) => ({ ...prev, isOpen: false }));
+  };
+
+  return (
+    <>
+      <div className="space-y-8 px-3">
+        {TABS.map((tab) => (
+          <div key={tab.slug} className="space-y-4">
+            <div className="space-y-3">
+              <h4 className="text-lg font-medium text-foreground">
+                {tab.label}
+              </h4>
+
+              {/* Flow Steps for Mobile */}
+              {tab.flow && (
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {tab.flow.map((step, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm px-2 py-1 bg-primary/10 text-primary rounded-md font-medium">
+                          {step}
+                        </span>
+                      </div>
+                      {index < tab.flow!.length - 1 && (
+                        <ArrowRight className="w-3 h-3 text-primary/60 flex-shrink-0" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {tab.video && (
+              <div
+                className="relative group cursor-pointer rounded-lg overflow-hidden"
+                onClick={() => openModal(tab)}
+              >
+                <video
+                  className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
+                  height="100%"
+                  key={tab.video}
+                  width="100%"
+                  loop
+                  muted
+                  autoPlay
+                  controls={false}
+                  playsInline
+                  poster={`/features/${tab.slug}.png`}
+                >
+                  <source src={tab.video} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-transparent group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                    <Play className="w-8 h-8 text-black ml-1" />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <VideoModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        videoSrc={modalState.videoSrc}
+        title={modalState.title}
+        poster={modalState.poster}
+      />
+    </>
+  );
+};
 
 export default TabsWithHighlights;
