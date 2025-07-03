@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: "Pricing", href: "/pricing" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
+  { label: "Download", href: "/download" },
   { label: "Contact Us", href: "/contact" },
 ];
 
