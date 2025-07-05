@@ -1,6 +1,7 @@
 "use server";
 import { ContactFormData } from "@/actions/contact";
 import { sendMail } from "./mail";
+import { DownloadRequest } from "@/actions/donwload-form";
 
 export async function sendEmailContactForm(data: ContactFormData) {
   const { name, email, message, mobile } = data;
@@ -59,6 +60,30 @@ export async function sendEmailContactForm(data: ContactFormData) {
   await sendMail({
     to: process.env.SEND_MAIL_TO!.split(",") || "",
     subject: "Magic Pill - Contact Form",
+    html,
+  });
+}
+
+export async function sendEmailDownloadRequest(data: DownloadRequest) {
+  const { name, email } = data;
+  const html = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <title>New Download Request</title>
+  </head>
+  <body>
+      <h1>New Download Request</h1>
+      <p>Name: ${name}</p>
+      <p>Email: ${email}</p>
+  </body>
+  </html>
+  `;
+
+  await sendMail({
+    to: process.env.SEND_MAIL_TO!.split(",") || "",
+    subject: "Magic Pill - Download Request",
     html,
   });
 }

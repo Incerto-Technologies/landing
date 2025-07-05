@@ -40,12 +40,12 @@ const Hero = () => {
         <RollUpText
           animations={[
             {
-              name: "ClickHouse",
-              image: "/clickhouse.svg",
-            },
-            {
               name: "Postgres",
               image: "/postgres.png",
+            },
+            {
+              name: "ClickHouse",
+              image: "/clickhouse.svg",
             },
           ]}
         />
