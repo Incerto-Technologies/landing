@@ -53,6 +53,7 @@ export function Navbar() {
         {/* Mobile Menu Button */}
         <Button
           aria-label="Menu"
+          // onClick={() => setShowMobileHeaderNav((prev) => !prev)}
           onClick={() => setShowMobileHeaderNav(!showMobileHeaderNav)}
           variant="secondary"
           className="md:hidden"
