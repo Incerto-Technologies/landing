@@ -3,27 +3,28 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Download,
-  Monitor,
-  Apple,
-  Terminal,
-  Sparkles,
-  Gift,
-} from "lucide-react";
+import { Download, Sparkles, Gift, X } from "lucide-react";
+import Image from "next/image";
+import { DownloadForm } from "@/components/download/download-form";
 
 export default function DownloadPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<
     "windows" | "mac" | "linux"
   >("mac");
+  const [showDialog, setShowDialog] = useState(false);
+  const [downloadInfo, setDownloadInfo] = useState<{
+    platform: string;
+    architecture?: string;
+  } | null>(null);
 
-  const handleDownload = (platform: string, architecture?: string) => {
-    console.log(
-      `Downloading for ${platform}${architecture ? ` - ${architecture}` : ""}`
-    );
-    const downloadUrl =
-      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGWPavetwzn7PHqYpkabNj2oW31dAt8lGgTZ";
-    window.open(downloadUrl, "_blank");
+  const handleDownloadClick = (platform: string, architecture?: string) => {
+    setDownloadInfo({ platform, architecture });
+    setShowDialog(true);
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
+    setDownloadInfo(null);
   };
 
   return (
@@ -68,7 +69,15 @@ export default function DownloadPage() {
                 : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
             }`}
           >
-            <Monitor className="w-5 h-5" />
+            <div className="w-5 h-5 relative">
+              <Image
+                src="/download/windows.svg"
+                alt="Windows"
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+            </div>
             Windows
           </button>
           <button
@@ -79,7 +88,15 @@ export default function DownloadPage() {
                 : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
             }`}
           >
-            <Apple className="w-5 h-5" />
+            <div className="w-5 h-5 relative -mt-2">
+              <Image
+                src="/download/apple.png"
+                alt="macOS"
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+            </div>
             Mac
           </button>
           <button
@@ -90,7 +107,15 @@ export default function DownloadPage() {
                 : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
             }`}
           >
-            <Terminal className="w-5 h-5" />
+            <div className="w-5 h-5 relative">
+              <Image
+                src="/download/linux.png"
+                alt="Linux"
+                width={20}
+                height={20}
+                className="object-contain"
+              />
+            </div>
             Linux
           </button>
         </div>
@@ -111,7 +136,7 @@ export default function DownloadPage() {
                 <Badge variant="secondary">64-bit</Badge>
               </div>
               <Button
-                onClick={() => handleDownload("windows")}
+                onClick={() => handleDownloadClick("windows")}
                 className="px-10 py-6 rounded-full text-lg font-medium shadow-lg hover:shadow-xl"
                 size="lg"
               >
@@ -139,22 +164,28 @@ export default function DownloadPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
                 <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Monitor className="w-8 h-8 text-primary-foreground" />
-                  </div>
+                  {/* <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Image
+                      src="/icons/intel.svg"
+                      alt="Intel"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </div> */}
                   <h3 className="text-xl font-bold text-card-foreground mb-2">
                     Intel Chip
                   </h3>
                   <p className="text-muted-foreground text-sm mb-6">
                     For Macs with Intel processors
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                  <div className="flex flex-wrap gap-2 justify-center mb-6 h-20">
                     <Badge variant="outline">Intel Core i5</Badge>
                     <Badge variant="outline">Intel Core i7</Badge>
                     <Badge variant="outline">Intel Core i9</Badge>
                   </div>
                   <Button
-                    onClick={() => handleDownload("mac", "intel")}
+                    onClick={() => handleDownloadClick("mac", "intel")}
                     className="w-full rounded-full font-medium"
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -162,24 +193,30 @@ export default function DownloadPage() {
                   </Button>
                 </div>
 
-                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                  <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Apple className="w-8 h-8 text-secondary-foreground" />
-                  </div>
+                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg flex flex-col justify-between">
+                  {/* <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Image
+                      src="/icons/apple.svg"
+                      alt="Apple Silicon"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </div> */}
                   <h3 className="text-xl font-bold text-card-foreground mb-2">
                     Apple Chip
                   </h3>
                   <p className="text-muted-foreground text-sm mb-6">
                     For Macs with Apple Silicon
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                  <div className="flex flex-wrap gap-2 justify-center mb-6 h-20">
                     <Badge variant="outline">M1</Badge>
                     <Badge variant="outline">M2</Badge>
                     <Badge variant="outline">M3</Badge>
                     <Badge variant="outline">M4</Badge>
                   </div>
                   <Button
-                    onClick={() => handleDownload("mac", "apple")}
+                    onClick={() => handleDownloadClick("mac", "apple")}
                     className="w-full rounded-full font-medium"
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -207,9 +244,15 @@ export default function DownloadPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
                 <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Terminal className="w-8 h-8 text-primary-foreground" />
-                  </div>
+                  {/* <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Image
+                      src="/icons/cpu.svg"
+                      alt="x86_64"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </div> */}
                   <h3 className="text-xl font-bold text-card-foreground mb-2">
                     x86_64
                   </h3>
@@ -221,7 +264,7 @@ export default function DownloadPage() {
                     <Badge variant="outline">AMD x64</Badge>
                   </div>
                   <Button
-                    onClick={() => handleDownload("linux", "x86")}
+                    onClick={() => handleDownloadClick("linux", "x86")}
                     className="w-full rounded-full font-medium"
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -230,9 +273,15 @@ export default function DownloadPage() {
                 </div>
 
                 <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Terminal className="w-8 h-8 text-primary-foreground" />
-                  </div>
+                  {/* <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Image
+                      src="/icons/arm.svg"
+                      alt="ARM64"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </div> */}
                   <h3 className="text-xl font-bold text-card-foreground mb-2">
                     ARM64
                   </h3>
@@ -244,7 +293,7 @@ export default function DownloadPage() {
                     <Badge variant="outline">Apple M-series</Badge>
                   </div>
                   <Button
-                    onClick={() => handleDownload("linux", "arm")}
+                    onClick={() => handleDownloadClick("linux", "arm")}
                     className="w-full rounded-full font-medium"
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -256,6 +305,36 @@ export default function DownloadPage() {
           )}
         </div>
       </div>
+
+      {/* Download Form Dialog */}
+      {showDialog && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-2xl w-full max-w-lg border">
+            <div className="flex items-center justify-between p-6 border-b">
+              <div>
+                <h3 className="text-lg font-semibold text-card-foreground">
+                  Download Incerto
+                </h3>
+                {/* <p className="text-sm text-muted-foreground mt-1">
+                  {downloadInfo?.platform}{" "}
+                  {downloadInfo?.architecture &&
+                    `(${downloadInfo.architecture})`}
+                </p> */}
+              </div>
+              <button
+                onClick={closeDialog}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <DownloadForm />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

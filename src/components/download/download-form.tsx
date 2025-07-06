@@ -21,7 +21,12 @@ import { useState, useTransition } from "react";
 
 const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  name: z.string().optional(),
+  mobile: z
+    .string()
+    .optional()
+    .refine((value) => (value ? /^\d{10}$/.test(value) : true), {
+      message: "Please enter a valid 10 digit mobile number",
+    }),
 });
 
 type FormData = z.infer<typeof downloadFormSchema>;
@@ -35,7 +40,7 @@ export const DownloadForm = () => {
     resolver: zodResolver(downloadFormSchema),
     defaultValues: {
       email: "",
-      name: "",
+      mobile: "",
     },
   });
 
@@ -45,7 +50,7 @@ export const DownloadForm = () => {
         setLoading(true);
         const result = await createDownloadRequest({
           email: data.email,
-          name: data.name || "",
+          mobile: data.mobile || "",
         });
 
         if (result.success) {
@@ -73,15 +78,6 @@ export const DownloadForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="text-center mb-5">
-        <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none text-gray-900">
-          Download Incerto
-        </h1>
-        <p className="mt-2 text-base md:text-lg text-gray-600">
-          Enter your details to get access to our database monitoring tool
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -105,14 +101,14 @@ export const DownloadForm = () => {
 
           <FormField
             control={form.control}
-            name="name"
+            name="mobile"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name (Optional)</FormLabel>
+                <FormLabel>Mobile (Optional)</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="Your name"
+                    placeholder="Your mobile number"
                     disabled={isPending}
                   />
                 </FormControl>

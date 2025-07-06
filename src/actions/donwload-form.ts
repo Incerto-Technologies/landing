@@ -6,8 +6,8 @@ import { DownloadRequestModel } from "@/models/download-request";
 import connectDB from "@/lib/mongodb";
 
 export type DownloadRequest = {
-  name: string;
   email: string;
+  mobile?: string;
 };
 
 export type DownloadResponse = {
@@ -20,7 +20,7 @@ export const createDownloadRequest = async (
   data: DownloadRequest
 ): Promise<DownloadResponse> => {
   try {
-    const { name, email } = data;
+    const { email, mobile } = data;
 
     // Validate input
     if (!email || !email.includes("@")) {
@@ -35,14 +35,14 @@ export const createDownloadRequest = async (
 
     // Send email notification
     await sendEmailDownloadRequest({
-      name,
       email,
+      mobile,
     });
 
     // Save to database
     const downloadRequest = await DownloadRequestModel.create({
-      name,
       email,
+      mobile,
     });
 
     return {

@@ -47,11 +47,9 @@ export function Navbar() {
 
         {/* CTA Button - Right Aligned */}
         <div className="hidden md:block">
-          <ContactBtn
-            className="text-xs"
-            href="/download"
-            children="Download"
-          />
+          <ContactBtn className="text-xs" href="/download">
+            Download
+          </ContactBtn>
         </div>
 
         {/* Mobile Menu Button */}
@@ -105,11 +103,9 @@ export function Navbar() {
           links={NAV_ITEMS}
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
-          <ContactBtn
-            className="text-xs"
-            href="/download"
-            children="Download"
-          />
+          <ContactBtn className="text-xs" href="/download">
+            Download
+          </ContactBtn>
         </MobileNavbar>
       )}
     </header>
