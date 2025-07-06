@@ -16,7 +16,7 @@ const Hero = () => {
         className="p-[5px] rounded-full mb-5  border-[#ededed] border w-[240px] group flex items-center h-[40px]"
       >
         <div className="border rounded-full px-4 py-1 border-primary bg-[#72E3AD] text-sm mr-[10px]">
-          Get 14 Days Free Trial
+          Get Unlimited AI Credits
         </div>
 
         <div className="text-sm font-bold">
@@ -33,7 +33,7 @@ const Hero = () => {
       {/* Hero Content */}
       <h1 className="text-foreground text-4xl font-semibold md:font-medium md:text-6xl lg:text-7xl leading-tight md:leading-tight lg:leading-tight max-w-5xl">
         <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">
-          Agentic AI
+          AI Co-Pilot
         </span>{" "}
         <br />
         <span className="text-foreground/90 font-medium">for</span> <br />
@@ -54,12 +54,12 @@ const Hero = () => {
       {/* CTA Buttons */}
       <div className="mt-10 flex items-center gap-3">
         <Link
-          href={CONTACT_LINK}
+          href={"/download"}
           className={buttonVariants({
             variant: "primary",
           })}
         >
-          Try Now
+          Download
         </Link>
         <Link
           href="/contact"

@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { label: "Pricing", href: "/pricing" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
-  { label: "Download", href: "/download" },
+  // { label: "Download", href: "/download" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -47,7 +47,11 @@ export function Navbar() {
 
         {/* CTA Button - Right Aligned */}
         <div className="hidden md:block">
-          <ContactBtn className="text-xs" />
+          <ContactBtn
+            className="text-xs"
+            href="/download"
+            children="Download"
+          />
         </div>
 
         {/* Mobile Menu Button */}
@@ -101,7 +105,11 @@ export function Navbar() {
           links={NAV_ITEMS}
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
-          <ContactBtn className="text-xs" />
+          <ContactBtn
+            className="text-xs"
+            href="/download"
+            children="Download"
+          />
         </MobileNavbar>
       )}
     </header>
