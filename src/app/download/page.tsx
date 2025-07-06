@@ -2,286 +2,258 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 import {
   Download,
   Monitor,
   Apple,
   Terminal,
-  Cpu,
-  ChevronRight,
+  Sparkles,
+  Gift,
 } from "lucide-react";
-import Image from "next/image";
 
 export default function DownloadPage() {
-  const [selectedMacChip, setSelectedMacChip] = useState<
-    "intel" | "apple" | null
-  >(null);
-  const [selectedLinuxArch, setSelectedLinuxArch] = useState<
-    "x86" | "arm" | null
-  >(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<
+    "windows" | "mac" | "linux"
+  >("mac");
 
   const handleDownload = (platform: string, architecture?: string) => {
-    // This would be replaced with actual download logic
     console.log(
       `Downloading for ${platform}${architecture ? ` - ${architecture}` : ""}`
     );
-    // You can replace this with actual download URLs
     const downloadUrl =
       "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGWPavetwzn7PHqYpkabNj2oW31dAt8lGgTZ";
     window.open(downloadUrl, "_blank");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 p-4">
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Download Incerto
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 relative overflow-hidden py-10">
+      {/* Floating Elements Background */}
+      <div className="absolute inset-0">
+        {[...Array(40)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-slate-200/30 to-gray-200/30 animate-pulse"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 10 + 5}px`,
+              height: `${Math.random() * 10 + 5}px`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-sm text-foreground px-4 py-2 rounded-full text-sm font-medium mb-6 border shadow-sm">
+            <Sparkles className="w-4 h-4" />
+            AI-Powered Database Monitoring
+          </div>
+          <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent mb-8 tracking-tight">
+            Download
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Get your AI-powered database monitoring tool for your platform
-          </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-          <Tabs defaultValue="windows" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8 h-12">
-              <TabsTrigger
-                value="windows"
-                className="flex items-center gap-2 text-base"
-              >
-                <Monitor className="w-5 h-5" />
-                Windows
-              </TabsTrigger>
-              <TabsTrigger
-                value="mac"
-                className="flex items-center gap-2 text-base"
-              >
-                <Apple className="w-5 h-5" />
-                macOS
-              </TabsTrigger>
-              <TabsTrigger
-                value="linux"
-                className="flex items-center gap-2 text-base"
-              >
-                <Terminal className="w-5 h-5" />
-                Linux
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="windows" className="mt-0">
-              <div className="text-center py-12">
-                <div className="mb-8">
-                  <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                    <Image
-                      src="/download/windows.svg"
-                      alt="Windows"
-                      width={96}
-                      height={96}
-                    />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                    Windows Desktop
-                  </h3>
-                  <p className="text-gray-600 mb-8">
-                    Compatible with Windows 10 and Windows 11
-                  </p>
-                </div>
-                <Button
-                  onClick={() => handleDownload("windows")}
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-medium rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download for Windows
-                </Button>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="mac" className="mt-0">
-              <div className="text-center py-8">
-                <div className="mb-8">
-                  <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                    <Image
-                      src="/download/apple.png"
-                      alt="Mac"
-                      width={96}
-                      height={96}
-                    />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                    Get your AI Co-Pilot Now
-                  </h3>
-                  <p className="text-lg text-green-600 font-medium mb-6">
-                    First 100 users get unlimited Anthropic credits
-                  </p>
-                  <p className="text-gray-600 mb-8">
-                    Choose your Mac processor type
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                  <div
-                    className={`border-2 rounded-xl p-6 cursor-pointer transition-all duration-200 ${
-                      selectedMacChip === "intel"
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedMacChip("intel")}
-                  >
-                    <div className="flex items-center justify-center mb-4">
-                      <Cpu className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                      Intel Chip
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      For Macs with Intel processors
-                    </p>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDownload("mac", "intel");
-                      }}
-                      variant={
-                        selectedMacChip === "intel" ? "default" : "outline"
-                      }
-                      className="w-full"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Intel
-                    </Button>
-                  </div>
-
-                  <div
-                    className={`border-2 rounded-xl p-6 cursor-pointer transition-all duration-200 ${
-                      selectedMacChip === "apple"
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedMacChip("apple")}
-                  >
-                    <div className="flex items-center justify-center mb-4">
-                      <Apple className="w-8 h-8 text-gray-800" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                      Apple Chip
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      For Macs with M1, M2, M3, or M4
-                    </p>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDownload("mac", "apple");
-                      }}
-                      variant={
-                        selectedMacChip === "apple" ? "default" : "outline"
-                      }
-                      className="w-full"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Apple Silicon
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="linux" className="mt-0">
-              <div className="text-center py-8">
-                <div className="mb-8">
-                  <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                    <Image
-                      src="/download/linux.png"
-                      alt="Linux"
-                      width={96}
-                      height={96}
-                    />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                    Linux Distribution
-                  </h3>
-                  <p className="text-gray-600 mb-8">
-                    Choose your system architecture
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                  <div
-                    className={`border-2 rounded-xl p-6 cursor-pointer transition-all duration-200 ${
-                      selectedLinuxArch === "x86"
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedLinuxArch("x86")}
-                  >
-                    <div className="flex items-center justify-center mb-4">
-                      <Cpu className="w-8 h-8 text-orange-600" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                      x86_64
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      For Intel/AMD 64-bit systems
-                    </p>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDownload("linux", "x86");
-                      }}
-                      variant={
-                        selectedLinuxArch === "x86" ? "default" : "outline"
-                      }
-                      className="w-full"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download x86_64
-                    </Button>
-                  </div>
-
-                  <div
-                    className={`border-2 rounded-xl p-6 cursor-pointer transition-all duration-200 ${
-                      selectedLinuxArch === "arm"
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedLinuxArch("arm")}
-                  >
-                    <div className="flex items-center justify-center mb-4">
-                      <Cpu className="w-8 h-8 text-orange-600" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                      ARM64
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      For ARM-based systems
-                    </p>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDownload("linux", "arm");
-                      }}
-                      variant={
-                        selectedLinuxArch === "arm" ? "default" : "outline"
-                      }
-                      className="w-full"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download ARM64
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
+        {/* Platform Tabs */}
+        <div className="flex gap-4 mb-12">
+          <button
+            onClick={() => setSelectedPlatform("windows")}
+            className={`flex items-center gap-3 px-8 py-4 rounded-full border transition-all duration-300 ${
+              selectedPlatform === "windows"
+                ? "bg-primary text-primary-foreground shadow-lg"
+                : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
+            }`}
+          >
+            <Monitor className="w-5 h-5" />
+            Windows
+          </button>
+          <button
+            onClick={() => setSelectedPlatform("mac")}
+            className={`flex items-center gap-3 px-8 py-4 rounded-full border transition-all duration-300 ${
+              selectedPlatform === "mac"
+                ? "bg-primary text-primary-foreground shadow-lg"
+                : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
+            }`}
+          >
+            <Apple className="w-5 h-5" />
+            Mac
+          </button>
+          <button
+            onClick={() => setSelectedPlatform("linux")}
+            className={`flex items-center gap-3 px-8 py-4 rounded-full border transition-all duration-300 ${
+              selectedPlatform === "linux"
+                ? "bg-primary text-primary-foreground shadow-lg"
+                : "bg-background/80 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
+            }`}
+          >
+            <Terminal className="w-5 h-5" />
+            Linux
+          </button>
         </div>
 
-        <div className="text-center mt-8 text-gray-500">
-          <p className="text-sm">
-            By downloading, you agree to our Terms of Service and Privacy Policy
-          </p>
+        {/* Content Card */}
+        <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-12 max-w-4xl w-full text-center border shadow-2xl">
+          {selectedPlatform === "windows" && (
+            <>
+              <h2 className="text-4xl font-bold text-card-foreground mb-4">
+                Incerto for Windows
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8">
+                Compatible with Windows 10 and Windows 11
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center mb-8">
+                <Badge variant="secondary">Windows 10</Badge>
+                <Badge variant="secondary">Windows 11</Badge>
+                <Badge variant="secondary">64-bit</Badge>
+              </div>
+              <Button
+                onClick={() => handleDownload("windows")}
+                className="px-10 py-6 rounded-full text-lg font-medium shadow-lg hover:shadow-xl"
+                size="lg"
+              >
+                <Download className="w-5 h-5 mr-3" />
+                Download
+              </Button>
+            </>
+          )}
+
+          {selectedPlatform === "mac" && (
+            <>
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Gift className="w-4 h-4" />
+                Limited Time Offer
+              </div>
+              <h2 className="text-4xl font-bold text-card-foreground mb-3">
+                Get your AI Co-Pilot Now
+              </h2>
+              <p className="text-xl font-semibold text-emerald-600 mb-8">
+                First 100 users get unlimited Anthropic credits
+              </p>
+              <p className="text-muted-foreground text-lg mb-8">
+                Choose your Mac processor type
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Monitor className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-card-foreground mb-2">
+                    Intel Chip
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    For Macs with Intel processors
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    <Badge variant="outline">Intel Core i5</Badge>
+                    <Badge variant="outline">Intel Core i7</Badge>
+                    <Badge variant="outline">Intel Core i9</Badge>
+                  </div>
+                  <Button
+                    onClick={() => handleDownload("mac", "intel")}
+                    className="w-full rounded-full font-medium"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Intel Chip
+                  </Button>
+                </div>
+
+                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                  <div className="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Apple className="w-8 h-8 text-secondary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-card-foreground mb-2">
+                    Apple Chip
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    For Macs with Apple Silicon
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    <Badge variant="outline">M1</Badge>
+                    <Badge variant="outline">M2</Badge>
+                    <Badge variant="outline">M3</Badge>
+                    <Badge variant="outline">M4</Badge>
+                  </div>
+                  <Button
+                    onClick={() => handleDownload("mac", "apple")}
+                    className="w-full rounded-full font-medium"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Apple Chip
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+
+          {selectedPlatform === "linux" && (
+            <>
+              <h2 className="text-4xl font-bold text-card-foreground mb-4">
+                Incerto for Linux
+              </h2>
+              <p className="text-muted-foreground text-lg mb-8">
+                Choose your system architecture
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center mb-8">
+                <Badge variant="secondary">Ubuntu</Badge>
+                <Badge variant="secondary">Debian</Badge>
+                <Badge variant="secondary">CentOS</Badge>
+                <Badge variant="secondary">RHEL</Badge>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Terminal className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-card-foreground mb-2">
+                    x86_64
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    For Intel/AMD 64-bit systems
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    <Badge variant="outline">Intel x64</Badge>
+                    <Badge variant="outline">AMD x64</Badge>
+                  </div>
+                  <Button
+                    onClick={() => handleDownload("linux", "x86")}
+                    className="w-full rounded-full font-medium"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    x86
+                  </Button>
+                </div>
+
+                <div className="bg-accent/50 backdrop-blur-sm rounded-2xl p-8 border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Terminal className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-card-foreground mb-2">
+                    ARM64
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    For ARM-based systems
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    <Badge variant="outline">ARM Cortex</Badge>
+                    <Badge variant="outline">Apple M-series</Badge>
+                  </div>
+                  <Button
+                    onClick={() => handleDownload("linux", "arm")}
+                    className="w-full rounded-full font-medium"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    ARM
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
