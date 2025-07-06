@@ -12,7 +12,7 @@ const Hero = () => {
     <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
       {/* Free Trial Banner */}
       <Link
-        href={CONTACT_LINK}
+        href={"/download"}
         className="p-[5px] rounded-full mb-5  border-[#ededed] border w-[240px] group flex items-center h-[40px]"
       >
         <div className="border rounded-full px-4 py-1 border-primary bg-[#72E3AD] text-sm mr-[10px]">

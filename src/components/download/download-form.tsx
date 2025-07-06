@@ -23,7 +23,7 @@ const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   mobile: z
     .string()
-    .optional()
+    .min(10, "Please enter a valid 10 digit mobile number")
     .refine((value) => (value ? /^\d{10}$/.test(value) : true), {
       message: "Please enter a valid 10 digit mobile number",
     }),
@@ -31,7 +31,7 @@ const downloadFormSchema = z.object({
 
 type FormData = z.infer<typeof downloadFormSchema>;
 
-export const DownloadForm = () => {
+export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ export const DownloadForm = () => {
           mobile: data.mobile || "",
         });
 
-        if (result.success) {
+        if (result.success && canDownload) {
           const downloadUrl =
             "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGWPavetwzn7PHqYpkabNj2oW31dAt8lGgTZ";
           window.location.href = downloadUrl;
@@ -85,7 +85,7 @@ export const DownloadForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel>Email </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -104,7 +104,7 @@ export const DownloadForm = () => {
             name="mobile"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Mobile (Optional)</FormLabel>
+                <FormLabel>Mobile</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -130,7 +130,11 @@ export const DownloadForm = () => {
           )}
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Submitting..." : "Download"}
+            {loading
+              ? "Submitting..."
+              : canDownload
+              ? "Download"
+              : "Join the waitlist"}
           </Button>
         </form>
       </Form>

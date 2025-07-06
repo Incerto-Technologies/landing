@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Download, Sparkles, Gift, X } from "lucide-react";
+import { Download, Sparkles, Gift, X, WatchIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import { DownloadForm } from "@/components/download/download-form";
 
@@ -124,9 +124,16 @@ export default function DownloadPage() {
         <div className="bg-card/95 backdrop-blur-sm rounded-3xl p-12 max-w-4xl w-full text-center border shadow-2xl">
           {selectedPlatform === "windows" && (
             <>
-              <h2 className="text-4xl font-bold text-card-foreground mb-4">
-                Incerto for Windows
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Gift className="w-4 h-4" />
+                Limited Time Offer
+              </div>
+              <h2 className="text-4xl font-bold text-card-foreground mb-3">
+                Get your AI Co-Pilot Now
               </h2>
+              <p className="text-xl font-semibold text-emerald-600 mb-8">
+                First 100 users get unlimited Anthropic credits
+              </p>
               <p className="text-muted-foreground text-lg mb-8">
                 Compatible with Windows 10 and Windows 11
               </p>
@@ -140,8 +147,8 @@ export default function DownloadPage() {
                 className="px-10 py-6 rounded-full text-lg font-medium shadow-lg hover:shadow-xl"
                 size="lg"
               >
-                <Download className="w-5 h-5 mr-3" />
-                Download
+                <Clock className="w-5 h-5" />
+                Join the waitlist
               </Button>
             </>
           )}
@@ -179,17 +186,12 @@ export default function DownloadPage() {
                   <p className="text-muted-foreground text-sm mb-6">
                     For Macs with Intel processors
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center mb-6 h-20">
-                    <Badge variant="outline">Intel Core i5</Badge>
-                    <Badge variant="outline">Intel Core i7</Badge>
-                    <Badge variant="outline">Intel Core i9</Badge>
-                  </div>
                   <Button
                     onClick={() => handleDownloadClick("mac", "intel")}
                     className="w-full rounded-full font-medium"
                   >
-                    <Download className="w-4 h-4 mr-2" />
-                    Intel Chip
+                    <Clock className="w-5 h-5" />
+                    Join the waitlist
                   </Button>
                 </div>
 
@@ -209,12 +211,6 @@ export default function DownloadPage() {
                   <p className="text-muted-foreground text-sm mb-6">
                     For Macs with Apple Silicon
                   </p>
-                  <div className="flex flex-wrap gap-2 justify-center mb-6 h-20">
-                    <Badge variant="outline">M1</Badge>
-                    <Badge variant="outline">M2</Badge>
-                    <Badge variant="outline">M3</Badge>
-                    <Badge variant="outline">M4</Badge>
-                  </div>
                   <Button
                     onClick={() => handleDownloadClick("mac", "apple")}
                     className="w-full rounded-full font-medium"
@@ -229,9 +225,16 @@ export default function DownloadPage() {
 
           {selectedPlatform === "linux" && (
             <>
-              <h2 className="text-4xl font-bold text-card-foreground mb-4">
-                Incerto for Linux
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Gift className="w-4 h-4" />
+                Limited Time Offer
+              </div>
+              <h2 className="text-4xl font-bold text-card-foreground mb-3">
+                Get your AI Co-Pilot Now
               </h2>
+              <p className="text-xl font-semibold text-emerald-600 mb-8">
+                First 100 users get unlimited Anthropic credits
+              </p>
               <p className="text-muted-foreground text-lg mb-8">
                 Choose your system architecture
               </p>
@@ -267,8 +270,8 @@ export default function DownloadPage() {
                     onClick={() => handleDownloadClick("linux", "x86")}
                     className="w-full rounded-full font-medium"
                   >
-                    <Download className="w-4 h-4 mr-2" />
-                    x86
+                    <Clock className="w-5 h-5" />
+                    Join the waitlist
                   </Button>
                 </div>
 
@@ -296,8 +299,8 @@ export default function DownloadPage() {
                     onClick={() => handleDownloadClick("linux", "arm")}
                     className="w-full rounded-full font-medium"
                   >
-                    <Download className="w-4 h-4 mr-2" />
-                    ARM
+                    <Clock className="w-5 h-5" />
+                    Join the waitlist
                   </Button>
                 </div>
               </div>
@@ -330,7 +333,13 @@ export default function DownloadPage() {
             </div>
 
             <div className="p-6">
-              <DownloadForm />
+              <DownloadForm
+                canDownload={
+                  downloadInfo?.platform === "mac" &&
+                  downloadInfo?.architecture === "apple" &&
+                  downloadInfo?.architecture === "apple"
+                }
+              />
             </div>
           </div>
         </div>

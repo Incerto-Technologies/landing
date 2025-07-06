@@ -9,7 +9,7 @@ const CTA = () => {
           Try Incerto For Free!
         </h3>
 
-        <ContactBtn />
+        <ContactBtn href="/download">Download Now</ContactBtn>
       </div>
     </SectionContainer>
   );
