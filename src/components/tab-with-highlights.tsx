@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, Suspense, useMemo, useState, useEffect } from "react";
+import React, { useRef, Suspense, useMemo, useState } from "react";
 import { useTheme } from "next-themes";
 import {
   AnimatePresence,
@@ -13,7 +13,6 @@ import BrowserFrame from "./browser-frame";
 import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import VideoModal from "./ui/video-modal";
-import { useQueryState } from "nuqs";
 import { ArrowRight, Play } from "lucide-react";
 
 export type Tab = {
@@ -30,7 +29,7 @@ const TABS: Tab[] = [
     slug: "remediation",
     flow: ["Analyze", "Observe", "Remediate", "Fixed"],
     video:
-      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7DX7GASrf4oDJhwHGjraRVM5uqEYkxeOP9IKN",
+      "https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -38,7 +37,7 @@ const TABS: Tab[] = [
           title: "Incerto Remediation",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7DX7GASrf4oDJhwHGjraRVM5uqEYkxeOP9IKN`,
+              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4`,
               type: "video/mp4",
             },
           ],
@@ -52,7 +51,7 @@ const TABS: Tab[] = [
     label: "Query Optimizer",
     slug: "query-optimizer",
     video:
-      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7oOJTdgRXsAlQGYjpD7FmaJKkIS98XiyeVBEC",
+      "https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"query-optimization"}
@@ -60,7 +59,7 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7oOJTdgRXsAlQGYjpD7FmaJKkIS98XiyeVBEC`,
+              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4`,
               type: "video/mp4",
             },
           ],
@@ -73,7 +72,7 @@ const TABS: Tab[] = [
     label: "Deep Research",
     slug: "deep-research",
     video:
-      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7CMwswVL0RA1TX2QOCbBgwIqY4J89hxGdnlcF",
+      "https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"deep-research"}
@@ -81,7 +80,7 @@ const TABS: Tab[] = [
           title: "Incerto Deep Research",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7CMwswVL0RA1TX2QOCbBgwIqY4J89hxGdnlcF`,
+              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4`,
               type: "video/mp4",
             },
           ],
@@ -94,7 +93,7 @@ const TABS: Tab[] = [
     label: "SQL Editor",
     slug: "sql-editor",
     video:
-      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7R9MLh6uvetIkDPSYLbWVz6NQ1xaZwyT08u34",
+      "https://res.cloudinary.com/diin3us70/video/upload/v1751788647/sql-editor_c2o10v.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"sql-editor"}
@@ -102,7 +101,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7R9MLh6uvetIkDPSYLbWVz6NQ1xaZwyT08u34`,
+              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788647/sql-editor_c2o10v.mp4`,
               type: "video/mp4",
             },
           ],
