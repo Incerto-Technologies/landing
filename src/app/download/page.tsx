@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Download, Sparkles, Gift, X, WatchIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import { DownloadForm } from "@/components/download/download-form";
+import { UserArchitecture, UserOS } from "@/lib/get-user-os";
 
 export default function DownloadPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<
@@ -13,11 +14,14 @@ export default function DownloadPage() {
   >("mac");
   const [showDialog, setShowDialog] = useState(false);
   const [downloadInfo, setDownloadInfo] = useState<{
-    platform: string;
-    architecture?: string;
+    platform: UserOS;
+    architecture?: UserArchitecture;
   } | null>(null);
 
-  const handleDownloadClick = (platform: string, architecture?: string) => {
+  const handleDownloadClick = (
+    platform: UserOS,
+    architecture?: UserArchitecture
+  ) => {
     setDownloadInfo({ platform, architecture });
     setShowDialog(true);
   };
@@ -144,7 +148,8 @@ export default function DownloadPage() {
               </div>
               <Button
                 onClick={() => handleDownloadClick("windows")}
-                className="px-10 py-6 rounded-full text-lg font-medium shadow-lg hover:shadow-xl"
+                className="rounded-full text-primary border-2 font-semibold"
+                variant={"outline"}
                 size="lg"
               >
                 <Clock className="w-5 h-5" />
@@ -188,7 +193,8 @@ export default function DownloadPage() {
                   </p>
                   <Button
                     onClick={() => handleDownloadClick("mac", "intel")}
-                    className="w-full rounded-full font-medium"
+                    variant={"outline"}
+                    className="w-full rounded-full text-primary border-2 font-semibold"
                   >
                     <Clock className="w-5 h-5" />
                     Join the waitlist
@@ -213,7 +219,7 @@ export default function DownloadPage() {
                   </p>
                   <Button
                     onClick={() => handleDownloadClick("mac", "apple")}
-                    className="w-full rounded-full font-medium"
+                    className="w-full rounded-full font-bold"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Apple Chip
@@ -268,7 +274,8 @@ export default function DownloadPage() {
                   </div>
                   <Button
                     onClick={() => handleDownloadClick("linux", "x86")}
-                    className="w-full rounded-full font-medium"
+                    className="w-full rounded-full text-primary border-2 font-semibold"
+                    variant={"outline"}
                   >
                     <Clock className="w-5 h-5" />
                     Join the waitlist
@@ -297,7 +304,8 @@ export default function DownloadPage() {
                   </div>
                   <Button
                     onClick={() => handleDownloadClick("linux", "arm")}
-                    className="w-full rounded-full font-medium"
+                    className="w-full rounded-full text-primary border-2 font-semibold"
+                    variant={"outline"}
                   >
                     <Clock className="w-5 h-5" />
                     Join the waitlist
