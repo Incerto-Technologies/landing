@@ -109,7 +109,7 @@ export default function DownloadPage() {
           >
             <div className="w-5 h-5 relative">
               <Image
-                src="/download/linux.png"
+                src="/download/Linux.png"
                 alt="Linux"
                 width={20}
                 height={20}
