@@ -65,7 +65,7 @@ export async function sendEmailContactForm(data: ContactFormData) {
 }
 
 export async function sendEmailDownloadRequest(data: DownloadRequest) {
-  const { name, email } = data;
+  const { mobile, email } = data;
   const html = `
   <!DOCTYPE html>
   <html>
@@ -75,8 +75,8 @@ export async function sendEmailDownloadRequest(data: DownloadRequest) {
   </head>
   <body>
       <h1>New Download Request</h1>
-      <p>Name: ${name}</p>
       <p>Email: ${email}</p>
+      <p>Mobile: ${mobile}</p>
   </body>
   </html>
   `;

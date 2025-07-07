@@ -21,12 +21,17 @@ import { useState, useTransition } from "react";
 
 const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  name: z.string().optional(),
+  mobile: z
+    .string()
+    .min(10, "Please enter a valid 10 digit mobile number")
+    .refine((value) => (value ? /^\d{10}$/.test(value) : true), {
+      message: "Please enter a valid 10 digit mobile number",
+    }),
 });
 
 type FormData = z.infer<typeof downloadFormSchema>;
 
-export const DownloadForm = () => {
+export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -35,7 +40,7 @@ export const DownloadForm = () => {
     resolver: zodResolver(downloadFormSchema),
     defaultValues: {
       email: "",
-      name: "",
+      mobile: "",
     },
   });
 
@@ -45,12 +50,12 @@ export const DownloadForm = () => {
         setLoading(true);
         const result = await createDownloadRequest({
           email: data.email,
-          name: data.name || "",
+          mobile: data.mobile || "",
         });
 
-        if (result.success) {
+        if (!result.success && canDownload) {
           const downloadUrl =
-            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGWPavetwzn7PHqYpkabNj2oW31dAt8lGgTZ";
+            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn73sgZFVAPNAq4a2WiBlfRnZFOQL0eCtSwyjzp";
           window.location.href = downloadUrl;
         }
 
@@ -73,15 +78,6 @@ export const DownloadForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="text-center mb-5">
-        <h1 className="text-3xl font-semibold md:font-medium md:text-4xl sm:leading-none text-gray-900">
-          Download Incerto
-        </h1>
-        <p className="mt-2 text-base md:text-lg text-gray-600">
-          Enter your details to get access to our database monitoring tool
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -89,7 +85,7 @@ export const DownloadForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel>Email </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -105,14 +101,14 @@ export const DownloadForm = () => {
 
           <FormField
             control={form.control}
-            name="name"
+            name="mobile"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name (Optional)</FormLabel>
+                <FormLabel>Mobile</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="Your name"
+                    placeholder="Your mobile number"
                     disabled={isPending}
                   />
                 </FormControl>
@@ -134,7 +130,11 @@ export const DownloadForm = () => {
           )}
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Submitting..." : "Download"}
+            {loading
+              ? "Submitting..."
+              : canDownload
+              ? "Download"
+              : "Join the waitlist"}
           </Button>
         </form>
       </Form>

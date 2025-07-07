@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const downloadRequestSchema = new mongoose.Schema({
-  name: {
+  mobile: {
     type: String,
     trim: true,
   },
