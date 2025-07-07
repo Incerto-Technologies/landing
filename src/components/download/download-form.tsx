@@ -53,9 +53,9 @@ export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
           mobile: data.mobile || "",
         });
 
-        if (result.success && canDownload) {
+        if (!result.success && canDownload) {
           const downloadUrl =
-            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGWPavetwzn7PHqYpkabNj2oW31dAt8lGgTZ";
+            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn73sgZFVAPNAq4a2WiBlfRnZFOQL0eCtSwyjzp";
           window.location.href = downloadUrl;
         }
 
