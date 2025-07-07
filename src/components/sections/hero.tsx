@@ -1,13 +1,27 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { CONTACT_LINK } from "@/lib/constants";
 import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
 import RollUpText from "../ui/roll-up-words";
+import { getUserOS } from "@/lib/get-user-os";
+import { useMemo, useState } from "react";
+import { DownloadForm } from "../download/download-form";
+import { X } from "lucide-react";
 
 const Hero = () => {
+  const { os, architecture } = getUserOS();
+  const [showDownloadDialog, setShowDownloadDialog] = useState(false);
+
+  const imageUrl = useMemo(() => {
+    if (os === "mac") return "/download/apple.png";
+    if (os === "windows") return "/download/windows.svg";
+    if (os === "linux") return "/download/Linux.png";
+    return "/download/windows.svg";
+  }, [os]);
+
   return (
     <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
       {/* Free Trial Banner */}
@@ -53,14 +67,24 @@ const Hero = () => {
 
       {/* CTA Buttons */}
       <div className="mt-10 flex items-center gap-3">
-        <Link
-          href={"/download"}
-          className={buttonVariants({
-            variant: "primary",
-          })}
+        <button
+          className={cn(
+            buttonVariants({
+              variant: "primary",
+            }),
+            "flex items-center gap-2"
+          )}
+          onClick={() => setShowDownloadDialog(true)}
         >
-          Download
-        </Link>
+          <Image
+            src={imageUrl}
+            alt={os}
+            width={20}
+            height={20}
+            className={cn("w-3 object-contain", os === "mac" && "-mt-0.5")}
+          />
+          Download {os}
+        </button>
         <Link
           href="/contact"
           className={cn(
@@ -83,6 +107,36 @@ const Hero = () => {
         </h3>
         <Logos />
       </div>
+      {showDownloadDialog && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-2xl w-full max-w-lg border">
+            <div className="flex items-center justify-between p-6 border-b">
+              <div>
+                <h3 className="text-lg font-semibold text-card-foreground">
+                  Download Incerto
+                </h3>
+                {/* <p className="text-sm text-muted-foreground mt-1">
+                  {downloadInfo?.platform}{" "}
+                  {downloadInfo?.architecture &&
+                    `(${downloadInfo.architecture})`}
+                </p> */}
+              </div>
+              <button
+                onClick={() => setShowDownloadDialog(false)}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <DownloadForm
+                canDownload={os === "mac" && architecture === "apple"}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </SectionContainer>
   );
 };

@@ -48,7 +48,7 @@ export function Navbar() {
         {/* CTA Button - Right Aligned */}
         <div className="hidden md:block">
           <ContactBtn className="text-xs" href="/download">
-            Download
+            All downloads
           </ContactBtn>
         </div>
 
@@ -104,7 +104,7 @@ export function Navbar() {
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
           <ContactBtn className="text-xs" href="/download">
-            Download
+            All downloads
           </ContactBtn>
         </MobileNavbar>
       )}
