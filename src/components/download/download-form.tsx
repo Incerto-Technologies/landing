@@ -55,7 +55,7 @@ export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
 
         if (result.success && canDownload) {
           const downloadUrl =
-            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn73sgZFVAPNAq4a2WiBlfRnZFOQL0eCtSwyjzp";
+            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Lz71aznKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe";
           window.location.href = downloadUrl;
         }
 
