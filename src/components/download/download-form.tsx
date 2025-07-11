@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import { useState, useTransition } from "react";
+import Link from "next/link";
 
 const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -120,12 +121,28 @@ export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
           {response && (
             <div
               className={`p-3 rounded-md text-sm ${
-                response.success
-                  ? "bg-green-50 text-green-800 border border-green-200"
+                !response.success
+                  ? "bg-green-50  border border-green-200"
                   : "bg-red-50 text-red-800 border border-red-200"
               }`}
             >
-              {response.message}
+              {!response.success ? (
+                <div className="flex items-center gap-2">
+                  <span data-success={!response.success}>
+                    Here is the tutorial video to install the app.
+                  </span>
+                  <Link
+                    href="https://youtu.be/7P8WA_Wyr-E"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline text-sm font-medium"
+                  >
+                    Click Here
+                  </Link>
+                </div>
+              ) : (
+                response.message
+              )}
             </div>
           )}
 
