@@ -72,7 +72,7 @@ const Hero = () => {
             buttonVariants({
               variant: "primary",
             }),
-            "flex items-center gap-2"
+            "flex items-center gap-2 capitalize"
           )}
           onClick={() => setShowDownloadDialog(true)}
         >

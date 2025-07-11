@@ -56,7 +56,7 @@ export default function DownloadPage() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-sm text-foreground px-4 py-2 rounded-full text-sm font-medium mb-6 border shadow-sm">
             <Sparkles className="w-4 h-4" />
-            AI-Powered Database Monitoring
+            AI-Powered Database Co-Pilot
           </div>
           <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent mb-8 tracking-tight">
             Download

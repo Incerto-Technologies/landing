@@ -47,8 +47,7 @@ export const createDownloadRequest = async (
 
     return {
       success: true,
-      message:
-        "Download request submitted successfully! Check your email for the download link.",
+      message: "You can download the app from the link below.",
       data: downloadRequest,
     };
   } catch (error) {
