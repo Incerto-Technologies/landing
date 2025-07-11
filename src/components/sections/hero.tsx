@@ -22,6 +22,13 @@ const Hero = () => {
     return "/download/windows.svg";
   }, [os]);
 
+  const downloadBtnText = useMemo(() => {
+    if (os === "mac") return "Download for macOS";
+    if (os === "windows") return "Download for Windows";
+    if (os === "linux") return "Download for Linux";
+    return "Download for Windows";
+  }, [os]);
+
   return (
     <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
       {/* Free Trial Banner */}
@@ -83,7 +90,7 @@ const Hero = () => {
             height={20}
             className={cn("w-3 object-contain", os === "mac" && "-mt-0.5")}
           />
-          Download {os}
+          {downloadBtnText}
         </button>
         <Link
           href="/contact"
