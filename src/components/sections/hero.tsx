@@ -137,9 +137,7 @@ const Hero = () => {
             </div>
 
             <div className="p-6">
-              <DownloadForm
-                canDownload={os === "mac" && architecture === "apple"}
-              />
+              <DownloadForm os={os} platform={architecture} />
             </div>
           </div>
         </div>
