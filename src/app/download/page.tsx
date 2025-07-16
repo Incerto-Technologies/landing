@@ -147,13 +147,13 @@ export default function DownloadPage() {
                 <Badge variant="secondary">64-bit</Badge>
               </div>
               <Button
-                onClick={() => handleDownloadClick("windows")}
-                className="rounded-full text-primary border-2 font-semibold"
-                variant={"outline"}
+                onClick={() => handleDownloadClick("windows", "x64")}
+                className="rounded-full font-bold"
+                // variant={"outline"}
                 size="lg"
               >
-                <Clock className="w-5 h-5" />
-                Join the waitlist
+                <Download className="w-4 h-4 mr-2" />
+                Download
               </Button>
             </>
           )}
@@ -342,11 +342,8 @@ export default function DownloadPage() {
 
             <div className="p-6">
               <DownloadForm
-                canDownload={
-                  downloadInfo?.platform === "mac" &&
-                  downloadInfo?.architecture === "apple" &&
-                  downloadInfo?.architecture === "apple"
-                }
+                os={downloadInfo?.platform || ""}
+                platform={downloadInfo?.architecture || ""}
               />
             </div>
           </div>

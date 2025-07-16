@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 
 const downloadFormSchema = z.object({
@@ -32,10 +32,43 @@ const downloadFormSchema = z.object({
 
 type FormData = z.infer<typeof downloadFormSchema>;
 
-export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
+const getDownloadUrl = (os: string, platform: string) => {
+  if (os === "mac" && platform === "apple") {
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Lz71aznKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe";
+  }
+  if (os === "windows") {
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7ilBGQiKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5";
+  }
+  return "";
+};
+
+export const DownloadForm = ({
+  os,
+  platform,
+}: {
+  os: string;
+  platform: string;
+}) => {
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const getCanDownload = (os: string, platform: string) => {
+    if (os === "mac" && platform === "apple") {
+      return true;
+    }
+
+    if (os === "windows") {
+      return true;
+    }
+
+    return false;
+  };
+
+  const canDownload = useMemo(
+    () => getCanDownload(os, platform),
+    [os, platform]
+  );
 
   const form = useForm<FormData>({
     resolver: zodResolver(downloadFormSchema),
@@ -55,8 +88,7 @@ export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
         });
 
         if (result.success && canDownload) {
-          const downloadUrl =
-            "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Lz71aznKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe";
+          const downloadUrl = getDownloadUrl(os, platform);
           window.location.href = downloadUrl;
         }
 
@@ -121,14 +153,14 @@ export const DownloadForm = ({ canDownload }: { canDownload: boolean }) => {
           {response && (
             <div
               className={`p-3 rounded-md text-sm ${
-                !response.success
+                response.success
                   ? "bg-green-50  border border-green-200"
                   : "bg-red-50 text-red-800 border border-red-200"
               }`}
             >
-              {!response.success ? (
+              {response.success ? (
                 <div className="flex items-center gap-2">
-                  <span data-success={!response.success}>
+                  <span data-success={response.success}>
                     Here is the tutorial video to install the app.
                   </span>
                   <Link
