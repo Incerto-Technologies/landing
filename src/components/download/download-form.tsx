@@ -45,9 +45,11 @@ const getDownloadUrl = (os: string, platform: string) => {
 export const DownloadForm = ({
   os,
   platform,
+  setShowDialog,
 }: {
   os: string;
   platform: string;
+  setShowDialog: (show: boolean) => void;
 }) => {
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
@@ -96,6 +98,7 @@ export const DownloadForm = ({
 
         if (result.success) {
           form.reset();
+          setShowDialog(false);
         }
       } catch (error) {
         console.error("Form submission error:", error);
@@ -104,7 +107,9 @@ export const DownloadForm = ({
           message: "An unexpected error occurred. Please try again.",
         });
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 4000);
       }
     });
   };
@@ -180,7 +185,9 @@ export const DownloadForm = ({
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading
-              ? "Submitting..."
+              ? canDownload
+                ? "Downloading..."
+                : "Submitting..."
               : canDownload
               ? "Download"
               : "Join the waitlist"}

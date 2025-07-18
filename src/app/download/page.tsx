@@ -344,6 +344,7 @@ export default function DownloadPage() {
               <DownloadForm
                 os={downloadInfo?.platform || ""}
                 platform={downloadInfo?.architecture || ""}
+                setShowDialog={setShowDialog}
               />
             </div>
           </div>
