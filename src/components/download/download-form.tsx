@@ -81,9 +81,9 @@ export const DownloadForm = ({
   });
 
   const onSubmit = async (data: FormData) => {
+    setLoading(true);
     startTransition(async () => {
       try {
-        setLoading(true);
         const result = await createDownloadRequest({
           email: data.email,
           mobile: data.mobile || "",
@@ -99,6 +99,8 @@ export const DownloadForm = ({
         if (result.success) {
           form.reset();
           setShowDialog(false);
+        } else {
+          setLoading(false);
         }
       } catch (error) {
         console.error("Form submission error:", error);
@@ -106,10 +108,10 @@ export const DownloadForm = ({
           success: false,
           message: "An unexpected error occurred. Please try again.",
         });
+        setLoading(false);
       } finally {
         setTimeout(() => {
           setLoading(false);
-          setShowDialog(false);
         }, 4000);
       }
     });
