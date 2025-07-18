@@ -137,7 +137,11 @@ const Hero = () => {
             </div>
 
             <div className="p-6">
-              <DownloadForm os={os} platform={architecture} />
+              <DownloadForm
+                os={os}
+                platform={architecture}
+                setShowDialog={setShowDownloadDialog}
+              />
             </div>
           </div>
         </div>

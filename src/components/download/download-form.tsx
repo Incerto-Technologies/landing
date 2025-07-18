@@ -109,6 +109,7 @@ export const DownloadForm = ({
       } finally {
         setTimeout(() => {
           setLoading(false);
+          setShowDialog(false);
         }, 4000);
       }
     });
