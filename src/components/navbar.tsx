@@ -18,6 +18,10 @@ const NAV_ITEMS = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+const RIGHT_NAV_ITEMS = [
+  { label: "What is Real Co-Pilot?", href: "/real-co-pilot-for-databases" },
+];
+
 export function Navbar() {
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
   const { resolvedTheme } = useTheme();
@@ -40,7 +44,7 @@ export function Navbar() {
 
         {/* Navigation - Centered */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.filter(item => item.label !== "Blog").map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -53,6 +57,15 @@ export function Navbar() {
 
         {/* CTA Button and Theme Toggle - Right Aligned */}
         <div className="hidden md:flex items-center gap-4">
+          {RIGHT_NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
           <ModeToggle />
           <ContactBtn className="text-xs" href="/download">
             All Downloads
@@ -107,7 +120,7 @@ export function Navbar() {
 
       {showMobileHeaderNav && (
         <MobileNavbar
-          links={NAV_ITEMS}
+          links={[...NAV_ITEMS, ...RIGHT_NAV_ITEMS]}
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
           <div className="flex items-center gap-4">
