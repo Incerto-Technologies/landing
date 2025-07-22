@@ -19,15 +19,16 @@ import { z } from "zod";
 import { Button } from "../ui/button";
 import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   mobile: z
     .string()
-    .min(10, "Please enter a valid 10 digit mobile number")
-    .refine((value) => (value ? /^\d{10}$/.test(value) : true), {
-      message: "Please enter a valid 10 digit mobile number",
-    }),
+    .refine(
+      (value) => (value ? isValidPhoneNumber(value) : true),
+      "Please enter a valid mobile number"
+    ),
 });
 
 type FormData = z.infer<typeof downloadFormSchema>;
@@ -147,10 +148,12 @@ export const DownloadForm = ({
               <FormItem>
                 <FormLabel>Mobile</FormLabel>
                 <FormControl>
-                  <Input
+                  <PhoneInput
                     {...field}
                     placeholder="Your mobile number"
                     disabled={isPending}
+                    international
+                    defaultCountry="IN"
                   />
                 </FormControl>
                 <FormMessage />
