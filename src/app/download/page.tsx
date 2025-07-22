@@ -32,7 +32,7 @@ export default function DownloadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 relative overflow-hidden py-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:bg-gradient-to-br dark:from-black dark:via-neutral-900 dark:to-neutral-950 relative overflow-hidden py-10">
       {/* Floating Elements Background */}
       <div className="absolute inset-0">
         {[...Array(40)].map((_, i) => (
@@ -320,7 +320,7 @@ export default function DownloadPage() {
       {/* Download Form Dialog */}
       {showDialog && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-card rounded-2xl shadow-2xl w-full max-w-lg border">
+          <div className="bg-white dark:bg-black rounded-2xl shadow-2xl w-full max-w-lg border">
             <div className="flex items-center justify-between p-6 border-b">
               <div>
                 <h3 className="text-lg font-semibold text-card-foreground">

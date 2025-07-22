@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import VideoWithHighlights from "./ui/video-with-highlight";
 import VideoModal from "./ui/video-modal";
 import { ArrowRight, Play } from "lucide-react";
+import { useVideoProvider } from "./ui/video-provider";
 
 export type Tab = {
   label: string;
@@ -25,9 +26,9 @@ export type Tab = {
 
 const TABS: Tab[] = [
   {
-    label: "AI Remediation",
+    label: "Detect & Solve Production Issues",
     slug: "remediation",
-    flow: ["Analyze", "Observe", "Remediate", "Fixed"],
+    flow: ["Determintic Alerts", "Observe", "Remediate with AI", "Fixed"],
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
@@ -48,7 +49,7 @@ const TABS: Tab[] = [
   },
 
   {
-    label: "Query Optimizer",
+    label: "Detect and Optimize Query Performance",
     slug: "query-optimizer",
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4",
@@ -69,7 +70,7 @@ const TABS: Tab[] = [
     ),
   },
   {
-    label: "Deep Research",
+    label: "Text to SQL",
     slug: "deep-research",
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4",
@@ -154,6 +155,17 @@ const TabsWithHighlightsContent = () => {
   );
   const Panel: any = activeTab?.panel ?? null;
 
+  // Use VideoProvider context
+  const { getVideoElement } = useVideoProvider();
+  const videoKeyMap: Record<string, string> = {
+    remediation: "remediation",
+    "query-optimizer": "query-optimization",
+    "deep-research": "deep-research",
+    "sql-editor": "sql-editor",
+  };
+  const videoKey = videoKeyMap[activeTab.slug];
+  const preloadedVideo = videoKey ? getVideoElement(videoKey) : null;
+
   return (
     <div ref={containerRef} className={cn("relative h-[200vh]")}>
       <div className={cn("sticky top-24 flex flex-col items-center pt-10")}>
@@ -198,25 +210,35 @@ const TabsWithHighlightsContent = () => {
               className="w-full max-w-6xl mx-auto overflow-hidden bg-default lg:order-last"
               contentClassName="aspect-video border overflow-hidden rounded-lg"
             >
-              {isInView && (
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeTab.label}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 0.1, delay: 0.2 },
-                    }}
-                    exit={{ opacity: 0, transition: { duration: 0.05 } }}
-                    className="relative h-full w-full max-w-full"
-                  >
-                    <Panel
-                      key={resolvedTheme?.includes("dark")}
-                      isDark={resolvedTheme?.includes("dark")}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab.label}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.1, delay: 0.2 },
+                  }}
+                  exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                  className="relative h-full w-full max-w-full"
+                >
+                  {/* Use preloaded video if available */}
+                  {videoKey && preloadedVideo ? (
+                    <video
+                      key={videoKey}
+                      src={preloadedVideo.src}
+                      poster={preloadedVideo.poster}
+                      style={{ display: "block", width: "100%", height: "100%" }}
+                      controls={false}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
                     />
-                  </motion.div>
-                </AnimatePresence>
-              )}
+                  ) : (
+                    Panel && <Panel key={resolvedTheme?.includes("dark")} isDark={resolvedTheme?.includes("dark")} />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </BrowserFrame>
           </div>
         </div>

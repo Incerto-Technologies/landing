@@ -67,7 +67,7 @@ const faqs = [
 export function FAQSection() {
   return (
     <SectionContainer>
-      <h3 className="mb-12 text-center text-2xl font-semibold text-gray-900">
+      <h3 className="mb-12 text-center text-2xl font-semibold text-foreground">
         Frequently Asked Questions
       </h3>
       <Accordion type="single" collapsible className="w-full">
@@ -81,9 +81,9 @@ export function FAQSection() {
         ))}
       </Accordion>
       <div className="mt-12 text-center">
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Still have questions?{" "}
-          <a href="/contact" className="text-green-600 hover:text-green-700">
+          <a href="/contact" className="text-primary hover:text-primary/80">
             Contact Us
           </a>{" "}
           now!
