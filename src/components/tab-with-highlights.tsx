@@ -28,7 +28,7 @@ const TABS: Tab[] = [
   {
     label: "Detect & Solve Production Issues",
     slug: "remediation",
-    flow: ["Determintic Alerts", "Observe", "Remediate with AI", "Fixed"],
+    flow: ["100+ problems are checked regularly by Incerto agent (non-AI) and corresponding verified solutions are run with AI. Prevents production issues before they impact users. These problem vary from inefficient query to complete cluster failiure.",],
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
@@ -51,6 +51,7 @@ const TABS: Tab[] = [
   {
     label: "Detect and Optimize Query Performance",
     slug: "query-optimizer",
+    flow: ["Slow queries are detected and optimized through human in loop AI workflow specific to different DBMSes"],
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
@@ -70,8 +71,9 @@ const TABS: Tab[] = [
     ),
   },
   {
-    label: "Text to SQL",
+    label: "Text to Task",
     slug: "deep-research",
+    flow: ["Access to best of LLM's intelligence with precise and rich context, solving any problem or completing any task"],
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
@@ -93,6 +95,7 @@ const TABS: Tab[] = [
   {
     label: "SQL Editor",
     slug: "sql-editor",
+    flow: ["Feature rich SQL Editor with AI assistance, complete text to SQL, and more"],
     video:
       "https://res.cloudinary.com/diin3us70/video/upload/v1751788647/sql-editor_c2o10v.mp4",
     panel: ({ isDark }: { isDark: boolean }) => (
