@@ -71,10 +71,9 @@ At its core, Incerto is a **Context Engine built specifically for databases**.
 
 We'll dive into the "Internals of Incerto" in our next blog post.
 
-In the meantime, feel free to reach out with any questions.
+In the meantime, feel free to reach out with any questions. I am available at [LinkedIn](https://www.linkedin.com/in/anurag-pandey-5a11ba113/).
 
 `;
-
 
 export default function RealCoPilotPage() {
   return (
