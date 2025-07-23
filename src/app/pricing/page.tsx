@@ -100,7 +100,7 @@ export default function PricingPage() {
   };
 
   const getDownloadButtonText = () => {
-    if (os === "mac") return "Download for macOS";
+    if (os === "mac") return "Download for MacOS";
     if (os === "windows") return "Download for Windows";
     if (os === "linux") return "Download for Linux";
     return "Download Now";
