@@ -28,23 +28,18 @@ const Hero = () => {
   }, [os]);
 
   return (
-    <div className="relative overflow-hidden pt-32">
-      {/* Gradient Background */}
-      <div className="absolute inset-x-0 top-0 h-[calc(100vh-200px)] bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 w-3/4 mx-auto rounded-3xl mt-16" />
-      
+    <div className="relative overflow-hidden pt-16">
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-20 pb-20">
-        {/* Header Section with Gradient Background */}
-        <div className="mb-16">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pb-20">
+        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 p-12 sm:p-16 md:p-20 lg:p-28 pb-32 sm:pb-40 md:pb-48 lg:pb-56">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 pt-8">
             The AI Database Co-Pilot
           </h1>
           <p className="text-white text-lg md:text-xl mb-8 max-w-3xl mx-auto">
             Knows your database. Fixes all problems. No more manual work.
           </p>
-          
           {/* CTA Buttons */}
-          <div className="flex items-center justify-center gap-4 flex-wrap">
+          <div className="flex items-center justify-center gap-4 flex-wrap relative z-30">
             <button
               className={cn(
                 "flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 transition-colors"
@@ -68,9 +63,8 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-
-        {/* Main Visual - Co-Pilot Diagram */}
-        <div className="w-full max-w-4xl mx-auto">
+        {/* Main Visual - Co-Pilot Diagram, overlaps gradient */}
+        <div className="w-full max-w-4xl mx-auto -mt-20 sm:-mt-28 md:-mt-36 lg:-mt-44 relative z-10">
           <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
             <Image
               src="/co-pilot-diagram.png"
@@ -83,15 +77,13 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
       {/* Clients Section */}
-      <div className="space-y-5 relative overflow-hidden text-center bg-black w-full py-8">
+      <div className="space-y-5 relative overflow-hidden text-center bg-black w-full py-8 mt-8">
         <h3 className="text-xl md:text-2xl leading-tight font-medium text-white">
           Trusted By
         </h3>
         <Logos />
       </div>
-
       {/* Download Dialog */}
       {showDownloadDialog && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
@@ -109,7 +101,6 @@ const Hero = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-
             <div className="p-6">
               <DownloadForm
                 os={os}

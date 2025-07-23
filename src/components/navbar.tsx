@@ -6,8 +6,6 @@ import Image from "next/image";
 import MobileNavbar from "./mobile-navbar";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { ModeToggle } from "./ui/theme-toggle";
-import { useTheme } from "next-themes";
 import React from "react";
 
 const NAV_ITEMS = [
@@ -25,18 +23,6 @@ const RIGHT_NAV_ITEMS = [
 
 export function Navbar() {
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, systemTheme } = useTheme();
-  
-  // Ensure component is mounted before using theme
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  // Use systemTheme as fallback when resolvedTheme is not available yet
-  // Default to dark theme as per the layout configuration
-  const currentTheme = mounted ? (resolvedTheme || systemTheme || 'dark') : 'dark';
-  const logoSrc = currentTheme === "dark" ? "/incerto-white.png" : "/incerto.png";
   
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-[4px]">
@@ -44,8 +30,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            key={logoSrc} // Force re-render when logo source changes
-            src={logoSrc}
+            src="/incerto-white.png"
             alt="Incerto Logo"
             className="h-full w-auto"
             width={128}
@@ -67,7 +52,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button and Theme Toggle - Right Aligned */}
+        {/* CTA Button - Right Aligned */}
         <div className="hidden md:flex items-center gap-4">
           {RIGHT_NAV_ITEMS.map((item) => (
             <Link
@@ -78,7 +63,6 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <ModeToggle />
           <ContactBtn className="text-xs" href="/download">
             All Downloads
           </ContactBtn>
@@ -136,7 +120,6 @@ export function Navbar() {
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
           <div className="flex items-center gap-4">
-            <ModeToggle />
             <ContactBtn className="text-xs" href="/download">
               All Downloads
             </ContactBtn>
