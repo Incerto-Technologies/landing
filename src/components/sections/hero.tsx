@@ -31,7 +31,7 @@ const Hero = () => {
     <div className="relative overflow-hidden pt-16">
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pb-20">
-        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 p-12 sm:p-16 md:p-20 lg:p-28 pb-32 sm:pb-40 md:pb-48 lg:pb-56">
+        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 p-24 sm:p-28 md:p-32 lg:p-40 pb-48 sm:pb-56 md:pb-64 lg:pb-72">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 pt-8">
             The AI Database Co-Pilot
           </h1>
