@@ -49,7 +49,7 @@ const TABS: Tab[] = [
   },
 
   {
-    label: "Detect and Optimize Query Performance",
+    label: "Boost Query Performance",
     slug: "query-optimizer",
     flow: ["Slow queries are detected and optimized through human in loop AI workflow specific to different DBMSes"],
     video:

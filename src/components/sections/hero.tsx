@@ -1,11 +1,9 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import SectionContainer from "../layouts/section-container";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
-import RollUpText from "../ui/roll-up-words";
 import { getUserOS } from "@/lib/get-user-os";
 import { useMemo, useState } from "react";
 import { DownloadForm } from "../download/download-form";
@@ -30,73 +28,71 @@ const Hero = () => {
   }, [os]);
 
   return (
-    <SectionContainer className="pt-8 pb-10  overflow-hidden text-center flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
-      {/* Free Trial Banner */}
-      {/* Removed the Get Unlimited AI Credits banner */}
-
+    <div className="relative overflow-hidden pt-32">
+      {/* Gradient Background */}
+      <div className="absolute inset-x-0 top-0 h-[calc(100vh-200px)] bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 w-3/4 mx-auto rounded-3xl mt-16" />
+      
       {/* Hero Content */}
-      <h1 className="text-foreground text-4xl font-semibold md:font-medium md:text-6xl lg:text-7xl leading-tight md:leading-tight lg:leading-tight max-w-5xl">
-        <span className="text-primary font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text ">
-          AI Co-Pilot
-        </span>{" "}
-        <br />
-        <span className="text-foreground/90 font-medium">for</span> <br />
-        <RollUpText
-          animations={[
-            {
-              name: "Postgres",
-              image: "/postgres.png",
-            },
-            {
-              name: "ClickHouse",
-              image: "/clickhouse-badge-black.svg",
-            },
-          ]}
-        />
-      </h1>
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-20 pb-20">
+        {/* Header Section with Gradient Background */}
+        <div className="mb-16">
+          <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 pt-8">
+            The AI Database Co-Pilot
+          </h1>
+          <p className="text-white text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+            Knows your database. Fixes all problems. No more manual work.
+          </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <button
+              className={cn(
+                "flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 transition-colors"
+              )}
+              onClick={() => setShowDownloadDialog(true)}
+            >
+              <Image
+                src={imageUrl}
+                alt={os}
+                width={20}
+                height={20}
+                className={cn("w-4 h-4 object-contain", os === "mac" && "-mt-0.5")}
+              />
+              {downloadBtnText}
+            </button>
+            <Link
+              href="/contact"
+              className="px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-gray-300 transition-colors"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
 
-      {/* CTA Buttons */}
-      <div className="mt-10 flex items-center gap-3">
-        <button
-          className={cn(
-            buttonVariants({
-              variant: "primary",
-            }),
-            "flex items-center gap-2 capitalize"
-          )}
-          onClick={() => setShowDownloadDialog(true)}
-        >
-          <Image
-            src={imageUrl}
-            alt={os}
-            width={20}
-            height={20}
-            className={cn("w-3 object-contain", os === "mac" && "-mt-0.5")}
-          />
-          {downloadBtnText}
-        </button>
-        <Link
-          href="/contact"
-          className={cn(
-            buttonVariants({
-              variant: "primary",
-            }),
-            "bg-[var(--color-card)] text-[var(--color-foreground)] shadow-sm  ring-[var(--color-border)] transition-colors hover:bg-[var(--color-muted)]"
-          )}
-        >
-          Contact Us
-        </Link>
+        {/* Main Visual - Co-Pilot Diagram */}
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <Image
+              src="/co-pilot-diagram.png"
+              alt="AI Co-Pilot Interface"
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain"
+              priority
+            />
+          </div>
+        </div>
       </div>
 
       {/* Clients Section */}
-      <div className="space-y-5 relative overflow-hidden text-center mt-[10vh]">
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background" />
-
-        <h3 className="text-xl md:text-2xl leading-tight font-medium text-foreground">
+      <div className="space-y-5 relative overflow-hidden text-center bg-black w-full py-8">
+        <h3 className="text-xl md:text-2xl leading-tight font-medium text-white">
           Trusted By
         </h3>
         <Logos />
       </div>
+
+      {/* Download Dialog */}
       {showDownloadDialog && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white dark:bg-black rounded-2xl shadow-2xl w-full max-w-lg border">
@@ -105,11 +101,6 @@ const Hero = () => {
                 <h3 className="text-lg font-semibold text-card-foreground">
                   Download Incerto
                 </h3>
-                {/* <p className="text-sm text-muted-foreground mt-1">
-                  {downloadInfo?.platform}{" "}
-                  {downloadInfo?.architecture &&
-                    `(${downloadInfo.architecture})`}
-                </p> */}
               </div>
               <button
                 onClick={() => setShowDownloadDialog(false)}
@@ -129,7 +120,7 @@ const Hero = () => {
           </div>
         </div>
       )}
-    </SectionContainer>
+    </div>
   );
 };
 

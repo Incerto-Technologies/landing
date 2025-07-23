@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ui/theme-toggle";
 import { useTheme } from "next-themes";
+import React from "react";
 
 const NAV_ITEMS = [
   { label: "Features", href: "/#features" },
@@ -24,9 +25,18 @@ const RIGHT_NAV_ITEMS = [
 
 export function Navbar() {
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
-  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, systemTheme } = useTheme();
   
-  const logoSrc = resolvedTheme === "dark" ? "/incerto-white.png" : "/incerto.png";
+  // Ensure component is mounted before using theme
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Use systemTheme as fallback when resolvedTheme is not available yet
+  // Default to dark theme as per the layout configuration
+  const currentTheme = mounted ? (resolvedTheme || systemTheme || 'dark') : 'dark';
+  const logoSrc = currentTheme === "dark" ? "/incerto-white.png" : "/incerto.png";
   
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-[4px]">
@@ -34,11 +44,13 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
+            key={logoSrc} // Force re-render when logo source changes
             src={logoSrc}
             alt="Incerto Logo"
             className="h-full w-auto"
             width={128}
             height={32}
+            priority
           />
         </Link>
 
