@@ -6,6 +6,8 @@ import Image from "next/image";
 import MobileNavbar from "./mobile-navbar";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { ModeToggle } from "./ui/theme-toggle";
+import { useTheme } from "next-themes";
 
 const NAV_ITEMS = [
   { label: "Features", href: "/#features" },
@@ -16,15 +18,23 @@ const NAV_ITEMS = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+const RIGHT_NAV_ITEMS = [
+  { label: "What is Real Co-Pilot?", href: "/real-co-pilot-for-databases" },
+];
+
 export function Navbar() {
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
+  const { resolvedTheme } = useTheme();
+  
+  const logoSrc = resolvedTheme === "dark" ? "/incerto-white.png" : "/incerto.png";
+  
   return (
-    <header className="sticky top-0 z-50 border-b border-[#DFDFDF] bg-[#FCFCFC]/90 backdrop-blur-[4px]">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-[4px]">
       <div className="mx-auto flex h-16 items-center justify-between lg:container px-6 lg:px-16 xl:px-20">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/incerto.png"
+            src={logoSrc}
             alt="Incerto Logo"
             className="h-full w-auto"
             width={128}
@@ -34,21 +44,31 @@ export function Navbar() {
 
         {/* Navigation - Centered */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.filter(item => item.label !== "Blog").map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-gray-900 transition-colors hover:text-gray-600"
+              className="text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* CTA Button - Right Aligned */}
-        <div className="hidden md:block">
+        {/* CTA Button and Theme Toggle - Right Aligned */}
+        <div className="hidden md:flex items-center gap-4">
+          {RIGHT_NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <ModeToggle />
           <ContactBtn className="text-xs" href="/download">
-            All downloads
+            All Downloads
           </ContactBtn>
         </div>
 
@@ -100,12 +120,15 @@ export function Navbar() {
 
       {showMobileHeaderNav && (
         <MobileNavbar
-          links={NAV_ITEMS}
+          links={[...NAV_ITEMS, ...RIGHT_NAV_ITEMS]}
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
-          <ContactBtn className="text-xs" href="/download">
-            All downloads
-          </ContactBtn>
+          <div className="flex items-center gap-4">
+            <ModeToggle />
+            <ContactBtn className="text-xs" href="/download">
+              All Downloads
+            </ContactBtn>
+          </div>
         </MobileNavbar>
       )}
     </header>

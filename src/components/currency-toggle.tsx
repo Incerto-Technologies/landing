@@ -34,8 +34,8 @@ export function CurrencyToggle({ onCurrencyChange }: CurrencyToggleProps) {
           onClick={() => handleCurrencyChange(currency)}
           className={`px-4 py-2 rounded-full md:cursor-pointer text-sm font-medium transition-all ${
             selectedCurrency === currency
-              ? 'bg-primary text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
           }`}
         >
           {currency}

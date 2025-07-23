@@ -67,7 +67,7 @@ const Feedback = () => {
   return (
     <SectionContainer className=" relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white" />
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background" />
 
         <h3 className="mb-8 text-2xl text-center  font-medium md:text-4xl max-w-[300px] sm:max-w-none mx-auto  ">
         What clients say about Incerto?
@@ -90,10 +90,10 @@ const Feedback = () => {
               ].map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-none w-[350px] h-fit  bg-white rounded-2xl border border-[#D6D3D1] p-6 flex flex-col gap-3 "
+                  className="flex-none w-[350px] h-fit  bg-card rounded-2xl border border-border p-6 flex flex-col gap-3 "
                 >
                   <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 rounded-full border border-[#393939] overflow-hidden">
+                    <div className="relative w-10 h-10 rounded-full border border-border overflow-hidden">
                       <Image
                         src={testimonial.profile}
                         alt={testimonial.name}
@@ -111,7 +111,7 @@ const Feedback = () => {
                             href={testimonial.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#898989] hover:text-[#171717] transition-colors"
+                            className="text-muted-foreground hover:text-foreground transition-colors"
                         >
                           <svg
                             className="w-4 h-4"
@@ -132,7 +132,7 @@ const Feedback = () => {
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-card-foreground">
                     {testimonial.message}
                   </p>
                 </div>
