@@ -27,7 +27,7 @@ Let's understand what we should expect from the best AI-powered Co-Pilot for dat
 
 ## The Best of Humans Can't Be Replaced by Incerto (Yet)
 
-If you have a responsible, smart, exteremely knowledgeable teamate managing your databases, Incerto is not a replacement for them yet.
+If you have a responsible, smart, extremely knowledgeable teamate managing your databases, Incerto is not a replacement for them yet.
 They bring **context** and **agency** - qualities that are hard to replicate.
 
 > Otherwise, we would call it a "Pilot" instead of a "Co-Pilot."
