@@ -20,9 +20,50 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Incerto - Agentic AI That Solves All Database Problems",
+  title: {
+    default: "Incerto - Agentic AI That Solves All Database Problems",
+    template: "%s | Incerto"
+  },
   description:
-    "Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly detect anomalies, identify root causes, and take corrective actions.",
+    "Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly detect anomalies, identify root causes, and take corrective actions with our AI-powered database management solution.",
+  keywords: "database monitoring, AI database management, database performance, database optimization, real-time monitoring, database insights, database co-pilot, database automation",
+  authors: [{ name: "Incerto Team" }],
+  creator: "Incerto",
+  publisher: "Incerto",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://incerto.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Incerto - Agentic AI That Solves All Database Problems",
+    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    url: "https://incerto.com",
+    siteName: "Incerto",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Incerto - Agentic AI That Solves All Database Problems",
+    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    creator: "@incerto",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({

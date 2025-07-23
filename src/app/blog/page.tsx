@@ -1,6 +1,24 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog - Real Co-Pilot for Databases | Incerto",
+  description: "Learn about Incerto's AI-powered database co-pilot technology. Discover how our agentic AI works alongside human database administrators to solve complex database problems efficiently.",
+  keywords: "database co-pilot, AI database assistant, database automation, database management blog, incerto blog, database AI technology",
+  openGraph: {
+    title: "Blog - Real Co-Pilot for Databases | Incerto",
+    description: "Learn about Incerto's AI-powered database co-pilot technology and how it works alongside human administrators.",
+    type: "website",
+    url: "https://incerto.com/blog",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog - Real Co-Pilot for Databases | Incerto",
+    description: "Learn about Incerto's AI-powered database co-pilot technology and how it works alongside human administrators.",
+  },
+};
 
 const markdown = `
 # What is Real Co-Pilot for Databases

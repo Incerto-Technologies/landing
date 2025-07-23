@@ -1,6 +1,25 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "What is a Real Database Co-Pilot? | Incerto AI Database Management",
+  description: "Discover what makes a real database co-pilot. Learn how Incerto's AI-powered context engine maintains database context across multiple DBMS and solves production issues intelligently.",
+  keywords: "database co-pilot, AI database management, database context engine, database automation, production database issues, multi-DBMS management",
+  openGraph: {
+    title: "What is a Real Database Co-Pilot? | Incerto AI Database Management",
+    description: "Discover what makes a real database co-pilot. Learn how Incerto's AI-powered context engine maintains database context across multiple DBMS.",
+    type: "website",
+    url: "https://incerto.com/real-co-pilot-for-databases",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What is a Real Database Co-Pilot? | Incerto AI Database Management",
+    description: "Discover what makes a real database co-pilot. Learn how Incerto's AI-powered context engine maintains database context across multiple DBMS.",
+  },
+};
+
 const markdown = `
 # What is a Real Database Co-Pilot ?
 
