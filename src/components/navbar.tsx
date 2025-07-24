@@ -11,6 +11,7 @@ import React from "react";
 const NAV_ITEMS = [
   { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blogs" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
   // { label: "Download", href: "/download" },
@@ -41,7 +42,7 @@ export function Navbar() {
 
         {/* Navigation - Centered */}
         <nav className="hidden md:flex items-center gap-10 flex-1 justify-center">
-          {NAV_ITEMS.filter(item => item.label !== "Blog").map((item) => (
+          {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}

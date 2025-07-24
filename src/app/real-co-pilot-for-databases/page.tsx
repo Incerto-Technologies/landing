@@ -21,57 +21,59 @@ export const metadata: Metadata = {
 };
 
 const markdown = `
-# What is a Real Database Co-Pilot ?
+# What is a Real Database Co-Pilot?
 
-Let understand what can we expect from the best AI Powered Co-Pilot for Databases. And where does Incerto stand ?
+Let's understand what we should expect from the best AI-powered Co-Pilot for databases. And where does Incerto stands today.
 
-## Best of Human's can't be replaced by Incerto (as of now)
+## The Best of Humans Can't Be Replaced by Incerto (Yet)
 
-If you have a responsible, smart, exteremely knowledgeable teamate looking after your databases, Incerto can't be a replacement for them.
-They have Context and Agency which in unparalleled.
+If you have a responsible, smart, extremely knowledgeable teamate managing your databases, Incerto is not a replacement for them yet.
+They bring **context** and **agency** - qualities that are hard to replicate.
 
->"Otherwise, we would call it "Pilot" instead of Co-Pilot"
+> Otherwise, we would call it a "Pilot" instead of a "Co-Pilot."
 
-![Incerto on 16:30 22 July 2025](/co-pilot-diagram.png)
+![Incerto as on 22 July 2025](/co-pilot-diagram.png)
 
-## Limitations of being a human
+## The Limitations of Being Human
 
-There are limitations to being a human : 
-- You can't track everything happening in the database.
-- You take time to write SQL queires. 
-- You can't store all the context you need to solve a problem. 
-- You can't master all the DBMS your organisation uses. 
+Despite their strengths, humans have certain limitations:
 
-## What is the Hardest thing about DBMS in production ?
+- You can't track everything happening inside a database.
+- Writing SQL queries takes time.
+- You can't store all the context needed to solve complex issues.
+- You can't master every DBMS your organization uses.
 
-Lot of context. A typical organisation uses 3-4 DBMS in tandem. Running different types of workloads. Larger the scale, more the context and thus larger team managing and interacting with it.
+## What's the Hardest Part About DBMS in Production?
 
->"Real Co-Pilot must maintain all the context, across DBMSes"
+**Context Overload.** Most organizations use 3-4 different DBMSs simultaneously, each running distinct workloads. The larger the scale, the more context is needed, and the more people are required to manage it.
 
-## Expertise in DBMS is hard to come by
+> "A real Co-Pilot must maintain all context, across DBMSs."
 
-You need to have worked and solved multiple productions issues to be an expert in DBMS. That is why we often offload it to vendors, with expertise.
+## DBMS Expertise is Rare
 
->"Real Co-Pilot must be able to solve any production issue, across DBMSes"
+Becoming an expert requires hands-on experience solving real production issues. That's why many teams rely on external vendors with deep domain expertise.
 
-## Intelligence is required to optimize and solve unkown problems
+> "A real Co-Pilot must be able to solve any production issue, across DBMSs."
 
-We all can agree here ?
+## Intelligence is Required to Optimize and Solve Unknown Problems
 
->"Real Co-Pilot must be able to optimize and solve unkown problems"
+We can all agree on this:
 
-## What does Incerto do ?
+> "A real Co-Pilot must be able to optimize and solve unknown problems."
 
->"Incerto has all the context, across DBMSes, and uses AI to help solve problems and complete tasks"
+## What Does Incerto do?
 
-Center of it is a **Context Engine made for Databases**
+> "Incerto has the ability to fetch complete context across multiple DBMSs and use AI agents to solve problems and complete tasks."
 
-![Incerto Context Engine Diagram as of 16:30 22 July 2025](/incerto_context_engine.png)
+At its core, Incerto is a **Context Engine built specifically for databases**.
 
-We will keep the details of "Internals of Incerto" for the next blog post. Feel free to reach out to us if you have any questions. 
+![Incerto Context Engine Diagram as of 22 July 2025](/incerto_context_engine.png)
+
+We'll dive into the "Internals of Incerto" in our next blog post.
+
+In the meantime, feel free to reach out with any questions. I am available at [LinkedIn](https://www.linkedin.com/in/anurag-pandey-5a11ba113/).
 
 `;
-
 
 export default function RealCoPilotPage() {
   return (
