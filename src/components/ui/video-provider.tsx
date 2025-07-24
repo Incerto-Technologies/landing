@@ -70,8 +70,12 @@ export const VideoProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         document.body.appendChild(vid); // Keep in DOM for caching
       }
     });
+    
+    // Store a reference to the current videos for cleanup
+    const currentVideos = {...videoRefs.current};
+    
     return () => {
-      Object.values(videoRefs.current).forEach((vid) => {
+      Object.values(currentVideos).forEach((vid) => {
         if (vid && vid.parentNode) vid.parentNode.removeChild(vid);
       });
     };
