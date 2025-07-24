@@ -1,7 +1,7 @@
 ---
 title: What is a Real Database Co-Pilot?
 date: July 24, 2025
-image: /co-pilot-diagram.png
+image: /incerto_context_engine.png
 excerpt: Discover what makes a real database co-pilot. Learn how Incerto's AI-powered context engine maintains database context across multiple DBMS and solves production issues intelligently.
 ---
 
