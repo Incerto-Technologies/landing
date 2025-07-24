@@ -3,6 +3,9 @@ import SectionContainer from "../layouts/section-container";
 import TabsWithHighlights, {
   MobileTabsWithHighlights,
 } from "../tab-with-highlights";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const Features: React.FC = () => (
   <SectionContainer className="text-center max-md:px-0" id="features">
@@ -14,6 +17,16 @@ const Features: React.FC = () => (
     </div>
     <div className="md:hidden block">
       <MobileTabsWithHighlights />
+    </div>
+    
+    {/* Features Page Button */}
+    <div className="mt-12">
+      <Button size="lg" asChild>
+        <Link href="/features">
+          View All Features
+          <ArrowRight className="ml-2 w-4 h-4" />
+        </Link>
+      </Button>
     </div>
   </SectionContainer>
 );

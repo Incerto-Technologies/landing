@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 import React from "react";
 
 const NAV_ITEMS = [
-  { label: "Features", href: "/#features" },
+  { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
