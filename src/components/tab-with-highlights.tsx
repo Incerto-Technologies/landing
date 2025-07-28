@@ -124,6 +124,108 @@ const TABS: Tab[] = [
   },
 ];
 
+// New Sticky Scroll Component for Desktop
+const StickyScrollWithHighlights = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="relative flex flex-col gap-8 lg:gap-12 items-center">
+          <div className="w-full h-[600px] animate-pulse bg-muted rounded-lg"></div>
+        </div>
+      }
+    >
+      <StickyScrollWithHighlightsContent />
+    </Suspense>
+  );
+};
+
+const StickyScrollWithHighlightsContent = () => {
+  const { resolvedTheme } = useTheme();
+  const [activeTabSlug, setActiveTabSlug] = useState(TABS[0].slug);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true });
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const newIndex = Math.min(
+      Math.floor(latest * TABS.length),
+      TABS.length - 1
+    );
+    if (TABS[newIndex] && TABS[newIndex].slug !== activeTabSlug) {
+      setActiveTabSlug(TABS[newIndex].slug);
+    }
+  });
+
+  const activeTab = useMemo(
+    () => TABS.find((tab) => tab.slug === activeTabSlug) || TABS[0],
+    [activeTabSlug]
+  );
+
+  return (
+    <div ref={containerRef} className="space-y-16">
+      {/* Threshold element used to load video 500px before reaching the video component */}
+      <div ref={sectionRef} className="absolute -top-[500px] not-sr-only" />
+
+      {TABS.map((tab, index) => (
+        <div key={tab.slug} className="space-y-8">
+          <div className="text-center space-y-4">
+            <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+              {tab.label}
+            </h3>
+
+            {/* Flow Steps */}
+            {tab.flow && (
+              <div className="space-y-3">
+                {tab.flow.map((step, stepIndex) => (
+                  <div
+                    key={stepIndex}
+                    className="p-4 bg-muted/30 rounded-xl border border-border/30 max-w-4xl mx-auto"
+                  >
+                    <span className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      {step}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Video Section */}
+          {tab.video && (
+            <div className="w-full px-6 md:px-0">
+              <BrowserFrame
+                className="w-full max-w-6xl mx-auto overflow-hidden bg-default"
+                contentClassName="aspect-video border overflow-hidden rounded-lg"
+              >
+                <video
+                  className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
+                  height="100%"
+                  key={tab.video}
+                  width="100%"
+                  loop
+                  muted
+                  autoPlay
+                  controls={false}
+                  playsInline
+                  poster={`/features/${tab.slug}.png`}
+                >
+                  <source src={tab.video} type="video/mp4" />
+                </video>
+              </BrowserFrame>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Original Tabs Component (kept for reference but not used in desktop)
 const TabsWithHighlights = () => {
   return (
     <Suspense
@@ -390,4 +492,4 @@ export const MobileTabsWithHighlights = () => {
   );
 };
 
-export default TabsWithHighlights;
+export default StickyScrollWithHighlights;
