@@ -202,20 +202,38 @@ const StickyScrollWithHighlightsContent = () => {
                 className="w-full max-w-6xl mx-auto overflow-hidden bg-default"
                 contentClassName="aspect-video border overflow-hidden rounded-lg"
               >
-                <video
-                  className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
-                  height="100%"
-                  key={tab.video}
-                  width="100%"
-                  loop
-                  muted
-                  autoPlay
-                  controls={false}
-                  playsInline
-                  poster={`/features/${tab.slug}.png`}
-                >
-                  <source src={tab.video} type="video/mp4" />
-                </video>
+                <div className="relative w-full h-full">
+                  {/* Poster Image - shown while video loads */}
+                  <img
+                    src={`/features/${tab.slug}.png`}
+                    alt={`${tab.label} preview`}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      // Fallback to jpg if png doesn't exist
+                      const target = e.target as HTMLImageElement;
+                      if (target.src.endsWith(".png")) {
+                        target.src = target.src.replace(".png", ".jpg");
+                      }
+                    }}
+                  />
+                  <video
+                    className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
+                    height="100%"
+                    key={tab.video}
+                    width="100%"
+                    loop
+                    muted
+                    autoPlay
+                    controls={false}
+                    playsInline
+                    poster={`/features/${tab.slug}.png`}
+                    onLoadStart={() => {
+                      // Video started loading, poster will be hidden automatically
+                    }}
+                  >
+                    <source src={tab.video} type="video/mp4" />
+                  </video>
+                </div>
               </BrowserFrame>
             </div>
           )}
@@ -456,23 +474,41 @@ export const MobileTabsWithHighlights = () => {
                 className="relative group cursor-pointer rounded-lg overflow-hidden"
                 onClick={() => openModal(tab)}
               >
-                <video
-                  className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
-                  height="100%"
-                  key={tab.video}
-                  width="100%"
-                  loop
-                  muted
-                  autoPlay
-                  controls={false}
-                  playsInline
-                  poster={`/features/${tab.slug}.png`}
-                >
-                  <source src={tab.video} type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-transparent group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
-                    <Play className="w-8 h-8 text-black ml-1" />
+                <div className="relative w-full h-full">
+                  {/* Poster Image - shown while video loads */}
+                  <img
+                    src={`/features/${tab.slug}.png`}
+                    alt={`${tab.label} preview`}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      // Fallback to jpg if png doesn't exist
+                      const target = e.target as HTMLImageElement;
+                      if (target.src.endsWith(".png")) {
+                        target.src = target.src.replace(".png", ".jpg");
+                      }
+                    }}
+                  />
+                  <video
+                    className="relative z-10 block w-full h-full reduce-motion:hidden rounded-lg"
+                    height="100%"
+                    key={tab.video}
+                    width="100%"
+                    loop
+                    muted
+                    autoPlay
+                    controls={false}
+                    playsInline
+                    poster={`/features/${tab.slug}.png`}
+                    onLoadStart={() => {
+                      // Video started loading, poster will be hidden automatically
+                    }}
+                  >
+                    <source src={tab.video} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-transparent group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                      <Play className="w-8 h-8 text-black ml-1" />
+                    </div>
                   </div>
                 </div>
               </div>
