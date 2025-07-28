@@ -42,7 +42,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap relative z-30 px-2">
             <button
               className={cn(
-                "flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-gray-300 transition-colors w-full sm:w-auto text-sm sm:text-base"
+                "flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-white hover:text-black hover:shadow-md transition-colors w-full sm:w-auto text-sm sm:text-base"
               )}
               onClick={() => setShowDownloadDialog(true)}
             >
@@ -60,7 +60,7 @@ const Hero = () => {
             </button>
             <Link
               href="/contact"
-              className="px-4 sm:px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 transition-colors w-full sm:w-auto text-sm sm:text-base text-center"
+              className="px-4 sm:px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 hover:shadow-md transition-colors w-full sm:w-auto text-sm sm:text-base text-center"
             >
               Contact Us
             </Link>
