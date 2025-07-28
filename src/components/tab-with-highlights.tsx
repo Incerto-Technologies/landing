@@ -28,9 +28,11 @@ const TABS: Tab[] = [
   {
     label: "Detect & Solve Production Issues",
     slug: "remediation",
-    flow: ["100+ problems are checked regularly by Incerto agent (non-AI) and corresponding verified solutions are run with AI. Prevents production issues before they impact users. These problem vary from inefficient query to complete cluster failiure.",],
+    flow: [
+      "100+ problems are checked regularly by Incerto agent (non-AI) and corresponding verified solutions are run with AI. Prevents production issues before they impact users. These problem vary from inefficient query to complete cluster failiure.",
+    ],
     video:
-      "https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4",
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7i69CyaKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"remediation"}
@@ -51,9 +53,11 @@ const TABS: Tab[] = [
   {
     label: "Boost Query Performance",
     slug: "query-optimizer",
-    flow: ["Slow queries are detected and optimized through human in loop AI workflow specific to different DBMSes"],
+    flow: [
+      "Slow queries are detected and optimized through human in loop AI workflow specific to different DBMSes",
+    ],
     video:
-      "https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4",
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7LGwaJEnKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"query-optimization"}
@@ -73,9 +77,11 @@ const TABS: Tab[] = [
   {
     label: "Text to Task",
     slug: "deep-research",
-    flow: ["Access to best of LLM's intelligence with precise and rich context, solving any problem or completing any task"],
+    flow: [
+      "Access to best of LLM's intelligence with precise and rich context, solving any problem or completing any task",
+    ],
     video:
-      "https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4",
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7nNqpjgadVYe3EDhHObxpW1vIlstrKQafw2oj",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"deep-research"}
@@ -95,9 +101,11 @@ const TABS: Tab[] = [
   {
     label: "SQL Editor",
     slug: "sql-editor",
-    flow: ["Feature rich SQL Editor with AI assistance, complete text to SQL, and more"],
+    flow: [
+      "Feature rich SQL Editor with AI assistance, complete text to SQL, and more",
+    ],
     video:
-      "https://res.cloudinary.com/diin3us70/video/upload/v1751788647/sql-editor_c2o10v.mp4",
+      "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGED2vhtwzn7PHqYpkabNj2oW31dAt8lGgTZ",
     panel: ({ isDark }: { isDark: boolean }) => (
       <VideoWithHighlights
         key={"sql-editor"}
@@ -230,7 +238,11 @@ const TabsWithHighlightsContent = () => {
                       key={videoKey}
                       src={preloadedVideo.src}
                       poster={preloadedVideo.poster}
-                      style={{ display: "block", width: "100%", height: "100%" }}
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        height: "100%",
+                      }}
                       controls={false}
                       autoPlay
                       muted
@@ -238,7 +250,12 @@ const TabsWithHighlightsContent = () => {
                       playsInline
                     />
                   ) : (
-                    Panel && <Panel key={resolvedTheme?.includes("dark")} isDark={resolvedTheme?.includes("dark")} />
+                    Panel && (
+                      <Panel
+                        key={resolvedTheme?.includes("dark")}
+                        isDark={resolvedTheme?.includes("dark")}
+                      />
+                    )
                   )}
                 </motion.div>
               </AnimatePresence>
