@@ -7,6 +7,7 @@ import { Download, Sparkles, Gift, X, WatchIcon, Clock } from "lucide-react";
 import Image from "next/image";
 import { DownloadForm } from "@/components/download/download-form";
 import { UserArchitecture, UserOS } from "@/lib/get-user-os";
+import Link from "next/link";
 
 export default function DownloadPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<
@@ -32,25 +33,7 @@ export default function DownloadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 dark:bg-gradient-to-br dark:from-black dark:via-neutral-900 dark:to-neutral-950 relative overflow-hidden py-6 lg:py-10">
-      {/* Floating Elements Background */}
-      <div className="absolute inset-0">
-        {[...Array(40)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-gradient-to-r from-slate-200/30 to-gray-200/30 animate-pulse"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 10 + 5}px`,
-              height: `${Math.random() * 10 + 5}px`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="min-h-screen bg-black relative overflow-hidden py-6 lg:py-10">
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 lg:px-6">
         {/* Header */}
         <div className="text-center mb-8 lg:mb-16">
@@ -61,6 +44,23 @@ export default function DownloadPage() {
           <h1 className="text-4xl lg:text-7xl xl:text-9xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent mb-6 lg:mb-8 tracking-tight">
             Download
           </h1>
+          
+          {/* Security Message */}
+          <div className="max-w-2xl mx-auto p-4 lg:p-6 bg-green-950/20 dark:bg-green-950/30 backdrop-blur-sm rounded-xl border border-green-800/30 text-sm lg:text-base text-green-100 mb-4 lg:mb-6">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-green-400 text-xl">🛡️</span>
+              <div className="text-center">
+                <span className="font-semibold text-green-200">100% secure & private.</span> 
+                <span className="ml-1 text-green-100">Everything stays on your servers - we never see your data.</span>
+                <Link
+                  href="/blogs/safe-co-pilot"
+                  className="text-green-300 hover:text-green-200 hover:underline ml-2 font-medium transition-colors"
+                >
+                  Learn how we keep you safe →
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Platform Tabs */}

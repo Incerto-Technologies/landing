@@ -245,6 +245,22 @@ export const DownloadForm = ({
             </div>
           )}
 
+          <div className="p-3 lg:p-4 bg-slate-50 dark:bg-slate-900 rounded-md text-xs lg:text-sm text-slate-600 dark:text-slate-400 border">
+            <div className="flex items-start gap-2">
+              <span className="text-green-600 dark:text-green-400 font-medium">🔒</span>
+              <div>
+                <span className="font-medium">Completely air-gapped and secure.</span> 
+                <span className="ml-1">Our product runs entirely on-premise with no external data transmission.</span>
+                <Link
+                  href="/blogs/safe-co-pilot"
+                  className="text-blue-500 hover:underline ml-1 font-medium"
+                >
+                  Read more about security →
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <Button
             type="submit"
             className="w-full text-sm lg:text-base py-2 lg:py-3"
