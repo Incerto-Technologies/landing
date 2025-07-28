@@ -8,6 +8,7 @@ import TailwindIndicator from "@/components/tailwind-indicator";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Script from "next/script";
 import { VideoProvider } from "@/components/ui/video-provider";
+import { SessionProvider } from "@/components/providers/session-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,11 +23,12 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   title: {
     default: "Incerto - Agentic AI That Solves All Database Problems",
-    template: "%s | Incerto"
+    template: "%s | Incerto",
   },
   description:
     "Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly detect anomalies, identify root causes, and take corrective actions with our AI-powered database management solution.",
-  keywords: "database monitoring, AI database management, database performance, database optimization, real-time monitoring, database insights, database co-pilot, database automation",
+  keywords:
+    "database monitoring, AI database management, database performance, database optimization, real-time monitoring, database insights, database co-pilot, database automation",
   authors: [{ name: "Incerto Team" }],
   creator: "Incerto",
   publisher: "Incerto",
@@ -41,7 +43,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Incerto - Agentic AI That Solves All Database Problems",
-    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    description:
+      "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
     url: "https://incerto.com",
     siteName: "Incerto",
     type: "website",
@@ -50,7 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Incerto - Agentic AI That Solves All Database Problems",
-    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    description:
+      "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
     creator: "@incerto",
   },
   robots: {
@@ -86,19 +90,21 @@ export default function RootLayout({
         className={`${inter.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
         <NuqsAdapter>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <VideoProvider>
-              <Navbar />
-              {children}
-              <Footer />
-              <TailwindIndicator />
-            </VideoProvider>
-          </ThemeProvider>
+          <SessionProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <VideoProvider>
+                <Navbar />
+                {children}
+                <Footer />
+                <TailwindIndicator />
+              </VideoProvider>
+            </ThemeProvider>
+          </SessionProvider>
         </NuqsAdapter>
       </body>
     </html>

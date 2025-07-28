@@ -25,6 +25,8 @@ import PhoneInputWithCountrySelect, {
 } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import React from "react";
+import { signIn, useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
 const downloadFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -85,6 +87,8 @@ export const DownloadForm = ({
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const { data: session, status } = useSession();
 
   const getCanDownload = (os: string, platform: string) => {
     if (os === "mac" && platform === "apple") {
@@ -252,6 +256,23 @@ export const DownloadForm = ({
           </Button>
         </form>
       </Form>
+
+      <Button
+        variant="outline"
+        className="w-full"
+        onClick={() => {
+          signIn("google", {
+            callbackUrl: "/download",
+          });
+        }}
+      >
+        {status === "loading" ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          "Sign In with Google to download"
+        )}
+        {session?.user?.email}
+      </Button>
     </div>
   );
 };
