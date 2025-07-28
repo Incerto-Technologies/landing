@@ -31,7 +31,7 @@ const Hero = () => {
     <div className="relative overflow-hidden pt-16">
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pb-20">
-        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 p-24 sm:p-28 md:p-32 lg:p-40 pb-48 sm:pb-56 md:pb-64 lg:pb-72">
+        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 py-10 px-3 sm:p-28 md:p-32 lg:p-40 pb-48 sm:pb-56 md:pb-64 lg:pb-72">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 pt-8">
             The AI Database Co-Pilot
           </h1>
@@ -42,7 +42,7 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-4 flex-wrap relative z-30">
             <button
               className={cn(
-                "flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-gray-300 transition-colors"
+                "flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-gray-300 transition-colors w-full md:w-auto"
               )}
               onClick={() => setShowDownloadDialog(true)}
             >
@@ -51,20 +51,23 @@ const Hero = () => {
                 alt={os}
                 width={20}
                 height={20}
-                className={cn("w-4 h-4 object-contain", os === "mac" && "-mt-0.5")}
+                className={cn(
+                  "w-4 h-4 object-contain",
+                  os === "mac" && "-mt-0.5"
+                )}
               />
               {downloadBtnText}
             </button>
             <Link
               href="/contact"
-              className="px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 transition-colors"
+              className="px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 transition-colors w-full md:w-auto"
             >
               Contact Us
             </Link>
           </div>
         </div>
         {/* Main Visual - Co-Pilot Diagram, overlaps gradient */}
-        <div className="w-full max-w-4xl mx-auto -mt-20 sm:-mt-28 md:-mt-36 lg:-mt-44 relative z-10">
+        <div className="w-full max-w-4xl mx-auto -mt-36 sm:-mt-28 md:-mt-36 lg:-mt-44 relative z-10 px-3">
           <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
             <Image
               src="/co-pilot-diagram.png"
