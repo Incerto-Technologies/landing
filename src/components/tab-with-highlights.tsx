@@ -200,19 +200,19 @@ const TabsWithHighlightsContent = () => {
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-3 max-w-4xl mx-auto px-6">
             {activeTab?.flow &&
               activeTab?.flow.map((step, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">{step}</span>
-                  <ArrowRight
-                    className={cn(
-                      "w-4 h-4 text-primary/80",
-                      index === (activeTab?.flow?.length ?? 0) - 1
-                        ? "hidden"
-                        : ""
-                    )}
-                  />
+                <div
+                  key={index}
+                  className="flex items-center gap-3 text-center"
+                >
+                  <span className="text-sm md:text-base text-muted-foreground leading-relaxed text-center">
+                    {step}
+                  </span>
+                  {index < (activeTab?.flow?.length ?? 0) - 1 && (
+                    <ArrowRight className="w-4 h-4 text-muted-foreground/60 flex-shrink-0 hidden md:block" />
+                  )}
                 </div>
               ))}
           </div>
@@ -328,23 +328,21 @@ export const MobileTabsWithHighlights = () => {
         {TABS.map((tab) => (
           <div key={tab.slug} className="space-y-4">
             <div className="space-y-3">
-              <h4 className="text-lg font-medium text-foreground">
+              <h4 className="text-xl font-semibold text-foreground text-center">
                 {tab.label}
               </h4>
 
               {/* Flow Steps for Mobile */}
               {tab.flow && (
-                <div className="flex flex-wrap items-center justify-center gap-2">
+                <div className="space-y-3">
                   {tab.flow.map((step, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm px-2 py-1 bg-primary/10 text-primary rounded-md font-medium">
-                          {step}
-                        </span>
-                      </div>
-                      {index < tab.flow!.length - 1 && (
-                        <ArrowRight className="w-3 h-3 text-primary/60 flex-shrink-0" />
-                      )}
+                    <div
+                      key={index}
+                      className="p-4 bg-muted/30 rounded-xl border border-border/30"
+                    >
+                      <span className="text-sm text-muted-foreground leading-relaxed">
+                        {step}
+                      </span>
                     </div>
                   ))}
                 </div>
