@@ -19,6 +19,7 @@ import { useVideoProvider } from "./ui/video-provider";
 export type Tab = {
   label: string;
   slug: string;
+  poster: string;
   panel: React.FC<{ isDark: boolean }>;
   flow?: string[];
   video?: string;
@@ -31,6 +32,8 @@ const TABS: Tab[] = [
     flow: [
       "100+ problems are checked regularly by Incerto agent (non-AI) and corresponding verified solutions are run with AI. Prevents production issues before they impact users. These problem vary from inefficient query to complete cluster failiure.",
     ],
+
+    poster: `/features/ai-remediation.png`,
     video:
       "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7i69CyaKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5",
     panel: ({ isDark }: { isDark: boolean }) => (
@@ -40,7 +43,7 @@ const TABS: Tab[] = [
           title: "Incerto Remediation",
           sources: [
             {
-              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788657/ai-remediation_r5l5xn.mp4`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7i69CyaKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5`,
               type: "video/mp4",
             },
           ],
@@ -65,7 +68,7 @@ const TABS: Tab[] = [
           title: "Incerto Query Optimization",
           sources: [
             {
-              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788655/query-optimization_uba57z.mp4`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7LGwaJEnKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe`,
               type: "video/mp4",
             },
           ],
@@ -73,6 +76,7 @@ const TABS: Tab[] = [
         }}
       />
     ),
+    poster: `/features/query.png`,
   },
   {
     label: "Text to Task",
@@ -89,7 +93,7 @@ const TABS: Tab[] = [
           title: "Incerto Deep Research",
           sources: [
             {
-              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788653/deep-research_mexsmg.mp4`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7nNqpjgadVYe3EDhHObxpW1vIlstrKQafw2oj`,
               type: "video/mp4",
             },
           ],
@@ -97,6 +101,7 @@ const TABS: Tab[] = [
         }}
       />
     ),
+    poster: `/features/deep-research.jpg`,
   },
   {
     label: "SQL Editor",
@@ -113,7 +118,7 @@ const TABS: Tab[] = [
           title: "Incerto SQL Editor",
           sources: [
             {
-              src: `https://res.cloudinary.com/diin3us70/video/upload/v1751788647/sql-editor_c2o10v.mp4`,
+              src: `https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7kGED2vhtwzn7PHqYpkabNj2oW31dAt8lGgTZ`,
               type: "video/mp4",
             },
           ],
@@ -121,6 +126,7 @@ const TABS: Tab[] = [
         }}
       />
     ),
+    poster: `/features/sql-editor.jpg`,
   },
 ];
 
@@ -205,7 +211,7 @@ const StickyScrollWithHighlightsContent = () => {
                 <div className="relative w-full h-full">
                   {/* Poster Image - shown while video loads */}
                   <img
-                    src={`/features/${tab.slug}.png`}
+                    src={tab.poster}
                     alt={`${tab.label} preview`}
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                     onError={(e) => {
@@ -477,7 +483,7 @@ export const MobileTabsWithHighlights = () => {
                 <div className="relative w-full h-full">
                   {/* Poster Image - shown while video loads */}
                   <img
-                    src={`/features/${tab.slug}.png`}
+                    src={tab.poster}
                     alt={`${tab.label} preview`}
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                     onError={(e) => {
