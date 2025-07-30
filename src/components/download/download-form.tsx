@@ -155,22 +155,26 @@ export const DownloadForm = ({
   return (
     <div className="w-full max-w-lg mx-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 lg:space-y-6"
+        >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email </FormLabel>
+                <FormLabel className="text-sm lg:text-base">Email</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     type="email"
                     placeholder="your-email@example.com"
                     disabled={isPending}
+                    className="text-sm lg:text-base"
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs lg:text-sm" />
               </FormItem>
             )}
           />
@@ -180,7 +184,7 @@ export const DownloadForm = ({
             name="mobile"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Mobile</FormLabel>
+                <FormLabel className="text-sm lg:text-base">Mobile</FormLabel>
                 <FormControl>
                   <PhoneInputWithCountrySelect
                     placeholder="Enter phone number"
@@ -209,24 +213,24 @@ export const DownloadForm = ({
                         "--PhoneInput-color--focus": "hsl(var(--ring))",
                       } as React.CSSProperties
                     }
-                    className="flex"
+                    className="flex text-sm lg:text-base"
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs lg:text-sm" />
               </FormItem>
             )}
           />
 
           {response && (
             <div
-              className={`p-3 rounded-md text-sm ${
+              className={`p-3 lg:p-4 rounded-md text-xs lg:text-sm ${
                 response.success
                   ? "bg-green-50  border border-green-200"
                   : "bg-red-50 text-red-800 border border-red-200"
               }`}
             >
               {response.success ? (
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2">
                   <span data-success={response.success}>
                     Here is the tutorial video to install the app.
                   </span>
@@ -234,7 +238,7 @@ export const DownloadForm = ({
                     href="https://youtu.be/7P8WA_Wyr-E"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline text-sm font-medium"
+                    className="text-blue-500 hover:underline text-xs lg:text-sm font-medium"
                   >
                     Click Here
                   </Link>
@@ -245,7 +249,11 @@ export const DownloadForm = ({
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full text-sm lg:text-base py-2 lg:py-3"
+            disabled={loading}
+          >
             {loading
               ? canDownload
                 ? "Downloading..."

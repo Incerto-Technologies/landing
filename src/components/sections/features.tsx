@@ -1,6 +1,6 @@
 import React from "react";
 import SectionContainer from "../layouts/section-container";
-import TabsWithHighlights, {
+import StickyScrollWithHighlights, {
   MobileTabsWithHighlights,
 } from "../tab-with-highlights";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,12 @@ const Features: React.FC = () => (
       What Incerto can do?
     </h3>
     <div className="hidden md:block">
-      <TabsWithHighlights />
+      <StickyScrollWithHighlights />
     </div>
     <div className="md:hidden block">
       <MobileTabsWithHighlights />
     </div>
-    
+
     {/* Features Page Button */}
     <div className="mt-12">
       <Button size="lg" asChild>
