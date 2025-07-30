@@ -42,17 +42,17 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap relative z-30 px-2">
             <button
               className={cn(
-                "flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-gray-200 text-gray-800 border border-white rounded-lg hover:bg-white hover:text-black hover:shadow-md transition-colors w-full sm:w-auto text-sm sm:text-base"
+                "flex items-center justify-center gap-2 px-6 sm:px-8 py-4 bg-white text-gray-900 border border-white rounded-lg hover:bg-gray-100 hover:shadow-lg transition-all w-full sm:w-auto text-base sm:text-lg font-semibold shadow-md"
               )}
               onClick={() => setShowDownloadDialog(true)}
             >
               <Image
                 src={imageUrl}
                 alt={os}
-                width={20}
-                height={20}
+                width={24}
+                height={24}
                 className={cn(
-                  "w-4 h-4 object-contain",
+                  "w-5 h-5 object-contain",
                   os === "mac" && "-mt-0.5"
                 )}
               />
@@ -60,7 +60,7 @@ const Hero = () => {
             </button>
             <Link
               href="/contact"
-              className="px-4 sm:px-6 py-3 bg-gray-800 text-white border border-white rounded-lg hover:bg-gray-700 hover:shadow-md transition-colors w-full sm:w-auto text-sm sm:text-base text-center"
+              className="px-6 sm:px-8 py-4 bg-transparent text-white border-2 border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all w-full sm:w-auto text-base sm:text-lg font-medium text-center"
             >
               Contact Us
             </Link>
@@ -94,8 +94,16 @@ const Hero = () => {
             <div className="flex items-center justify-between p-4 sm:p-6 border-b">
               <div>
                 <h3 className="text-base sm:text-lg font-semibold text-card-foreground">
-                  Download Incerto
+                  Get Incerto
                 </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Download for{" "}
+                  {os === "mac"
+                    ? "macOS"
+                    : os === "windows"
+                    ? "Windows"
+                    : "Linux"}
+                </p>
               </div>
               <button
                 onClick={() => setShowDownloadDialog(false)}

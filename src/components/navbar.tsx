@@ -7,6 +7,17 @@ import MobileNavbar from "./mobile-navbar";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import React from "react";
+import { useSession, signOut, signIn } from "next-auth/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User, LogOut } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "Features", href: "/features" },
@@ -24,7 +35,27 @@ const RIGHT_NAV_ITEMS = [
 
 export function Navbar() {
   const [showMobileHeaderNav, setShowMobileHeaderNav] = useState(false);
-  
+  const { data: session, status } = useSession();
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: "/" });
+  };
+
+  const getUserInitials = (name?: string | null, email?: string | null) => {
+    if (name) {
+      return name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+    }
+    if (email) {
+      return email[0].toUpperCase();
+    }
+    return "U";
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-[4px]">
       <div className="mx-auto flex h-16 items-center justify-between lg:container px-6 lg:px-16 xl:px-20">
@@ -54,7 +85,7 @@ export function Navbar() {
         </nav>
 
         {/* CTA Button - Right Aligned */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           {RIGHT_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -64,9 +95,61 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <ContactBtn className="text-xs" href="/download">
+
+          {/* Sign In Button - Show for non-authenticated users */}
+          {/* {status !== "authenticated" && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => signIn("google", { callbackUrl: "/download" })}
+              className="h-9 px-4 text-sm font-medium"
+            >
+              Sign In
+            </Button>
+          )} */}
+
+          <ContactBtn className="h-9 px-4 text-sm font-medium" href="/download">
             All Downloads
           </ContactBtn>
+
+          {/* User Menu */}
+          {status === "authenticated" && session?.user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="relative h-9 w-9 rounded-full"
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage
+                      src={session.user.image || ""}
+                      alt={session.user.name || session.user.email || ""}
+                    />
+                    <AvatarFallback className="text-xs">
+                      {getUserInitials(session.user.name, session.user.email)}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">
+                      {session.user.name || "User"}
+                    </p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      {session.user.email}
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -120,10 +203,34 @@ export function Navbar() {
           links={[...NAV_ITEMS, ...RIGHT_NAV_ITEMS]}
           setShowMobileHeaderNav={setShowMobileHeaderNav}
         >
-          <div className="flex items-center gap-4">
-            <ContactBtn className="text-xs" href="/download">
+          <div className="flex items-center gap-3">
+            {/* Sign In Button - Show for non-authenticated users */}
+            {status !== "authenticated" && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => signIn("google", { callbackUrl: "/download" })}
+                className="h-9 px-4 text-sm font-medium"
+              >
+                Sign In
+              </Button>
+            )}
+            <ContactBtn
+              className="h-9 px-4 text-sm font-medium"
+              href="/download"
+            >
               All Downloads
             </ContactBtn>
+            {status === "authenticated" && session?.user && (
+              <Button
+                variant="ghost"
+                onClick={handleSignOut}
+                className="flex items-center gap-2 h-9 px-4 text-sm font-medium"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Log out</span>
+              </Button>
+            )}
           </div>
         </MobileNavbar>
       )}
