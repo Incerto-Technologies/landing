@@ -30,15 +30,17 @@ export default function PrivacyPolicyPage() {
             Incerto Technologies Private Limited
           </h2>
           <p className="text-muted-foreground mb-4">
-            We (<strong>Incerto Technologies Private Limited</strong>, or "
-            <strong>Incerto</strong>") are deeply concerned about your privacy
-            and take this responsibility very seriously. This Privacy Policy
-            ("Privacy Policy") outlines how we collect, process, use, and
-            disclose your data when you use our product ("Incerto"). The term
-            "Tool" refers to our product offering and all associated services.
+            We (<strong>Incerto Technologies Private Limited</strong>, or &quot;
+            <strong>Incerto</strong>&quot;) are deeply concerned about your
+            privacy and take this responsibility very seriously. This Privacy
+            Policy (&quot;Privacy Policy&quot;) outlines how we collect,
+            process, use, and disclose your data when you use our product
+            (&quot;Incerto&quot;). The term &quot;Tool&quot; refers to our
+            product offering and all associated services.
           </p>
           <p className="text-muted-foreground mb-4">
-            References to "we", "our" or "us" refer to the Tool and/or{" "}
+            References to &quot;we&quot;, &quot;our&quot; or &quot;us&quot;
+            refer to the Tool and/or{" "}
             <strong>Incerto Technologies Private Limited</strong>, which has its
             registered office at:
           </p>
@@ -229,7 +231,7 @@ export default function PrivacyPolicyPage() {
           </h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
-              We don't keep any of your data on our servers. Our tool is
+              We don&apos;t keep any of your data on our servers. Our tool is
               completely on-prem.
             </p>
             <p>
