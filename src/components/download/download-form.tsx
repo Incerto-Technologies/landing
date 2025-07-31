@@ -240,8 +240,8 @@ export const DownloadForm = ({
                 </p>
               </div>
               <p className="text-sm text-muted-foreground">
-                Your download should begin automatically. If it doesn't, check
-                your browser's download settings.
+                Your download should begin automatically. If it doesn&apos;t,
+                check your browser&apos;s download settings.
               </p>
             </div>
 
