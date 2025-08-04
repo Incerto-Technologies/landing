@@ -251,7 +251,7 @@ const Feedback = () => {
           User Testimonials
         </h3>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Our users tell us that Incerto&apos;s clean and intuitive interface makes using databases fun again.
+          Users say Incerto is increasing productivity in interacting and maintaining database fleets 
         </p>
       </div>
 
