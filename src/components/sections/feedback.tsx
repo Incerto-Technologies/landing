@@ -18,8 +18,10 @@ const testimonials = [
   },
   {
     "id": 1,
-    "name": "Dinesh",
-    "position": "Co-Founder",
+    "name": "Dinesh Kumar",
+    "position": "Principal MTS, Oracle",
+    "profile" : "/clients/avatar/dinesh.jpg",
+    "linkedin": "https://www.linkedin.com/in/dinesh-kumar-8123a3100/",
     "message": "I recently tried the Quick Incerto platform for PostgreSQL, and the results were impressive.  I tested it with a few complex SQL queries—spanning two to three pages if printed—and Incerto was able to rewrite them in a much more optimal and concise form.  Not only did it significantly reduce the query size, but it also delivered the exact performance improvements we were aiming for.  This tool is especially valuable for teams or developers who may not have deep expertise in database optimization—it truly bridges that gap with ease",
     "date": "July 31, 2025",
     "rating": 5
@@ -53,6 +55,7 @@ const testimonials = [
     "position": "Senior VP Engineering at Fyers",
     "profile": "/clients/avatar/pranav-khambayatkar.webp",
     "companyLogo": "/clients/fyers.svg",
+    "linkedin": "https://www.linkedin.com/in/pkhambayatkar/",
     "link": "https://incerto.in/blog/india-s-leading-brokerage-firm-unlocks-85-cost-savings-using-incerto-s-industry-first-custom-observability-solution-powered-by-opentelemetry",
     "message": "Incerto has been a great help in transforming Fyers observability landscape. Their end-to-end implementation with open source technologies provided meaningful insights into our infrastructure. Real-time observability and proactive alerting mitigated issues swiftly, reducing MTTR (Mean time to resolve) significantly. Crucially, Incerto ensured seamless SIEM compliance and delivered a highly customized solution tailored to our unique needs.",
     "date": "May 15, 2024",
@@ -64,6 +67,7 @@ const testimonials = [
     "position": "CTO & Co-Founder",
     "profile": "/clients/avatar/dhruman.jpeg",
     "companyLogo": "/clients/kevit.svg",
+    "linkedin": "https://www.linkedin.com/in/dkbhadeshiya/",
     "link": "https://incerto.in/blog",
     "message": "Transforming observability in the CPaaS sector, Kevit is setting new standards with Incerto's custom-built platform. Migrating from New Relic, we've achieved a 90% reduction in monthly expenses and significant savings on cloud egress costs. Incerto's tailored stack ensures seamless data retention for one year, meeting our audit and compliance requirements. With complete data ownership, our infrastructure is now optimized for peak performance. Kevit is proud to lead the way in advanced observability solutions with Incerto.",
     "date": "Mar 08, 2024",
