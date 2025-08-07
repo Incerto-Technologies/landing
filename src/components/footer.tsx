@@ -22,7 +22,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
   },
   {
     title: "Legal",
-    links: [{ label: "Privacy Policy", href: "/privacy-policy" }],
+    links: [{ label: "Privacy Policy", href: "/legal/privacy-policy" }],
   },
 ];
 
