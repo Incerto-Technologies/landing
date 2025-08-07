@@ -4,18 +4,22 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get Started with Incerto Database AI",
-  description: "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution. Get personalized support and expert guidance.",
-  keywords: "contact incerto, database AI support, database management help, incerto contact, database optimization consultation",
+  description:
+    "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution. Get personalized support and expert guidance.",
+  keywords:
+    "contact incerto, database AI support, database management help, incerto contact, database optimization consultation",
   openGraph: {
     title: "Contact Us - Get Started with Incerto Database AI",
-    description: "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution.",
+    description:
+      "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution.",
     type: "website",
-    url: "https://incerto.com/contact",
+    url: "https://incerto.in/contact",
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact Us - Get Started with Incerto Database AI",
-    description: "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution.",
+    description:
+      "Ready to solve your database problems 5x faster? Contact our team to get started with Incerto's agentic AI database management solution.",
   },
 };
 
