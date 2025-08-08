@@ -65,10 +65,10 @@ type FormData = z.infer<typeof downloadFormSchema>;
 
 const getDownloadUrl = (os: string, platform: string) => {
   if (os === "mac" && platform === "apple") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Lz71aznKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7WCGLnVhSHKElWxr08bFfQ5q2mUIT7YCdGoAZ";
   }
   if (os === "windows") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7ilBGQiKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7EqrrNCDGkxUp0H2csZafrivEgS4dNlJAOyjo";
   }
   return "";
 };
@@ -247,10 +247,17 @@ export const DownloadForm = ({
 
           <div className="p-3 lg:p-4 bg-slate-50 dark:bg-slate-900 rounded-md text-xs lg:text-sm text-slate-600 dark:text-slate-400 border">
             <div className="flex items-start gap-2">
-              <span className="text-green-600 dark:text-green-400 font-medium">🔒</span>
+              <span className="text-green-600 dark:text-green-400 font-medium">
+                🔒
+              </span>
               <div>
-                <span className="font-medium">Completely air-gapped and secure.</span> 
-                <span className="ml-1">Our product runs entirely on-premise with no external data transmission.</span>
+                <span className="font-medium">
+                  Completely air-gapped and secure.
+                </span>
+                <span className="ml-1">
+                  Our product runs entirely on-premise with no external data
+                  transmission.
+                </span>
                 <Link
                   href="/blogs/safe-co-pilot"
                   className="text-blue-500 hover:underline ml-1 font-medium"
