@@ -61,7 +61,7 @@ The robots.txt file is located at `src/app/robots.ts` and:
 
 - Allows crawling of all pages
 - Disallows crawling of `/api/`, `/_next/`, and `/admin/` paths
-- References the sitemap at `https://incerto.com/sitemap.xml`
+- References the sitemap at `https://incerto.in/sitemap.xml`
 
 ## Maintenance
 

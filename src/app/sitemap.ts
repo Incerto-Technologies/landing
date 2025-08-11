@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://incerto.com";
+  const baseUrl = "https://incerto.in";
 
   // Get all blog posts
   const blogPosts = getAllBlogPosts();

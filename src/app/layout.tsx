@@ -22,11 +22,12 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   title: {
     default: "Incerto - Agentic AI That Solves All Database Problems",
-    template: "%s | Incerto"
+    template: "%s | Incerto",
   },
   description:
     "Gain full visibility into your database performance with real-time monitoring and intelligent insights. Instantly detect anomalies, identify root causes, and take corrective actions with our AI-powered database management solution.",
-  keywords: "database monitoring, AI database management, database performance, database optimization, real-time monitoring, database insights, database co-pilot, database automation",
+  keywords:
+    "database monitoring, AI database management, database performance, database optimization, real-time monitoring, database insights, database co-pilot, database automation",
   authors: [{ name: "Incerto Team" }],
   creator: "Incerto",
   publisher: "Incerto",
@@ -35,14 +36,15 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://incerto.com"),
+  metadataBase: new URL("https://incerto.in"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Incerto - Agentic AI That Solves All Database Problems",
-    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
-    url: "https://incerto.com",
+    description:
+      "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    url: "https://incerto.in",
     siteName: "Incerto",
     type: "website",
     locale: "en_US",
@@ -50,7 +52,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Incerto - Agentic AI That Solves All Database Problems",
-    description: "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
+    description:
+      "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
     creator: "@incerto",
   },
   robots: {

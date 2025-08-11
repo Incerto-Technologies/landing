@@ -20,6 +20,10 @@ const FOOTER_SECTIONS: FooterSection[] = [
       { label: "Contact Us", href: "/contact" },
     ],
   },
+  {
+    title: "Legal",
+    links: [{ label: "Privacy Policy", href: "/legal/privacy-policy" }],
+  },
 ];
 
 function FooterSection({ title, links }: FooterSection) {
@@ -56,7 +60,7 @@ export function Footer() {
 
   return (
     <footer className="bg-background">
-      <div className="mx-auto py-12 px-6 lg:container lg:px-16 xl:px-20">
+      <div className="mx-auto py-12 px-6 lg:container lg:px-20 xl:px-20">
         {/* Horizontal Divider */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
 
@@ -155,7 +159,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="gap-8">
+          <div className="gap-8 flex flex-col md:flex-row">
             {FOOTER_SECTIONS.map((section) => (
               <FooterSection key={section.title} {...section} />
             ))}
