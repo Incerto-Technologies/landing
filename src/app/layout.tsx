@@ -8,6 +8,7 @@ import TailwindIndicator from "@/components/tailwind-indicator";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Script from "next/script";
 import { VideoProvider } from "@/components/ui/video-provider";
+import { SessionProvider } from "@/components/providers/session-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -89,19 +90,21 @@ export default function RootLayout({
         className={`${inter.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
         <NuqsAdapter>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <VideoProvider>
-              <Navbar />
-              {children}
-              <Footer />
-              <TailwindIndicator />
-            </VideoProvider>
-          </ThemeProvider>
+          <SessionProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <VideoProvider>
+                <Navbar />
+                {children}
+                <Footer />
+                <TailwindIndicator />
+              </VideoProvider>
+            </ThemeProvider>
+          </SessionProvider>
         </NuqsAdapter>
       </body>
     </html>
