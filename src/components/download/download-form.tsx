@@ -65,7 +65,7 @@ type FormData = z.infer<typeof downloadFormSchema>;
 
 const getDownloadUrl = (os: string, platform: string) => {
   if (os === "mac" && platform === "apple") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7WCGLnVhSHKElWxr08bFfQ5q2mUIT7YCdGoAZ";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7gTlPIKQdcy0T7nD6RAhrsJufNLBV2p8k4t9H";
   }
   if (os === "windows") {
     return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7EqrrNCDGkxUp0H2csZafrivEgS4dNlJAOyjo";
