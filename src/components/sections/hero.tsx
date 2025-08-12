@@ -114,9 +114,9 @@ const Hero = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">
                   Download for{" "}
-                  {os === "mac"
+                  {osData.os === "mac"
                     ? "macOS"
-                    : os === "windows"
+                    : osData.os === "windows"
                     ? "Windows"
                     : "Linux"}
                 </p>
