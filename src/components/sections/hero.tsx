@@ -13,9 +13,12 @@ import { X } from "lucide-react";
 const Hero = () => {
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [osData, setOsData] = useState<{ os: UserOS; architecture: UserArchitecture }>({ 
-    os: "windows", 
-    architecture: "x64" 
+  const [osData, setOsData] = useState<{
+    os: UserOS;
+    architecture: UserArchitecture;
+  }>({
+    os: "windows",
+    architecture: "x64",
   });
 
   // Only detect OS after client-side hydration to prevent mismatch
@@ -50,7 +53,7 @@ const Hero = () => {
           </h1>
           <p className="text-white text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl mx-auto px-2">
             Knows your database. Fixes all problems. No more manual work.
-</p>
+          </p>
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap relative z-30 px-2">
             <button
@@ -132,3 +135,4 @@ const Hero = () => {
 };
 
 export default Hero;
+//
