@@ -23,6 +23,7 @@ const NAV_ITEMS = [
   { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blogs" },
+  { label: "Docs", href: "/docs" },
   // { label: "Resources", href: "/resources" },
   // { label: "Company", href: "/company" },
   // { label: "Download", href: "/download" },
