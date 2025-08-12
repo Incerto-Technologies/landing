@@ -5,27 +5,43 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Logos from "./logos";
 import { getUserOS } from "@/lib/get-user-os";
-import { useMemo, useState } from "react";
+import type { UserOS, UserArchitecture } from "@/lib/get-user-os";
+import { useMemo, useState, useEffect } from "react";
 import { DownloadForm } from "../download/download-form";
 import { X } from "lucide-react";
 
 const Hero = () => {
-  const { os, architecture } = getUserOS();
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [osData, setOsData] = useState<{
+    os: UserOS;
+    architecture: UserArchitecture;
+  }>({
+    os: "windows",
+    architecture: "x64",
+  });
+
+  // Only detect OS after client-side hydration to prevent mismatch
+  useEffect(() => {
+    setMounted(true);
+    setOsData(getUserOS());
+  }, []);
 
   const imageUrl = useMemo(() => {
-    if (os === "mac") return "/download/apple.png";
-    if (os === "windows") return "/download/windows.svg";
-    if (os === "linux") return "/download/Linux.png";
+    if (!mounted) return "/download/windows.svg"; // Default for SSR
+    if (osData.os === "mac") return "/download/apple.png";
+    if (osData.os === "windows") return "/download/windows.svg";
+    if (osData.os === "linux") return "/download/Linux.png";
     return "/download/windows.svg";
-  }, [os]);
+  }, [mounted, osData.os]);
 
   const downloadBtnText = useMemo(() => {
-    if (os === "mac") return "Download for macOS";
-    if (os === "windows") return "Download for Windows";
-    if (os === "linux") return "Download for Linux";
+    if (!mounted) return "Download for Windows"; // Default for SSR
+    if (osData.os === "mac") return "Download for macOS";
+    if (osData.os === "windows") return "Download for Windows";
+    if (osData.os === "linux") return "Download for Linux";
     return "Download for Windows";
-  }, [os]);
+  }, [mounted, osData.os]);
 
   return (
     <div className="relative overflow-hidden pt-8 sm:pt-16">
@@ -48,12 +64,12 @@ const Hero = () => {
             >
               <Image
                 src={imageUrl}
-                alt={os}
-                width={24}
-                height={24}
+                alt={mounted ? osData.os : "windows"}
+                width={20}
+                height={20}
                 className={cn(
-                  "w-5 h-5 object-contain",
-                  os === "mac" && "-mt-0.5"
+                  "w-4 h-4 object-contain",
+                  mounted && osData.os === "mac" && "-mt-0.5"
                 )}
               />
               {downloadBtnText}
@@ -114,8 +130,8 @@ const Hero = () => {
             </div>
             <div className="p-4 sm:p-6">
               <DownloadForm
-                os={os}
-                platform={architecture}
+                os={osData.os}
+                platform={osData.architecture}
                 setShowDialog={setShowDownloadDialog}
               />
             </div>
@@ -127,3 +143,4 @@ const Hero = () => {
 };
 
 export default Hero;
+//

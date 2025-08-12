@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://incerto.com"),
+  metadataBase: new URL("https://incerto.in"),
   alternates: {
     canonical: "/",
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Incerto - Agentic AI That Solves All Database Problems",
     description:
       "Gain full visibility into your database performance with real-time monitoring and intelligent insights.",
-    url: "https://incerto.com",
+    url: "https://incerto.in",
     siteName: "Incerto",
     type: "website",
     locale: "en_US",

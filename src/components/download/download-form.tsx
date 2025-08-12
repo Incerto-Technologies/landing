@@ -65,10 +65,10 @@ type MobileFormData = z.infer<typeof mobileFormSchema>;
 
 const getDownloadUrl = (os: string, platform: string) => {
   if (os === "mac" && platform === "apple") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Lz71aznKiZ23OUBzHkuDRd5Wh4aoNVGtwFTe";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7gTlPIKQdcy0T7nD6RAhrsJufNLBV2p8k4t9H";
   }
   if (os === "windows") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7ilBGQiKsq6AhXSmeKlJHnu1cBIQPD9WdkyV5";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7EqrrNCDGkxUp0H2csZafrivEgS4dNlJAOyjo";
   }
   return "";
 };
@@ -307,11 +307,56 @@ export const DownloadForm = ({
                 )}
               />
 
-              {response && !response.success && (
-                <div className="p-3 bg-destructive/10 border border-destructive rounded-md">
-                  <p className="text-sm text-destructive">{response.message}</p>
+              {response && (
+                <div
+                  className={`p-3 lg:p-4 rounded-md text-xs lg:text-sm ${
+                    response.success
+                      ? "bg-green-50  border border-green-200"
+                      : "bg-red-50 text-red-800 border border-red-200"
+                  }`}
+                >
+                  {response.success ? (
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2">
+                      <span data-success={response.success}>
+                        Here is the tutorial video to install the app.
+                      </span>
+                      <Link
+                        href="https://youtu.be/7P8WA_Wyr-E"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline text-xs lg:text-sm font-medium"
+                      >
+                        Click Here
+                      </Link>
+                    </div>
+                  ) : (
+                    response.message
+                  )}
                 </div>
               )}
+
+              <div className="p-3 lg:p-4 bg-slate-50 dark:bg-slate-900 rounded-md text-xs lg:text-sm text-slate-600 dark:text-slate-400 border">
+                <div className="flex items-start gap-2">
+                  <span className="text-green-600 dark:text-green-400 font-medium">
+                    🔒
+                  </span>
+                  <div>
+                    <span className="font-medium">
+                      Completely air-gapped and secure.
+                    </span>
+                    <span className="ml-1">
+                      Our product runs entirely on-premise with no external data
+                      transmission.
+                    </span>
+                    <Link
+                      href="/blogs/safe-co-pilot"
+                      className="text-blue-500 hover:underline ml-1 font-medium"
+                    >
+                      Read more about security →
+                    </Link>
+                  </div>
+                </div>
+              </div>
 
               <Button
                 type="submit"
