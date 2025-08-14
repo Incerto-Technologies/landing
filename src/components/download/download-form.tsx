@@ -85,7 +85,9 @@ export const DownloadForm = ({
   const [isPending, startTransition] = useTransition();
   const [response, setResponse] = useState<DownloadResponse | null>(null);
   const [loading, setLoading] = useState(false);
-  const [currentStep, setCurrentStep] = useState<"login" | "mobile">("login");
+  const [currentStep, setCurrentStep] = useState<
+    "login" | "mobile" | "download"
+  >("login");
 
   const { data: session, status } = useSession();
   const isLoggedIn = !!session?.user;
@@ -110,7 +112,11 @@ export const DownloadForm = ({
   // Move to mobile step when user logs in
   React.useEffect(() => {
     if (isLoggedIn && currentStep === "login") {
-      setCurrentStep("mobile");
+      if (session?.user?.phoneNumber) {
+        setCurrentStep("download");
+      } else {
+        setCurrentStep("mobile");
+      }
     }
   }, [isLoggedIn, currentStep]);
 
@@ -223,6 +229,9 @@ export const DownloadForm = ({
             </h3>
             <p className="text-sm text-muted-foreground mt-1">
               {session?.user?.email}
+            </p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {session?.user?.phoneNumber || "No phone number found"}
             </p>
             <p className="text-sm text-muted-foreground mt-2">
               Please provide your mobile number to continue.
@@ -371,6 +380,155 @@ export const DownloadForm = ({
               </Button>
             </form>
           </Form>
+        )}
+      </div>
+    );
+  }
+
+  if (currentStep === "download") {
+    return (
+      <div className="w-full max-w-lg mx-auto">
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h3 className="text-lg font-semibold mb-2">Ready to Download</h3>
+          <p className="text-sm text-muted-foreground">
+            Your account is verified and ready
+          </p>
+        </div>
+
+        {/* User Info */}
+        <div className="bg-muted/50 rounded-lg p-4 mb-6">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+              <span className="text-primary font-semibold text-sm">
+                {session?.user?.name?.charAt(0) ||
+                  session?.user?.email?.charAt(0) ||
+                  "U"}
+              </span>
+            </div>
+            <div className="flex-1">
+              <p className="font-medium">{session?.user?.name || "User"}</p>
+              <p className="text-sm text-muted-foreground">
+                {session?.user?.email}
+              </p>
+            </div>
+          </div>
+
+          {session?.user?.phoneNumber && (
+            <div className="mt-3 pt-3 border-t border-border">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm">{session.user.phoneNumber}</span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary">
+                  Verified
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Download Button */}
+        <div className="space-y-4">
+          <Button
+            onClick={async () => {
+              setLoading(true);
+              startTransition(async () => {
+                try {
+                  const result = await createDownloadRequest({
+                    email: session?.user?.email || "",
+                    mobile: session?.user?.phoneNumber || "",
+                  });
+
+                  if (result.success) {
+                    setResponse(result);
+                    // Automatically trigger download
+                    if (canDownload) {
+                      const downloadUrl = getDownloadUrl(os, platform);
+                      window.location.href = downloadUrl;
+                    }
+                    // Close dialog after a short delay to show success message
+                    setTimeout(() => {
+                      setShowDialog(false);
+                    }, 2000);
+                  } else {
+                    setResponse(result);
+                    setLoading(false);
+                  }
+                } catch (error) {
+                  console.error("Download error:", error);
+                  setResponse({
+                    success: false,
+                    message: "An unexpected error occurred. Please try again.",
+                  });
+                  setLoading(false);
+                } finally {
+                  setTimeout(() => {
+                    setLoading(false);
+                  }, 4000);
+                }
+              });
+            }}
+            className="w-full h-12 text-base font-medium"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                Preparing Download...
+              </>
+            ) : (
+              <>Download {os === "mac" ? "for macOS" : "for Windows"}</>
+            )}
+          </Button>
+
+          {/* Platform Info */}
+        </div>
+
+        {/* Success State */}
+        {response?.success && (
+          <div className="mt-6 space-y-4">
+            <div className="bg-background border border-border rounded-lg p-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <div>
+                  <p className="font-medium">Download Started!</p>
+                  <p className="text-sm text-muted-foreground">
+                    Check your downloads folder or browser download bar
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tutorial Section */}
+            <div className="bg-muted/50 border border-border rounded-lg p-4">
+              <p className="font-medium mb-2">Need help installing?</p>
+              <p className="text-sm text-muted-foreground mb-3">
+                Watch our step-by-step tutorial to get started quickly
+              </p>
+              <Link
+                href="https://youtu.be/7P8WA_Wyr-E"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium text-sm"
+              >
+                Watch Installation Tutorial
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Error State */}
+        {response && !response.success && (
+          <div className="mt-6 bg-background border border-border rounded-lg p-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 bg-destructive rounded-full"></div>
+              <div>
+                <p className="font-medium">Download Failed</p>
+                <p className="text-sm text-muted-foreground">
+                  {response.message}
+                </p>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );
