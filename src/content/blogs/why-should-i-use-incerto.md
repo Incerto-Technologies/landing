@@ -1,6 +1,6 @@
 ---
 title: Why Should I Use Incerto? The Database Co-Pilot That Actually Works
-date: August 5, 2025
+date: August 15, 2025
 image: /incerto_accuracy_chart.png
 excerpt: Discover how Incerto achieves 86% accuracy on complex database queries without any ontology, empowers teams 10x faster, and solves production bugs that stump even senior DBAs.
 ---
@@ -15,7 +15,7 @@ If you're still manually writing repetitive SQL/No-SQL queries, time to analyze 
 
 ### 86% Accuracy on Complex Data Without Any Ontology
 
-Most AI database tools require extensive training, custom ontologies, or domain-specific knowledge to work effectively. Incerto is different. You might feel 86% is low (we are chasing 100% too), check out the dataset it was operating on [Conglomerate Dataset](https://github.com/TextQLLabs/conglomerate-benchmark/tree/main/v1/lite). It has 109 tables, with similar data stored in several tables. Can you answer 18 questions with 100% accuracy? Our whole team wouldn't be able to (without incerto). 
+ You might feel 86% is low (we are chasing 100% too), check out the dataset it was operating on [Conglomerate Dataset](https://github.com/TextQLLabs/conglomerate-benchmark/tree/main/v1/lite). It has 109 tables, with similar data stored in several tables. Can you answer 18 questions with 100% accuracy on such a large fleet of interelated tables? How much time would it take us do to manualy ? 
 
 >We achieved 86% accuracy on a 109-table conglomerate database without any prior ontology or informed knowledge.
 
