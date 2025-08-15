@@ -1,7 +1,7 @@
 ---
 title: Why Should I Use Incerto? The Database Co-Pilot That Actually Works
 date: August 15, 2025
-image: /incerto_accuracy_chart.png
+image: /accuracy.png
 excerpt: Discover how Incerto achieves 86% accuracy on complex database queries without any ontology, empowers teams 10x faster, and solves production bugs that stump even senior DBAs.
 ---
 
