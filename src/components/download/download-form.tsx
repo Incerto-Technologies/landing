@@ -65,10 +65,10 @@ type MobileFormData = z.infer<typeof mobileFormSchema>;
 
 const getDownloadUrl = (os: string, platform: string) => {
   if (os === "mac" && platform === "apple") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7gTlPIKQdcy0T7nD6RAhrsJufNLBV2p8k4t9H";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7F7XwokyU0qAQPcxTEgf9iWmVUBSzyL1wHhRX";
   }
   if (os === "windows") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7EqrrNCDGkxUp0H2csZafrivEgS4dNlJAOyjo";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Pn2U96BCaORZxnIsY7QA0ueUfdGz962Cp8mK";
   }
   return "";
 };
