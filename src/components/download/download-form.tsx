@@ -68,7 +68,7 @@ const getDownloadUrl = (os: string, platform: string) => {
     return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7F7XwokyU0qAQPcxTEgf9iWmVUBSzyL1wHhRX";
   }
   if (os === "windows") {
-    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7Pn2U96BCaORZxnIsY7QA0ueUfdGz962Cp8mK";
+    return "https://dfeebj4kxn.ufs.sh/f/kGNlPW1twzn7b5Eg3rSRBzUMNwjdZQYGWIX49a8CTbvPynAx";
   }
   return "";
 };
