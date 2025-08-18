@@ -118,7 +118,7 @@ export const DownloadForm = ({
         setCurrentStep("mobile");
       }
     }
-  }, [isLoggedIn, currentStep]);
+  }, [isLoggedIn, currentStep, session?.user?.phoneNumber]);
 
   const form = useForm<MobileFormData>({
     resolver: zodResolver(mobileFormSchema),

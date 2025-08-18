@@ -87,3 +87,41 @@ export async function sendEmailDownloadRequest(data: DownloadRequest) {
     html,
   });
 }
+
+export async function sendEmailWelcomeMail(email: string, name: string) {
+  const html = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Welcome to Incerto</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h1 style="color: #2563eb;">Welcome to Incerto!</h1>
+          
+          <p>Namaste ${name} Ji,</p>
+          
+          <p>Thanks for installing Incerto. Do email us if you face any problem at all. Docs are available at <a href="https://docs.incerto.in" style="color: #2563eb;">docs.incerto.in</a></p>
+          
+          <p><strong>Product doesn't send even a single byte of data back to us.</strong> Feel free to use staging or production databases too with Incerto.</p>
+          
+          <p>If you would like to join the community of Indian Dev/DBA's using Incerto let us know.</p>
+          
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+          
+          <p style="font-size: 14px; color: #6b7280;">
+              Best regards,<br>
+              The Incerto Team
+          </p>
+      </div>
+  </body>
+  </html>
+  `;
+
+  await sendMail({
+    to: email,
+    subject: "Welcome to Incerto - Your Installation Guide",
+    html,
+  });
+}
