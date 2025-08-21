@@ -48,7 +48,21 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pb-12 sm:pb-20">
         <div className="w-full max-w-7xl mx-auto rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 py-8 px-4 sm:py-10 sm:px-3 md:p-28 lg:p-32 xl:p-40 pb-16 sm:pb-20 md:pb-48 lg:pb-56 xl:pb-64 2xl:pb-72">
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 pt-4 sm:pt-8">
+          <div className="flex items-center justify-center">
+            <a
+              href="https://www.producthunt.com/products/incerto?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-incerto"
+              target="_blank"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1007873&theme=dark&t=1755780637940"
+                alt="Incerto - The&#0032;AI&#0032;Copilot&#0032;for&#0032;Databases | Product Hunt"
+                style={{ width: "250px", height: "54px" }}
+                width="250"
+                height="54"
+              />
+            </a>
+          </div>
+          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 pt-2 sm:pt-4">
             The AI Database Co-Pilot
           </h1>
           <p className="text-white text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl mx-auto px-2">
