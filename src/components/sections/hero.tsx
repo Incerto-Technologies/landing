@@ -50,11 +50,11 @@ const Hero = () => {
         <div className="w-full max-w-7xl mx-auto rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-900 via-teal-600 to-emerald-700 py-8 px-4 sm:py-10 sm:px-3 md:p-28 lg:p-32 xl:p-40 pb-16 sm:pb-20 md:pb-48 lg:pb-56 xl:pb-64 2xl:pb-72">
           <div className="flex items-center justify-center">
             <a
-              href="https://www.producthunt.com/products/incerto?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-incerto"
+              href="https://www.producthunt.com/products/incerto?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_source=badge-incerto"
               target="_blank"
             >
               <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1007873&theme=dark&t=1755780637940"
+                src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1007873&theme=dark&period=daily&t=1757058908003"
                 alt="Incerto - The&#0032;AI&#0032;Copilot&#0032;for&#0032;Databases | Product Hunt"
                 style={{ width: "250px", height: "54px" }}
                 width="250"
