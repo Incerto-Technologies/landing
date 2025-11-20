@@ -48,8 +48,9 @@ export function BusinessUserPopup() {
         <DialogHeader>
           <DialogTitle>Are you a business user?</DialogTitle>
           <DialogDescription>
-            If you're looking for enterprise solutions or business features, you
-            might want to check out our business platform at incerto.ai
+            If you&apos;re looking for enterprise solutions or business
+            features, you might want to check out our business platform at
+            incerto.ai
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex-col sm:flex-row gap-2">
