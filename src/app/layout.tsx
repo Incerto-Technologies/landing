@@ -9,6 +9,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Script from "next/script";
 import { VideoProvider } from "@/components/ui/video-provider";
 import { SessionProvider } from "@/components/providers/session-provider";
+import { BusinessUserPopup } from "@/components/business-user-popup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -101,6 +102,7 @@ export default function RootLayout({
                 <Navbar />
                 {children}
                 <Footer />
+                <BusinessUserPopup />
                 <TailwindIndicator />
               </VideoProvider>
             </ThemeProvider>
