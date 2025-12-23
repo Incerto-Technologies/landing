@@ -484,12 +484,13 @@ export const MobileTabsWithHighlights = () => {
               >
                 <div className="relative w-full h-full">
                   {/* Poster Image - shown while video loads */}
-                  <img
+                  <Image
                     src={tab.poster}
                     alt={`${tab.label} preview`}
+                    fill
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                     onError={(e) => {
-                      // Fallback to jpg if png doesn't exist
+                      // Fallback to jpg if png doesn&apos;t exist
                       const target = e.target as HTMLImageElement;
                       if (target.src.endsWith(".png")) {
                         target.src = target.src.replace(".png", ".jpg");
